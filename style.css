@@ -1248,22 +1248,24 @@ body {
     }
 
     .contenedor-monitor {
-        display: flex !important;
-        flex-direction: column !important; /* APILADO VERTICAL */
-        gap: 10px !important;
-        align-items: center !important;
-        text-align: center !important;
-    }
+    display: flex !important;
+    flex-direction: row !important; 
+    justify-content: center !important; 
+    align-items: center !important;    
+    gap: 20px !important;              
+    text-align: center !important;
+    padding: 10px 0;                   
+}
 
     .separador { 
         display: none !important; /* QUITA LOS PALITOS | */
     }
 
     .monitor-item {
-        font-size: 11px !important;
-        width: 100% !important;
-        justify-content: center !important;
-    }
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
 
     /* 3. LOGO Y ELEMENTOS SUPERIORES */
     .logo-m {
@@ -1396,15 +1398,19 @@ body {
     padding: 0 20px !important;
 }
 
-/* EL CÍRCULO VERDE NEÓN */
 .punto-pulso {
-    width: 10px;          /* Tamaño del punto */
+    width: 10px;
     height: 10px;
     background-color: #00ff00; 
-    border-radius: 50%;   /* Lo hace redondo */
+    border-radius: 50%;
     display: inline-block;
-    margin-right: 10px;   /* Separa el punto del texto ESTADO */
-    box-shadow: 0 0 10px #00ff00; /* Brillo inicial */
+    
+    /* AJUSTES PARA ALINEACIÓN PERFECTA */
+    vertical-align: middle;   /* Alinea el punto con la mitad de las letras */
+    margin-bottom: 2px;      /* Pequeño ajuste fino para que no se vea caído */
+    margin-right: 10px;      
+    
+    box-shadow: 0 0 10px #00ff00; 
     animation: latido-verde 1.5s infinite ease-in-out;
 }
 
