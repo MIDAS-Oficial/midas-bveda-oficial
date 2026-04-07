@@ -44,8 +44,7 @@ async function actualizarMidas() {
         const gramoLocal = onzaLocal / 31.1035;
         const kiloLocal = gramoLocal * 1000;
 
-        // Compartir datos con el tasador (script.js)
-        window.precioOroReal24k = gramoLocal; 
+        window.precioOroUSD24k = precioUSD / 31.1035; // Guardamos el gramo en USD puro
         window.trmRealMidas = trmActual;
 
         // Formato de moneda
