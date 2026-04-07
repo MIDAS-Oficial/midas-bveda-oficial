@@ -3,25 +3,26 @@ function toggleMenuIdioma() {
 }
 
 function seleccionarIdioma(lang) {
-    
+    // 1. Actualizar el texto del botón principal inmediatamente
     const btnTexto = document.getElementById('idioma-actual');
     if (btnTexto) btnTexto.innerText = "🌐 " + lang.toUpperCase();
 
-    
+    // 2. Ejecutar tu traducción manual (Navbar y Títulos)
     if (typeof textos !== 'undefined' && textos[lang]) {
         cambiarIdiomaManual(lang);
     }
 
-    
+    // 3. FORZAR TRADUCCIÓN GLOBAL DE GOOGLE
     const intentarTraducir = setInterval(() => {
         const combo = document.querySelector('.goog-te-combo');
         if (combo) {
             combo.value = lang;
             combo.dispatchEvent(new Event('change'));
-            clearInterval(intentarTraducir); 
+            clearInterval(intentarTraducir); // Detener cuando funcione
         }
-    }, 100); 
+    }, 100); // Intenta cada 100ms hasta que el motor de Google responda
 
+    // 4. Tiempo límite para dejar de intentar (5 segundos)
     setTimeout(() => clearInterval(intentarTraducir), 5000);
 
     toggleMenuIdioma();
@@ -33,14 +34,14 @@ function cambiarIdiomaManual(lang) {
     
     localStorage.setItem('idiomaPreferido', lang);
 
-    
+    // Navbar
     const navIds = ['nav-inicio', 'nav-tasador', 'nav-tejidos', 'nav-probador', 'nav-mercado', 'nav-comunidad'];
     navIds.forEach((id, i) => {
         const el = document.getElementById(id);
         if (el) el.innerText = t[`nav${i}`] || el.innerText;
     });
 
-    
+    // Títulos Hero
     const tit = document.getElementById('bienvenida-titulo');
     const sub = document.getElementById('bienvenida-sub');
     if (tit) tit.innerText = t.titulo;
@@ -52,12 +53,12 @@ function cambiarIdiomaManual(lang) {
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'es',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE, 
-        autoDisplay: false, 
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE, // Cambiado a SIMPLE
+        autoDisplay: false, // Evita que salte el banner automáticamente
         multilanguagePage: true
     }, 'google_translate_element');
 }
-
+// Función para forzar que la página no se mueva
 function limpiarBarraGoogle() {
     const banner = document.querySelector(".goog-te-banner-frame");
     if (banner) {
@@ -66,7 +67,7 @@ function limpiarBarraGoogle() {
     document.body.style.top = "0px";
 }
 
-
+// Ejecutar la limpieza cada vez que se cambie el idioma
 function seleccionarIdioma(lang) {
     const btnTexto = document.getElementById('idioma-actual');
     if (btnTexto) btnTexto.innerText = "🌐 " + lang.toUpperCase();
@@ -76,63 +77,56 @@ function seleccionarIdioma(lang) {
         combo.value = lang;
         combo.dispatchEvent(new Event('change'));
         
-        
+        // Esperar un momento a que Google intente poner la barra y borrarla
         setTimeout(limpiarBarraGoogle, 500);
     }
     toggleMenuIdioma();
 }
 
-
+// También limpiar al cargar la página
 window.addEventListener('load', () => {
-    setInterval(limpiarBarraGoogle, 1000); 
+    setInterval(limpiarBarraGoogle, 1000); // Revisa cada segundo por si Google intenta volver
 });
 
 
 function calcularTasacion() {
-    const precio24k = window.precioOroReal24k || 530000; 
-    const trmActual = window.trmRealMidas || 0.00025; 
-    const margenMin = 0.70;
-    const margenMax = 0.90;
+    // 1. Tomamos el precio que mercado.js acaba de traer de Binance
+    const precio24k = window.precioOroReal24k; 
+    const trmActual = window.trmRealMidas; 
+    const display = document.getElementById('resultado-precio');
 
-    
-    const purezas = {
-        "24k": 1, "22k": 0.916, "18k": 0.75, "14k": 0.585, "10k": 0.417
-    };
+    // Seguridad: Si la API aún no carga, avisamos
+    if (!precio24k) {
+        if(display) display.innerText = "SINCRONIZANDO...";
+        return;
+    }
 
+    const purezas = { "24k": 1, "22k": 0.916, "18k": 0.75, "14k": 0.585, "10k": 0.417 };
     const cantidad = parseFloat(document.getElementById('input-gramos').value);
     const unidad = document.getElementById('select-unidad').value; 
     const ley = document.getElementById('select-quilates').value;
     const moneda = document.getElementById('select-pais').value;
-    const display = document.getElementById('resultado-precio');
 
     if (cantidad > 0) {
         let gramosReales = (unidad === "kg") ? cantidad * 1000 : (unidad === "oz") ? cantidad * 28.35 : cantidad;
-        
-        const pureza = purezas[ley];
-        
-        
-        let precioBase = precio24k * pureza;
+        let precioBase = precio24k * purezas[ley];
 
-        let totalMin = gramosReales * (precioBase * margenMin);
-        let totalMax = gramosReales * (precioBase * margenMax);
+        let totalMin = gramosReales * (precioBase * 0.80); // Margen 70%
+        let totalMax = gramosReales * (precioBase * 0.90); // Margen 90%
 
-        if (moneda !== "COP") { 
+        // Si la moneda no es COP, convertimos usando la TRM real
+        if (moneda !== "COP" && trmActual) { 
             totalMin *= trmActual; 
             totalMax *= trmActual; 
         }
 
-        display.innerText = `${totalMin.toLocaleString(undefined, { maximumFractionDigits: 2 })} - ${totalMax.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${moneda}`;
+        display.innerText = `${totalMin.toLocaleString('es-CO', { maximumFractionDigits: 0 })} - ${totalMax.toLocaleString('es-CO', { maximumFractionDigits: 0 })} ${moneda}`;
         
-       
         display.style.color = "#00ff88"; 
         setTimeout(() => { display.style.color = "#d4af37"; }, 500);
-
-    } else {
-        alert("Ingresa una cantidad válida.");
     }
 }
-
-
+// Asegúrate de que este bloque esté UNA SOLA VEZ
 const catalogo = {
     caballero: [
         { label: "45 cm - Medida Corta", file: "caballero45.png" },
@@ -148,7 +142,9 @@ const catalogo = {
     ]
 };
 
-
+/* =========================================
+   SISTEMA DE PROBADOR VIRTUAL MIDAS
+   ========================================= */
 function cambiarGenero(gen) {
     const sel = document.getElementById('selector-medida');
     const img = document.getElementById('imagen-modelo');
@@ -157,7 +153,7 @@ function cambiarGenero(gen) {
     
     if (!sel || !catalogo[gen]) return;
 
-
+    // 1. Limpiar y llenar el selector con las medidas del género elegido
     sel.innerHTML = ''; 
     catalogo[gen].forEach(item => {
         let opt = document.createElement('option');
@@ -166,7 +162,7 @@ function cambiarGenero(gen) {
         sel.appendChild(opt);
     });
 
-    
+    // 2. Gestionar estado visual de los botones
     if (gen === 'caballero') {
         btnCab.classList.add('active');
         btnDam.classList.remove('active');
@@ -175,7 +171,7 @@ function cambiarGenero(gen) {
         btnCab.classList.remove('active');
     }
 
-    
+    // 3. Actualizar la imagen inmediatamente al primer item del catálogo
     if (img) {
         img.style.opacity = "0.4";
         setTimeout(() => { 
@@ -185,7 +181,7 @@ function cambiarGenero(gen) {
     }
 }
 
-
+// Reemplaza tu window.onload por este disparador más seguro
 window.addEventListener('DOMContentLoaded', () => {
     // Si estamos en la página del probador, inicializamos
     if (document.getElementById('selector-medida')) {
@@ -202,15 +198,17 @@ function actualizarImagen() {
     }
 }
 
-
+/* =========================================
+   SISTEMA DE ENVÍO DE CONSULTAS (FORMULARIO)
+   ========================================= */
 function abrirFormularioDuda() { 
     const modal = document.getElementById('modal-consulta');
     if(modal) {
         modal.style.display = 'block';
-        
+        // Configuramos el envío apenas se abre el modal
         const formulario = document.getElementById('mi-formulario-midas');
         if (formulario && !formulario.dataset.listenerActive) {
-            formulario.dataset.listenerActive = "true"; 
+            formulario.dataset.listenerActive = "true"; // Evita que se repita el envío
             formulario.onsubmit = async function(e) {
                 e.preventDefault();
                 const btn = document.getElementById('btn-enviar-midas');
@@ -251,15 +249,17 @@ function abrirFormularioExperiencia() {
     window.location.href = "https://wa.me/573137918385?text=Hola%20MIDAS";
 }
 
-
+/* =========================================
+   EVENTOS DE CARGA Y CIERRE
+   ========================================= */
 window.addEventListener('DOMContentLoaded', () => {
-    
+    // Carga de idioma
     const langGuardado = localStorage.getItem('idiomaPreferido') || 'es';
     const btnTexto = document.getElementById('idioma-actual');
     if (btnTexto) btnTexto.innerText = "🌐 " + langGuardado.toUpperCase();
     cambiarIdioma(langGuardado);
 
-    
+    // Iniciar probador
     if (document.getElementById('selector-medida')) cambiarGenero('caballero');
 });
 
@@ -297,6 +297,9 @@ function aceptarCookies() {
     if(cookies) cookies.style.display = 'none';
 }
 
+/* =========================================
+   SISTEMA LEGAL PROFESIONAL MIDAS
+   ========================================= */
 
 const textosLegales = {
     terminos: `
@@ -356,7 +359,7 @@ if (formularioMidas) {
         const formData = new FormData(this);
 
         try {
-            /
+            // AQUÍ USAMOS TU NUEVO ID
             const response = await fetch('https://formspree.io/f/mzdjnzzn', { 
                 method: 'POST',
                 body: formData,
@@ -378,34 +381,38 @@ if (formularioMidas) {
         }
     });
 }
+/* =========================================
+   ACTIVACIÓN MANIFIESTO MIDAS (HERO)
+   ========================================= */
 
+// 1. Mostrar el Manifiesto (con el evento para evitar conflictos de links)
 function mostrarProposito(event) {
-    if (event) event.preventDefault();
+    if (event) event.preventDefault(); // Evita recargas de página
     
     const manifiesto = document.getElementById('seccion-proposito');
     if (manifiesto) {
         manifiesto.style.display = 'block';
-        document.body.style.overflow = 'hidden'; o
+        document.body.style.overflow = 'hidden'; // Bloquea el scroll de fondo
         console.log("Accediendo a la Bóveda: Manifiesto Midas Activo.");
     }
 }
 
-
+// 2. Cerrar el Manifiesto (Vincular con tu span de cerrar)
 function cerrarProposito() {
     const manifiesto = document.getElementById('seccion-proposito');
     if (manifiesto) {
         manifiesto.style.display = 'none';
-        document.body.style.overflow = 'auto'; 
+        document.body.style.overflow = 'auto'; // Devuelve el scroll normal
     }
 }
 
-
+// 3. Cerrar al presionar la tecla Esc (Toque Pro)
 document.addEventListener('keydown', function(event) {
     if (event.key === "Escape") {
         cerrarProposito();
     }
 });
-
+// Detectar si abren la consola y mandar un aviso de MIDAS
 setInterval(() => {
     if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
         console.clear();
@@ -414,11 +421,11 @@ setInterval(() => {
     }
 }, 1000);
 
-
+// Asegúrate de que esta variable esté al puro inicio de mercado.js
 let tiempoRestante = 60; 
 
 function iniciarCronometro() {
-  
+    // Si ya hay un reloj andando, lo matamos para que no se dupliquen
     if (window.relojMidas) clearInterval(window.relojMidas);
 
     window.relojMidas = setInterval(() => {
@@ -427,10 +434,11 @@ function iniciarCronometro() {
         if (elementoContador) {
             tiempoRestante--;
             
-            
+            // --- EL CIERRE DE SEGURIDAD ---
+            // Si el tiempo es 0 o menor (negativo), forzamos reinicio
             if (tiempoRestante <= 0) {
                 tiempoRestante = 60;
-                
+                // Intentamos actualizar, si falla, al menos el reloj sigue
                 try {
                     actualizarMidas();
                     console.log("Bóveda Sincronizada con Éxito");
@@ -443,7 +451,7 @@ function iniciarCronometro() {
         }
     }, 1000);
 }
-
+// Esto conecta tu código "escondido" con los botones del HTML
     window.calcularTasacion = calcularTasacion;
     window.toggleMenuIdioma = toggleMenuIdioma;
     window.seleccionarIdioma = seleccionarIdioma;
@@ -453,31 +461,31 @@ function iniciarCronometro() {
 
     
 
-
+// 3. BLOQUE DE PROTECCIÓN TOTAL (Anti-Copia y Anti-Inspección)
 document.addEventListener('contextmenu', event => event.preventDefault()); // Bloquea clic derecho
 
 document.onkeydown = function(e) {
     if(e.keyCode == 123) return false; // Bloquea F12
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; 
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; 
-    if(e.ctrlKey && e.uKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Bloquea Ctrl+Shift+I
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Bloquea Ctrl+Shift+C
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Bloquea Ctrl+Shift+J
+    if(e.ctrlKey && e.uKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Bloquea Ctrl+U (Ver código fuente)
 };
 
-
+// 4. DISPARADOR DE INICIO (Esto es lo que hace que el 60 empiece a bajar)
 window.addEventListener('DOMContentLoaded', () => {
     iniciarCronometro(); 
     actualizarMidas();
 });
-
+// --- DISPARADOR DE LA BÓVEDA ---
 document.addEventListener('DOMContentLoaded', () => {
-   
+    // 1. Definimos la variable global si no estaba definida arriba
     window.tiempoRestante = 60; 
     
-   
+    // 2. Encendemos el segundero
     iniciarCronometro(); 
     
-    
+    // 3. Hacemos la primera carga de precios
     if (typeof actualizarMidas === "function") {
         actualizarMidas();
     }
