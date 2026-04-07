@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDAS | Probador Virtual</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#d4af37">
+    <link rel="icon" href="midas_m.png" type="image/png">
+    <title>👑 MIDAS | MERCADO GLOBAL</title>
+    <link rel="canonical" href="https://www.midasgoldking.com/mercado.html">
+
+<meta property="og:title" content="MIDAS | Inteligencia de Mercado Global">
+<meta property="og:description" content="Cotización de oro 24k, onza troy y TRM en tiempo real. La bóveda digital de MIDAS GOLD KING.">
+<meta property="og:url" content="https://www.midasgoldking.com/mercado.html">
+<meta property="og:image" content="https://www.midasgoldking.com/img/banner-compartir.jpg">
+<meta property="og:type" content="website">
+</head>
+<body>
+    <div id="preloader-midas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out;">
+    <img src="midas_m.png" alt="M" style="width: 80px; filter: drop-shadow(0 0 10px #d4af37); animation: latido 1.5s infinite ease-in-out;">
+    <p style="color: #d4af37; font-family: sans-serif; font-size: 0.8em; letter-spacing: 4px; margin-top: 20px; text-transform: uppercase;">Iniciando Bóveda...</p>
+</div>
+    <header>
+        <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="midas_m.png" alt="M" class="logo-m">
+            </a>
+        </div>
+
+        <div class="menu-hamburguesa" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="menu" id="menuPrincipal">
+            <li><a href="index.html">INICIO</a></li>
+            <li><a href="tasador.html">TASADOR</a></li>
+            <li><a href="tejidos.html">TEJIDOS</a></li>
+            <li><a href="probador.html">PROBADOR</a></li>
+            <li><a href="mercado.html">MERCADO</a></li>
+            <li><a href="comunidad.html">COMUNIDAD</a></li>
+        </ul>
+
+            <div class="idioma-selector-nuevo">
+            <button class="btn-idioma" onclick="toggleMenuIdioma()">
+                <span id="idioma-actual">🌐 ES</span>
+            </button>
+            <div id="menu-idiomas" class="dropdown-idiomas">
+                <div onclick="seleccionarIdioma('es')">🇪🇸 ESPAÑOL</div>
+                <div onclick="seleccionarIdioma('en')">🇺🇸 ENGLISH</div>
+                <div onclick="seleccionarIdioma('fr')">🇫🇷 FRANÇAIS</div>
+                <div onclick="seleccionarIdioma('it')">🇮🇹 ITALIANO</div>
+                <div onclick="seleccionarIdioma('pt')">🇵🇹 PORTUGUÊS</div>
+                <div onclick="seleccionarIdioma('de')">🇩🇪 DEUTSCH</div>
+                <div onclick="seleccionarIdioma('ru')">🇷🇺 РУССКИЙ</div>
+                <div onclick="seleccionarIdioma('jp')">🇯🇵 日本語</div>
+                <div onclick="seleccionarIdioma('cn')">🇨🇳 中文</div>
+                <div onclick="seleccionarIdioma('ar')">SA العربية</div>
+                <div onclick="seleccionarIdioma('hi')">🇮🇳 हिन्दी</div>
+                <div onclick="seleccionarIdioma('tr')">TR TÜRKÇE</div>
+                <div onclick="seleccionarIdioma('nl')">🇳🇱 NEDERLANDS</div>
+                <div onclick="seleccionarIdioma('kr')">🇰🇷 한국어</div>
+                <div onclick="seleccionarIdioma('pl')">🇵🇱 POLSKI</div>
+                <div onclick="seleccionarIdioma('gr')">🇬🇷 ΕΛΛΗΝΙΚΑ</div>
+                <div onclick="seleccionarIdioma('th')">🇹🇭 ไทย</div>
+                <div onclick="seleccionarIdioma('vn')">🇻🇳 TIẾNG VIỆT</div>
+                <div onclick="seleccionarIdioma('il')">🇮🇱 עברית</div>
+                <div onclick="seleccionarIdioma('se')">🇸🇪 SVENSKA</div>
+            </div>
+        </div> </nav>
+    </header>
+
+    <main class="seccion-limpia">
+    <h2 class="titulo-dorado">SIMULADOR DE LONGITUD</h2>
+    <p class="subtitulo-mercado">
+        La longitud de una cadena define su presencia. Utilice nuestro motor de simulación para proyectar la caída exacta de los tejidos sobre el perfil anatómico, garantizando una elección basada en estándares reales de joyería internacional.
+    </p>
+    <div class="linea-oro"></div>
+
+    <section class="mercado-global">
+        <div class="panel-tasacion" style="max-width: 550px; margin: 0 auto;">
+            
+            <div class="input-group">
+                <label>PERFIL DE MODELO</label>
+                <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+                    <button onclick="cambiarGenero('caballero')" id="btn-caballero" class="btn-control active" style="flex: 1; font-size: 0.8em; letter-spacing: 2px;">CABALLERO</button>
+                    <button onclick="cambiarGenero('dama')" id="btn-dama" class="btn-control" style="flex: 1; font-size: 0.8em; letter-spacing: 2px;">DAMA</button>
+                </div>
+
+                <label>LONGITUD DE REFERENCIA</label>
+                <select id="selector-medida" class="btn-control" onchange="actualizarImagen()" style="width: 100%; margin-bottom: 20px;">
+                    </select>
+            </div>
+
+            <div class="monitor-precios" style="padding: 5px; border: 2px solid #d4af37; border-radius: 4px; background: #000; position: relative;">
+                <div style="height: 450px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #111 0%, #000 100%);">
+                    <img id="imagen-modelo" src="caballero50.png" style="max-height: 100%; width: auto; transition: all 0.5s ease;" alt="Vista MIDAS">
+                </div>
+                <span style="position: absolute; bottom: 10px; right: 15px; color: rgba(212, 175, 55, 0.3); font-size: 0.6em; letter-spacing: 3px;">MIDAS KING</span>
+            </div>
+
+            <div class="status-barra" style="margin-top: 15px;">
+                <span id="punto-status" style="background: #00ff88; box-shadow: 0 0 10px #00ff88; animation: palpitar 2s infinite;"></span> 
+                SISTEMA: <span id="texto-status">VISUALIZACIÓN DE CAÍDA ACTIVA</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <script src="script.js"></script>
+     <footer class="footer-midas">
+    <div class="footer-container">
+        <div class="footer-section">
+            <img src="midas_m.png" alt="Midas Logo" class="footer-logo">
+            <p class="footer-text">La Bóveda Digital: Transparencia y precisión en el mercado del oro global.</p>
+        </div>
+        
+        <div class="footer-section">
+            <h4>EXPLORAR</h4>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="tasador.html">Tasador</a></li>
+                <li><a href="tejidos.html">Tejidos</a></li>
+                <li><a href="mercado.html">Mercado</a></li>
+                <li><a href="comunidad.html">Comunidad</a></li> 
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>SOPORTE</h4>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('terminos')">Términos de Uso</a></li>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('privacidad')">Política de Privacidad</a></li>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('faq')">Preguntas Frecuentes</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>CONTACTO</h4>
+            <div class="social-links">
+                <a href="https://wa.me/573137918385" target="_blank" class="wa-link">
+                    WHATSAPP: +57 313 791 8385
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2026 MIDAS GOLD KING | Todos los derechos reservados.</p>
+    </div>
+</footer>
+<div id="modal-legal" style="display:none; position:fixed; z-index:20000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px);">
+    
+    <div style="background: #111; border: 1px solid #d4af37; margin: 5% auto; padding: 30px; width: 85%; max-width: 500px; color: #fff; border-radius: 10px; position: relative; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); 
+        max-height: 80vh; overflow-y: auto;"> <span onclick="cerrarLegal()" style="position: absolute; top: 10px; right: 20px; color: #d4af37; font-size: 30px; cursor: pointer;">&times;</span>
+        
+        <div id="contenido-legal"></div> <div style="text-align: center; margin-top: 20px;">
+            <button onclick="cerrarLegal()" style="background:#d4af37; color:#000; border:none; padding:10px 20px; font-weight:bold; cursor:pointer; text-transform:uppercase;">Entendido</button>
+        </div>
+    </div>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'es',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+        // --- ELIMINADOR DE BARRA MIDAS ---
+        setInterval(function() {
+            // 1. Borra el iframe de la barra
+            const barra = document.querySelector('.goog-te-banner-frame');
+            if (barra) {
+                barra.style.display = 'none';
+                barra.remove(); 
+            }
+            // 2. Devuelve el cuerpo a su posición original (0px arriba)
+            document.body.style.top = "0px";
+            document.documentElement.style.marginTop = "0px";
+        }, 500); 
+    }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>

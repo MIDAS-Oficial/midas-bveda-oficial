@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MIDAS | Inicio</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#d4af37">
+    <link rel="icon" href="midas_m.png" type="image/png">
+    <title>👑 MIDAS | MERCADO GLOBAL</title>
+    <link rel="canonical" href="https://www.midasgoldking.com/mercado.html">
+
+<meta property="og:title" content="MIDAS | Inteligencia de Mercado Global">
+<meta property="og:description" content="Cotización de oro 24k, onza troy y TRM en tiempo real. La bóveda digital de MIDAS GOLD.">
+<meta property="og:url" content="https://www.midasgoldking.com/mercado.html">
+<meta property="og:image" content="https://www.midasgoldking.com/img/banner-compartir.jpg">
+<meta property="og:type" content="website">
+</head>
+<body>
+    <div id="preloader-midas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out;">
+    <img src="midas_m.png" alt="M" style="width: 80px; filter: drop-shadow(0 0 10px #d4af37); animation: latido 1.5s infinite ease-in-out;">
+    <p style="color: #d4af37; font-family: sans-serif; font-size: 0.8em; letter-spacing: 4px; margin-top: 20px; text-transform: uppercase;">Iniciando Bóveda...</p>
+</div>
+    <header>
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="midas_m.png" alt="M" class="logo-m">
+            </a>
+        </div>
+
+        <div class="menu-hamburguesa" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="menu" id="menuPrincipal">
+            <li><a href="index.html">INICIO</a></li>
+            <li><a href="tasador.html">TASADOR</a></li>
+            <li><a href="tejidos.html">TEJIDOS</a></li>
+            <li><a href="probador.html">PROBADOR</a></li>
+            <li><a href="mercado.html">MERCADO</a></li>
+            <li><a href="comunidad.html">COMUNIDAD</a></li>
+        </ul>
+
+            <div class="idioma-selector-nuevo">
+            <button class="btn-idioma" onclick="toggleMenuIdioma()">
+                <span id="idioma-actual">🌐 ES</span>
+            </button>
+            <div id="menu-idiomas" class="dropdown-idiomas">
+                <div onclick="seleccionarIdioma('es')">🇪🇸 ESPAÑOL</div>
+                <div onclick="seleccionarIdioma('en')">🇺🇸 ENGLISH</div>
+                <div onclick="seleccionarIdioma('fr')">🇫🇷 FRANÇAIS</div>
+                <div onclick="seleccionarIdioma('it')">🇮🇹 ITALIANO</div>
+                <div onclick="seleccionarIdioma('pt')">🇵🇹 PORTUGUÊS</div>
+                <div onclick="seleccionarIdioma('de')">🇩🇪 DEUTSCH</div>
+                <div onclick="seleccionarIdioma('ru')">🇷🇺 РУССКИЙ</div>
+                <div onclick="seleccionarIdioma('jp')">🇯🇵 日本語</div>
+                <div onclick="seleccionarIdioma('cn')">🇨🇳 中文</div>
+                <div onclick="seleccionarIdioma('ar')">SA العربية</div>
+                <div onclick="seleccionarIdioma('hi')">🇮🇳 हिन्दी</div>
+                <div onclick="seleccionarIdioma('tr')">TR TÜRKÇE</div>
+                <div onclick="seleccionarIdioma('nl')">🇳🇱 NEDERLANDS</div>
+                <div onclick="seleccionarIdioma('kr')">🇰🇷 한국어</div>
+                <div onclick="seleccionarIdioma('pl')">🇵🇱 POLSKI</div>
+                <div onclick="seleccionarIdioma('gr')">🇬🇷 ΕΛΛΗΝΙΚΑ</div>
+                <div onclick="seleccionarIdioma('th')">🇹🇭 ไทย</div>
+                <div onclick="seleccionarIdioma('vn')">🇻🇳 TIẾNG VIỆT</div>
+                <div onclick="seleccionarIdioma('il')">🇮🇱 עברית</div>
+                <div onclick="seleccionarIdioma('se')">🇸🇪 SVENSKA</div>
+            </div>
+        </div> </nav>
+    </header>
+
+    <div class="monitor-viva">
+    <div class="contenedor-monitor">
+        <div class="monitor-item">
+            <span class="punto-pulso"></span>
+            <span class="texto-blanco">ESTADO: <span class="texto-verde">OPERANDO EN VIVO</span></span>
+        </div>
+
+        <span class="separador ocultar-movil">|</span>
+
+        <div class="monitor-item texto-blanco">
+            PRÓXIMA ACTUALIZACIÓN EN: <span id="cuenta-regresiva" class="texto-dorado">60</span>s
+        </div>
+
+        <span class="separador ocultar-movil">|</span>
+
+        <div class="monitor-item texto-gris">
+            MERCADO: <span class="texto-blanco">LONDRES / NY</span>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+@keyframes pulso-verde {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+</style>
+
+    <main>
+        <section class="hero">
+    <div class="contenedor-logo-expansion" onclick="mostrarProposito(event)">
+        <img src="midas_logo.png" alt="MIDAS Logo" class="logo-principal">
+        <div class="estallido-luz"></div> 
+    </div>
+    <h1 id="bienvenida-titulo">LA BÓVEDA DIGITAL</h1>
+    <p id="bienvenida-sub">Tu centro de mando para el mercado del oro</p>
+</section>
+
+     <section class="grid-herramientas">
+    <a href="tasador.html" class="tarjeta">
+        <h3>TASADOR</h3>
+        <p>Calcula el valor real en tiempo real</p>
+    </a>
+    <a href="tejidos.html" class="tarjeta">
+        <h3>TEJIDOS</h3>
+        <p>Catálogo visual de cadenas y tejidos</p>
+    </a>
+    <a href="probador.html" class="tarjeta">
+        <h3>PROBADOR</h3>
+        <p>Visualiza cómo te quedan las piezas</p>
+    </a>
+    <a href="mercado.html" class="tarjeta">
+        <h3>MERCADO</h3>
+        <p>Gráficas del precio del oro hoy</p>
+    </a>
+    <a href="comunidad.html" class="tarjeta" style="border-color: #d4af37; background: rgba(212, 175, 55, 0.05);">
+        <h3 style="color: #d4af37;">COMUNIDAD</h3>
+        <p>Foro de expertos y experiencias reales</p>
+    </a>
+</section>
+
+        <section class="seccion-info-dorada" style="padding: 50px 20px; max-width: 1000px; margin: 0 auto;">
+    <h2 style="color: #d4af37; text-align: center; letter-spacing: 3px; margin-bottom: 40px; font-size: 1.5em;">INTELIGENCIA DE MERCADO</h2>
+    
+    <div class="faq-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+        
+        <div style="background: rgba(20, 20, 20, 0.5); border: 1px solid #333; padding: 25px; border-radius: 5px; transition: 0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='#333'">
+            <h4 style="color: #d4af37; margin-bottom: 15px; font-size: 1em;">¿Qué hace que el precio del oro suba o baje?</h4>
+            <p style="color: #ccc; font-size: 0.9em; line-height: 1.6;">El oro actúa como el termómetro del mundo. Sube principalmente cuando hay incertidumbre económica o inflación, ya que los inversionistas lo ven como un refugio seguro. Baja cuando el dólar se fortalece o las tasas de interés suben.</p>
+        </div>
+
+        <div style="background: rgba(20, 20, 20, 0.5); border: 1px solid #333; padding: 25px; border-radius: 5px; transition: 0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='#333'">
+            <h4 style="color: #d4af37; margin-bottom: 15px; font-size: 1em;">¿Es rentable comprar oro hoy por hoy?</h4>
+            <p style="color: #ccc; font-size: 0.9em; line-height: 1.6;">Históricamente, el oro nunca pierde su valor real. Comprar oro no es un gasto, es un seguro para tu patrimonio. A largo plazo, siempre ha superado las crisis, protegiendo tus ahorros de la devaluación del papel moneda.</p>
+        </div>
+
+        <div style="background: rgba(20, 20, 20, 0.5); border: 1px solid #333; padding: 25px; border-radius: 5px; transition: 0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='#333'">
+            <h4 style="color: #d4af37; margin-bottom: 15px; font-size: 1em;">¿El precio del oro puede bajar mucho?</h4>
+            <p style="color: #ccc; font-size: 0.9em; line-height: 1.6;">El oro tiene un "piso" natural: su costo de extracción. Al ser un recurso finito y difícil de obtener, su escasez garantiza que siempre mantendrá un valor elevado. Es físicamente imposible que el valor del oro llegue a cero.</p>
+        </div>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+    <p style="color: #888; font-size: 0.9em; margin-bottom: 20px;">¿Tienes una duda específica sobre tu joyería o inversión?</p>
+    <a href="comunidad.html" style="color: #d4af37; text-decoration: none; border: 1px solid #d4af37; padding: 10px 25px; border-radius: 3px; font-size: 0.8em; letter-spacing: 2px; transition: 0.3s;" onmouseover="this.style.background='#d4af37'; this.style.color='#000'" onmouseout="this.style.background='transparent'; this.style.color='#d4af37'">
+        IR AL FORO DE EXPERTOS
+    </a>
+</div>
+
+    <section style="padding: 60px 20px; background: linear-gradient(to bottom, #000, #050505); text-align: center;">
+    <h2 style="color: #d4af37; letter-spacing: 5px; margin-bottom: 50px; font-size: 1.2em;">ESTÁNDARES DE PUREZA</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; opacity: 0.9;">
+        <div style="min-width: 120px;">
+            <h1 style="color: #d4af37; margin: 0; font-size: 2.5em;">24K</h1>
+            <p style="color: #888; font-size: 0.65em; letter-spacing: 2px; margin-top: 5px;">ORO PURO (99.9%)</p>
+        </div>
+        <div style="min-width: 120px;">
+            <h1 style="color: #d4af37; margin: 0; font-size: 2.5em;">18K</h1>
+            <p style="color: #888; font-size: 0.65em; letter-spacing: 2px; margin-top: 5px;">LEY 750 (75%)</p>
+        </div>
+        <div style="min-width: 120px;">
+            <h1 style="color: #d4af37; margin: 0; font-size: 2.5em;">14K</h1>
+            <p style="color: #888; font-size: 0.65em; letter-spacing: 2px; margin-top: 5px;">LEY 585 (58.5%)</p>
+        </div>
+        <div style="min-width: 120px;">
+            <h1 style="color: #d4af37; margin: 0; font-size: 2.5em;">10K</h1>
+            <p style="color: #888; font-size: 0.65em; letter-spacing: 2px; margin-top: 5px;">LEY 417 (41.7%)</p>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 60px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; background: #000; border-top: 1px solid #d4af37;">
+    <div style="text-align: center; padding: 20px;">
+        <div style="color: #d4af37; font-size: 2em; margin-bottom: 15px;">🛡️</div>
+        <h4 style="color: #fff; font-size: 0.9em; margin-bottom: 10px; letter-spacing: 2px;">SEGURIDAD</h4>
+        <p style="color: #666; font-size: 0.8em; line-height: 1.6;">Tasaciones privadas sin registro de datos personales.</p>
+    </div>
+    <div style="text-align: center; padding: 20px;">
+        <div style="color: #d4af37; font-size: 2em; margin-bottom: 15px;">⚡</div>
+        <h4 style="color: #fff; font-size: 0.9em; margin-bottom: 10px; letter-spacing: 2px;">RAPIDEZ</h4>
+        <p style="color: #666; font-size: 0.8em; line-height: 1.6;">Cálculos automáticos con la TRM al minuto.</p>
+    </div>
+    <div style="text-align: center; padding: 20px;">
+        <div style="color: #d4af37; font-size: 2em; margin-bottom: 15px;">💎</div>
+        <h4 style="color: #fff; font-size: 0.9em; margin-bottom: 10px; letter-spacing: 2px;">EXCLUSIVIDAD</h4>
+        <p style="color: #666; font-size: 0.8em; line-height: 1.6;">Acceso a los tejidos más finos del mercado.</p>
+    </div>
+</section>
+</section>
+
+    <div id="seccion-proposito" class="modal-proposito">
+        <div class="contenido-proposito">
+            <span class="cerrar-proposito" onclick="cerrarProposito()">&times;</span>
+            <h2>EL MANIFIESTO MIDAS</h2>
+            <div class="linea-dorada"></div>
+            <p><strong>Nuestra Misión:</strong> Democratizar el acceso a la información experta en el sector joyero. En un mercado de sombras, MIDAS es la luz que garantiza la transparencia.</p>
+            <p><strong>Proyección:</strong> Nos proyectamos como el tasador global definitivo, integrando inteligencia artificial para autenticar piezas de 18k y 24k en segundos.</p>
+            <p><strong>El Legado:</strong> No solo vendemos tecnología; blindamos la confianza de cada inversionista y amante del oro.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+     <footer class="footer-midas">
+    <div class="footer-container">
+        <div class="footer-section">
+            <img src="midas_m.png" alt="Midas Logo" class="footer-logo">
+            <p class="footer-text">La Bóveda Digital: Transparencia y precisión en el mercado del oro global.</p>
+        </div>
+        
+        <div class="footer-section">
+    <h4>EXPLORAR</h4>
+    <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="tasador.html">Tasador</a></li>
+        <li><a href="tejidos.html">Tejidos</a></li>
+        <li><a href="mercado.html">Mercado</a></li>
+        <li><a href="comunidad.html">Comunidad</a></li> </ul>
+</div>
+        <div class="footer-section">
+            <h4>SOPORTE</h4>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('terminos')">Términos de Uso</a></li>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('privacidad')">Política de Privacidad</a></li>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('faq')">Preguntas Frecuentes</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>CONTACTO</h4>
+            <div class="social-links">
+                <a href="https://wa.me/573137918385" target="_blank" class="wa-link">
+                    WHATSAPP: +57 313 791 8385
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2026 MIDAS GOLD KING | Todos los derechos reservados.</p>
+    </div>
+</footer>
+<div id="modal-legal" style="display:none; position:fixed; z-index:20000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px);">
+    
+    <div style="background: #111; border: 1px solid #d4af37; margin: 5% auto; padding: 30px; width: 85%; max-width: 500px; color: #fff; border-radius: 10px; position: relative; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); 
+        max-height: 80vh; overflow-y: auto;"> <span onclick="cerrarLegal()" style="position: absolute; top: 10px; right: 20px; color: #d4af37; font-size: 30px; cursor: pointer;">&times;</span>
+        
+        <div id="contenido-legal"></div> <div style="text-align: center; margin-top: 20px;">
+            <button onclick="cerrarLegal()" style="background:#d4af37; color:#000; border:none; padding:10px 20px; font-weight:bold; cursor:pointer; text-transform:uppercase;">Entendido</button>
+        </div>
+    </div>
+</div>
+<div id="aviso-cookies" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: #111; border: 1px solid #d4af37; padding: 20px; text-align: center; z-index: 10001; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5); display: none;">
+    <img src="midas_m.png" alt="M" style="width: 30px; margin-bottom: 10px;">
+    <p style="color: #fff; font-family: sans-serif; font-size: 0.8em; margin-bottom: 15px;">
+        En <span style="color: #d4af37; font-weight: bold;">MIDAS</span> usamos cookies para mejorar tu experiencia y mostrarte precios en tiempo real.
+    </p>
+    <button onclick="aceptarCookies()" style="background: #d4af37; color: #000; border: none; padding: 10px 25px; font-weight: bold; cursor: pointer; border-radius: 4px; text-transform: uppercase; font-size: 0.7em; letter-spacing: 1px;">
+        Aceptar y Entrar
+    </button>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'es',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+        // --- ELIMINADOR DE BARRA MIDAS ---
+        setInterval(function() {
+            // 1. Borra el iframe de la barra
+            const barra = document.querySelector('.goog-te-banner-frame');
+            if (barra) {
+                barra.style.display = 'none';
+                barra.remove(); 
+            }
+            // 2. Devuelve el cuerpo a su posición original (0px arriba)
+            document.body.style.top = "0px";
+            document.documentElement.style.marginTop = "0px";
+        }, 500); 
+    }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>

@@ -1,0 +1,1685 @@
+/* Limpieza básica */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000; /* Fondo negro total */
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden; /* Evita movimiento lateral */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* CAMBIA ESTO: el 30px es el espacio arriba y abajo, el 7% es a los lados */
+    padding: 20px 7%; 
+    background-color: #0a0a0a;
+    border-bottom: 2px solid #d4af37;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    position: relative;
+    z-index: 100; 
+}
+
+.logo-m {
+    height: 60px;
+    margin-left: 50px; /* Esto la empuja un poco más a la derecha */
+    animation: brilloM 2s infinite ease-in-out;
+}
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    perspective: 500px;
+  
+}
+.menu li a:hover {
+    transform: translateZ(30px) scale(1.1); /* El texto avanza hacia el usuario */
+    color: #fff; /* Cambia a blanco/oro brillante al activarse */
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.4);
+}
+
+/* 4. El "Estallido" pequeño detrás de cada palabra */
+.menu li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu li::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(10px);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 1;
+}
+
+.menu li:hover::after {
+    width: 80px;
+    height: 40px;
+    opacity: 1;
+}
+
+.menu a {
+    color: #d4af37; /* Color Oro */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    display: inline-block;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Suavidad premium */
+    position: relative;
+    z-index: 2;
+}
+
+/* Sección Central (Hero) */
+.hero {
+    height: 80vh; /* Ocupa casi toda la pantalla visible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logo-principal {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+#bienvenida-titulo {
+    font-size: 3rem;
+    color: #d4af37;
+    letter-spacing: 2px;
+}
+
+#bienvenida-sub {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.btn-oro {
+    background-color: #d4af37;
+    color: #000;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+/* Animación de brillo */
+@keyframes brilloM {
+    0% { filter: drop-shadow(0 0 2px #d4af37); }
+    50% { filter: drop-shadow(0 0 10px #d4af37) brightness(1.2); }
+    100% { filter: drop-shadow(0 0 2px #d4af37); }
+}
+
+/* Aplicar el brillo al logo */
+.logo-m {
+    animation: brilloM 2s infinite ease-in-out;
+}
+.idioma-selector {
+    margin-left: auto; /* Esto asegura que se mantenga a la derecha */
+    margin-right: 40px; /* Aumenta este número para moverlo más hacia la izquierda */
+}
+.logo-container a {
+    text-decoration: none;
+    display: block;
+    outline: none;
+}
+/* Contenedor de herramientas */
+.grid-herramientas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 00px 10% 40px 10%;
+    margin-top: -20px;
+}
+
+.tarjeta {
+    background: #111;
+    border: 1px solid #d4af37;
+    padding: 30px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+    border-radius: 8px;
+}
+
+.tarjeta:hover {
+    background: #1a1a1a;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.tarjeta h3 { color: #d4af37; margin-bottom: 10px; }
+
+/* ESTILO PARA PUBLICIDAD */
+.banner-publicidad {
+    width: 80%;
+    height: 120px;
+    background: #050505;
+    border: 1px dashed #444; /* Línea punteada para indicar espacio de anuncio */
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #444;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    border-radius: 4px;
+}
+
+.top-banner { margin-top: -50px; } /* Ajuste para que quede cerca del Hero */
+.grid-herramientas {
+    display: grid;
+    /* Esto hace que se ajusten solas: 4 columnas si hay espacio, 2 o 1 si es celular */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 20px;
+    padding: 0 10% 40px 10%; /* 0 arriba para que suban */
+    margin-top: -50px; /* Sube las tarjetas hacia el hero */
+}
+.banner-publicidad {
+    width: 80%;
+    height: 100px;
+    background: linear-gradient(90deg, #050505, #111, #050505); /* Un degradado sutil */
+    border: 1px solid #222; 
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.banner-publicidad p {
+    color: #555; /* Color gris oscuro elegante */
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 5px; /* Espaciado entre letras tipo marca de lujo */
+    text-transform: uppercase;
+}
+/* Contenedor con perspectiva para efecto de profundidad (3D) */
+.contenedor-logo-expansion {
+    position: relative;
+    display: inline-block;
+    perspective: 1500px; /* Perspectiva alta para mayor profundidad Z */
+    cursor: pointer;
+    margin-bottom: 20px; /* Espacio con el título */
+}
+
+.logo-principal {
+    width: 300px;
+    position: relative;
+    z-index: 2; /* El logo va al frente */
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.5s;
+    /* Sombras base para dar volumen inicial */
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+}
+
+/* El brillo de fondo que "explota" */
+.estallido-luz {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0; /* Empieza en cero */
+    height: 0;
+    background: radial-gradient(circle, rgba(212, 175, 55, 1) 0%, rgba(212, 175, 55, 0.4) 40%, transparent 70%);
+    transform: translate(-50%, -50%) translateZ(-10px); /* Ligeramente atrás en Z */
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0;
+    transition: opacity 0.6s ease, width 0.6s ease, height 0.6s ease;
+    z-index: 1; /* Detrás del logo */
+}
+
+/* INTERACCIÓN AL PASAR EL MOUSE (HOVER) */
+.contenedor-logo-expansion:hover .logo-principal {
+    /* translateZ lo agranda hacia adelante en 3D reales, scale(1.05) lo ajusta */
+    transform: translateZ(150px) scale(1.05); 
+    /* Brillo frontal en el logo */
+    filter: brightness(1.1) contrast(1.1) drop-shadow(0 15px 30px rgba(212, 175, 55, 0.7));
+}
+
+.contenedor-logo-expansion:hover .estallido-luz {
+    opacity: 1;
+    width: 500px; /* El brillo explota hacia los lados */
+    height: 500px;
+    animation: pulsoLuzBoveda 2.5s infinite ease-in-out 0.6s; /* Empieza después de abrirse */
+}
+
+/* Animación de latido de la luz interior */
+@keyframes pulsoLuzBoveda {
+    0%, 100% { opacity: 0.8; width: 500px; height: 500px; filter: blur(40px); }
+    50% { opacity: 1; width: 550px; height: 550px; filter: blur(35px); }
+}
+
+/* Pantalla completa del propósito */
+.modal-proposito {
+    display: none; /* Oculto al inicio */
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95); /* Fondo casi negro */
+    backdrop-filter: blur(15px); /* Efecto de desenfoque */
+    animation: fadeIn 0.5s;
+}
+
+.contenido-proposito {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    max-width: 700px;
+}
+
+.contenido-proposito h2 {
+    color: #d4af37;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.linea-dorada {
+    height: 2px;
+    width: 100px;
+    background: #d4af37;
+    margin: 20px auto;
+}
+
+.contenido-proposito p {
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.cerrar-proposito {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    color: #d4af37;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+
+.tasador-container {
+    min-height: 60vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Esto centra el panel en el medio de la pantalla */
+    padding-bottom: 50px;; }
+.titulo-tasador { color: #d4af37; letter-spacing: 3px; margin-bottom: 20px; }
+.input-group { text-align: left; margin-bottom: 15px; }
+.input-group label { color: #888; font-size: 0.7rem; display: block; margin-bottom: 5px; }
+.input-group input, .input-group select { width: 100%; background: #111; border: 1px solid #333; padding: 12px; color: #fff; border-radius: 5px; outline: none; }
+.display-resultado { background: #050505; padding: 20px; margin: 20px 0; border: 1px dashed #d4af37; }
+.precio-final { font-size: 2rem; font-weight: bold; color: #fff; }
+.btn-tasar { width: 100%; padding: 15px; background: #d4af37; color: #000; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
+.btn-tasar:hover { background: #fff; box-shadow: 0 0 15px #d4af37; }
+
+/* ESTILOS PARA LA SECCIÓN TEJIDOS */
+.seccion-limpia {
+    padding: 60px 10%;
+    text-align: center;
+}
+
+.titulo-dorado {
+    color: #d4af37;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+.grid-tejidos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.tarjeta-tejido {
+    background: #0a0a0a;
+    border: 1px solid #222;
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.4s;
+}
+
+.tarjeta-tejido:hover {
+    border-color: #d4af37;
+    transform: translateY(-10px);
+}
+
+.img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px dashed #444;
+}
+
+.tarjeta-tejido h3 {
+    color: #d4af37;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.tarjeta-tejido p {
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ESTILOS PROBADOR Y MERCADO */
+.contenedor-probador, .panel-mercado {
+    background: #0a0a0a;
+    border: 1px solid #d4af37;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.visor-joya, .grafica-falsa {
+    height: 300px;
+    background: #000;
+    border: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #444;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.btn-control {
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-control:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+.sube { color: #00ff00; font-weight: bold; }
+
+.idioma-selector-nuevo {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-idioma {
+    background: #000;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif; /* O la que estés usando */
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-idioma:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+.dropdown-idiomas {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #0a0a0a;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    border: 1px solid #d4af37;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-idiomas div {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.dropdown-idiomas div:hover {
+    background-color: #1a1a1a;
+    color: #d4af37;
+}
+
+.show { display: block !important; }
+
+/* Ajuste para que el rango se vea impecable */
+.precio-final {
+    font-size: 1.3rem !important; /* Un poco más pequeño para que quepa el rango */
+    letter-spacing: 1px;
+    padding: 10px 0;
+}
+
+.label-resultado {
+    font-size: 0.65rem;
+    color: #d4af37;
+    letter-spacing: 3px;
+}
+
+
+.seccion-intro-midas {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto 60px auto; /* Espacio generoso antes del tasador */
+    padding: 0 20px;
+    animation: fadeIn 1s ease-in;
+}
+
+.glitch-gold {
+    color: #d4af37;
+    font-size: 2.5rem;
+    text-align: center;
+    letter-spacing: 5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.tagline {
+    color: #555;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.grid-proposito {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.item-proposito {
+    border-top: 1px solid #d4af37;
+    padding-top: 20px;
+}
+
+.item-proposito h3 {
+    color: #d4af37;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.item-proposito p {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Animación para que aparezca suavemente */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.aviso-legal-tasacion {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid #222;
+    border-radius: 5px;
+    
+}
+
+.aviso-legal-tasacion p {
+    color: #666; /* Gris oscuro para que no distraiga tanto como el resultado */
+    font-size: 0.75rem;
+    line-height: 1.5;
+    text-align: justify;
+    margin: 0;
+}
+
+.aviso-legal-tasacion span {
+    color: #d4af37; /* El encabezado del aviso en oro */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.aviso-legal-tasacion strong {
+    color: #aaa;
+}
+.panel-tasacion {
+    background: #0a0a0a;
+    border: 1px solid #d4af37;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px; /* Un poco más ancho para que respire */
+    text-align: center;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); /* Brillo sutil de bóveda */
+}
+
+.footer-midas {
+    background-color: #000000; /* Negro total */
+    border-top: 1px solid #d4af37; /* Línea dorada fina y elegante */
+    padding: 60px 10% 20px 10%;
+    margin-top: 80px;
+    color: #fff;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+}
+
+.footer-logo {
+    height: 55px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+}
+
+.footer-section h4 {
+    color: #d4af37;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+    padding-left: 5px;
+}
+
+.footer-text {
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.wa-link {
+    display: inline-block;
+    color: #d4af37;
+    text-decoration: none;
+    border: 1px solid #d4af37;
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.wa-link:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+.footer-bottom {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #111;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #444; /* Gris oscuro para el copyright */
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.clausula-midas {
+    margin: 30px auto;
+    max-width: 480px;
+    padding: 20px;
+    background: rgba(10, 10, 10, 0.8); /* Fondo casi negro */
+    border: 0.5px solid rgba(212, 175, 55, 0.3); /* Borde dorado muy sutil */
+    border-radius: 2px; /* Esquinas rectas para verse más serio */
+    text-align: center;
+}
+
+.clausula-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.clausula-icono {
+    color: #d4af37;
+    font-size: 1.2rem;
+}
+
+.clausula-titulo {
+    color: #d4af37;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.clausula-texto {
+    color: #777; /* Gris suave, no distrae */
+    font-size: 0.75rem;
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+}
+
+.clausula-texto strong {
+    color: #aaa;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+/* Contenedor Principal */
+.contenedor-catalogos {
+    padding: 100px 5% 50px;
+    text-align: center;
+    background-color: #000;
+}
+
+.titulo-seccion {
+    color: #d4af37;
+    letter-spacing: 5px;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.linea-decorativa {
+    width: 100px;
+    height: 2px;
+    background: #d4af37;
+    margin: 0 auto 50px;
+}
+
+/* Cuadrícula */
+.grid-tejidos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Tarjeta Individual */
+.tarjeta-oro {
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+}
+
+.tarjeta-oro:hover {
+    transform: translateY(-10px);
+    border-color: #d4af37;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+/* Imagen con efecto */
+.contenedor-img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background: #111;
+}
+
+.contenedor-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+    transition: transform 0.6s ease;
+    filter: grayscale(20%); /* Un toque serio que se quita al tocar */
+}
+
+.tarjeta-oro:hover img {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+}
+
+/* Textos abajo de la imagen */
+.info-tejido {
+    padding: 20px;
+    border-top: 1px solid #1a1a1a;
+}
+
+.info-tejido h3 {
+    color: #d4af37;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.mensaje-especial {
+    color: #888;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    font-style: italic;
+}
+.contenedor-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto es clave: corta la imagen para que llene el cuadro sin deformarse */
+    transition: transform 0.5s ease;
+}
+
+/* Efecto al tocar la tarjeta */
+.tarjeta-oro:active {
+    transform: scale(0.95); /* Se hunde un poco al tocarla, como un botón real */
+}
+
+/* Para pantallas de celular */
+@media (max-width: 600px) {
+    .grid-tejidos {
+        grid-template-columns: repeat(2, 1fr); /* En celular muestra 2 por fila */
+        gap: 15px;
+    }
+    .titulo-seccion { font-size: 1.4rem; }
+    .mensaje-especial { display: none; } /* Ocultamos el mensaje en celular para ahorrar espacio */
+}
+
+.descripcion-seccion {
+    color: #aaa; /* Gris claro para que sea legible pero sutil */
+    max-width: 700px; /* Para que no se estire mucho en pantallas anchas */
+    margin: 0 auto 50px; /* Centrado y con espacio abajo antes de las fotos */
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.descripcion-seccion strong {
+    color: #d4af37; /* Resaltamos MIDAS en dorado */
+    font-weight: bold;
+}
+.item-proposito p strong {
+    color: #d4af37; /* El Dorado MIDAS */
+    font-weight: bold;
+    text-transform: uppercase; /* Opcional: para que se vea más imponente */
+}
+
+.monitor-precios {
+    height: 450px; /* Altura fija para que no baile la página */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000; /* Fondo negro para que no se note el borde de la foto */
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+#imagen-modelo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* ESTO evita que se estire o se corte */
+    display: block;
+    transition: all 0.3s ease;
+}
+.tarjeta-precio {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tarjeta-precio.highlight {
+    border-color: #d4af37;
+    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.valor-vivo {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    color: #d4af37;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.status-barra {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.punto-verde {
+    width: 8px;
+    height: 8px;
+    background: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #00ff00;
+    animation: parpadeo 2s infinite;
+}
+
+@keyframes parpadeo {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.subtitulo-mercado {
+    color: #bbb;
+    max-width: 700px;
+    margin: 10px auto 25px auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.display-joya {
+    background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+    border: 1px solid #d4af37;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modelo-preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.btn-tipo {
+    background: transparent;
+    color: #888;
+    border: 1px solid #333;
+    padding: 10px 20px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.btn-tipo.active {
+    background: #d4af37;
+    color: #000;
+    font-weight: bold;
+    border-color: #d4af37;
+}
+
+/* Animación de caída y revelado MIDAS */
+.titulo-dorado, .subtitulo-mercado, .linea-oro {
+    animation: caidaMidas 1.2s ease-out forwards;
+    opacity: 0;
+}
+
+.subtitulo-mercado {
+    animation-delay: 0.3s; /* El párrafo cae un poco después */
+}
+
+.linea-oro {
+    animation-delay: 0.6s; /* La línea cae al final */
+}
+
+@keyframes caidaMidas {
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Efecto de resplandor para la línea */
+.linea-oro {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    width: 80%;
+    margin: 20px auto;
+
+}
+/* TARJETAS */
+.card-m {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #333;
+    padding: 30px 20px;
+    border-radius: 4px;
+    text-align: center;
+    flex: 1;
+}
+
+.label-m { font-size: 0.75em; color: #666; letter-spacing: 2px; }
+.value-m { font-size: 1.3em; font-weight: bold; color: #d4af37; margin-top: 10px; }
+
+/* GRÁFICO CUADRADO (600x600 aprox) */
+.contenedor-cuadrado {
+    width: 600px;
+    height: 600px;
+    border: 1px solid #d4af37;
+    background: #000;
+}
+
+/* ESPACIOS PARA PUBLICIDAD */
+.ads-lateral {
+    width: 160px; /* Tamaño estándar de banner vertical */
+    height: 600px;
+    background: #111;
+    border: 1px dashed #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 0.8em;
+}
+
+/* RESPONSIVO: Si la pantalla es chica, oculta publicidad */
+@media (max-width: 1000px) {
+    .ads-lateral { display: none; }
+    .contenedor-cuadrado { width: 100%; height: 450px; }
+}
+
+/* TARJETAS VERTICALES */
+.card-vertical {
+    width: 100%;
+    max-width: 450px;
+    background: #111;
+    border: 1px solid #333;
+    padding: 25px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.label-v {
+    font-size: 0.75em;
+    color: #666;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.value-v {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #d4af37;
+}
+
+/* CONTENEDOR DE GRÁFICA VERTICAL */
+#contenedor-grafica-vertical {
+    width: 450px;  /* Ancho controlado */
+    height: 700px; /* Mucha más altura */
+    border: 1px solid #d4af37;
+    background: #000;
+}
+
+#tradingview_midas {
+    height: 100% !important;
+}
+/* CONTENEDOR DE GRÁFICA VERTICAL COMPACTA */
+#contenedor-grafica-vertical {
+    width: 100%;
+    max-width: 450px;  /* Mantiene el ancho controlado */
+    height: 450px;     /* ALTURA RECORTADA: Ahora no es tan largo */
+    border: 1px solid #d4af37;
+    background: #000;
+    margin: 0 auto;    /* Centra el cuadro */
+}
+
+#tradingview_midas {
+    height: 100% !important;
+}
+/* Título con caídas (Serif) */
+.titulo-midas-global {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif; /* La fuente con caídas */
+    font-weight: bold;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0 0 10px 0;
+}
+
+/* Párrafos estándar */
+.parrafo-midas-global {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0 0 25px 0;
+    line-height: 1.6;
+}
+
+/* La línea dorada que te gusta */
+.linea-oro-midas {
+    width: 100px;
+    height: 1px;
+    background-color: #d4af37;
+    margin: 0 auto 40px auto;
+}
+
+/* Resaltado para MIDAS */
+.oro-destaque {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+/* Clase para la "caída" en los títulos de MIDAS GOLD KING */
+.fuente-caida {
+    font-family: 'Playfair Display', serif; /* Si no carga la fuente, usa la Serif del sistema */
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #d4af37;
+    letter-spacing: 2px;
+}
+
+/* Animación de latido dorado para el logo */
+@keyframes latido {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 20px #d4af37); }
+    100% { transform: scale(1); opacity: 0.6; }
+}
+/* Agrégale esto al estilo del botón de cookies */
+#btn-aceptar-cookies {
+    background: #d4af37;
+    color: #000;
+    padding: 12px 30px;
+    font-weight: 900; /* Más negrita */
+    border-radius: 2px; /* Bordes más rectos se ven más serios */
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+#btn-aceptar-cookies:hover {
+    background: #fff; /* Que brille al pasar el mouse */
+    box-shadow: 0 0 15px #d4af37;
+}
+
+/* Personalizar la barra de desplazamiento dentro del modal */
+#modal-legal div::-webkit-scrollbar {
+    width: 6px;
+}
+
+#modal-legal div::-webkit-scrollbar-track {
+    background: #000;
+}
+
+#modal-legal div::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 10px;
+}
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* OCULTAR BARRA SUPERIOR DE GOOGLE */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+/* OCULTAR EL WIDGET FLOTANTE QUE SALE A VECES */
+.goog-te-gadget {
+    display: none !important;
+}
+
+/* EVITAR QUE EL MOUSE PASE POR ENCIMA DE LA BARRA INVISIBLE */
+#goog-gt-tt, .goog-te-balloon-frame {
+    display: none !important;
+}
+
+.goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Bloqueo total de la barra de Google */
+.goog-te-banner-frame.skiptranslate, 
+.goog-te-banner-frame, 
+#goog-gt-tt, 
+.goog-te-balloon-frame, 
+.goog-te-menu-frame {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Evita que el cuerpo de la página se desplace hacia abajo */
+body {
+    top: 0 !important;
+    position: static !important;
+}
+
+/* Quita el resaltado azul cuando pasas el mouse por textos traducidos */
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Ocultar el widget original que Google intenta mostrar */
+#google_translate_element {
+    display: none !important;
+}
+
+/* ============================================================
+   SOLUCIÓN MAESTRA MÓVIL MIDAS - UNIFICADA
+   ============================================================ */
+@media (max-width: 768px) {
+    /* 1. RESET DE ESTRUCTURA */
+    .navbar {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        height: 80px !important;
+        padding: 0 15px !important;
+        position: relative !important;
+    }
+
+    /* 2. BARRA DE ESTADO (EL MONITOR) */
+    .monitor-viva {
+        height: auto !important;
+        padding: 15px 0 !important;
+    }
+
+    .contenedor-monitor {
+        display: flex !important;
+        flex-direction: column !important; /* APILADO VERTICAL */
+        gap: 10px !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .separador { 
+        display: none !important; /* QUITA LOS PALITOS | */
+    }
+
+    .monitor-item {
+        font-size: 11px !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* 3. LOGO Y ELEMENTOS SUPERIORES */
+    .logo-m {
+        height: 45px !important;
+        margin: 0 !important;
+        order: 2; /* Logo al centro */
+    }
+
+    .menu-hamburguesa {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    
+    /* --- EL AJUSTE DE CENTRADO --- */
+    margin: 0 auto;       /* Esto lo centra horizontalmente en su contenedor */
+    position: relative;   /* Asegura que no se mueva por otros flujos */
+    left: 10px;           /* Empujón visual a la derecha para compensar el peso visual del logo */
+}
+
+/* Asegúrate de que las líneas internas sigan siendo doradas y elegantes */
+.menu-hamburguesa span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #d4af37; /* Dorado Midas */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+    .idioma-selector-nuevo {
+        order: 3; /* Idioma a la derecha */
+        margin: 0 !important;
+    }
+
+    /* 4. MENÚ DESPLEGABLE (LA BÓVEDA) */
+    .menu {
+        display: none !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background: rgba(0, 0, 0, 0.98) !important;
+        justify-content: center !important;
+        align-items: center !important;
+        z-index: 10000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    .menu.active {
+        display: flex !important;
+    }
+
+    .menu li {
+        margin: 20px 0 !important;
+        list-style: none !important;
+    }
+
+    .menu li a {
+        font-size: 1.5rem !important;
+        letter-spacing: 4px !important;
+    }
+
+    /* 5. LOGO PRINCIPAL (HERO) */
+    .logo-principal {
+        max-width: 220px !important;
+        margin-top: 40px !important;
+    }
+
+    .hero {
+        height: auto !important;
+        padding: 60px 0 !important;
+    }
+}
+/* --- ESTILOS PARA PC (Escritorio) --- */
+.monitor-viva {
+    background: #000;
+    border-bottom: 1px solid #d4af37;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.contenedor-monitor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+/* --- AJUSTE PARA MÓVIL (ASUS / CELULARES) --- */
+@media (max-width: 768px) {
+    .contenedor-monitor {
+        flex-direction: column; /* LOS PONE UNO ABAJO DEL OTRO */
+        gap: 8px;
+        padding: 15px 0;
+    }
+
+    .ocultar-movil {
+        display: none !important; /* QUITA LOS PALITOS | */
+    }
+
+    .monitor-item {
+        font-size: 0.65rem; /* UN POCO MÁS CHICO PARA QUE QUEPA BIEN */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Evita que el logo principal choque con la barra */
+    .hero {
+        padding-top: 40px !important;
+    }
+}
+.navbar {
+    height: 80px !important; /* Le damos aire para que quepa el botón y el logo */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+}
+
+/* EL CÍRCULO VERDE NEÓN */
+.punto-pulso {
+    width: 10px;          /* Tamaño del punto */
+    height: 10px;
+    background-color: #00ff00; 
+    border-radius: 50%;   /* Lo hace redondo */
+    display: inline-block;
+    margin-right: 10px;   /* Separa el punto del texto ESTADO */
+    box-shadow: 0 0 10px #00ff00; /* Brillo inicial */
+    animation: latido-verde 1.5s infinite ease-in-out;
+}
+
+/* LA ANIMACIÓN DE LATIDO */
+@keyframes latido-verde {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 5px #00ff00;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.5;
+        box-shadow: 0 0 15px #00ff00; /* Aumenta el brillo al crecer */
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 5px #00ff00;
+    }
+}
+
+/* ASEGURAR COLORES DE TEXTO */
+.texto-verde {
+    color: #00ff00 !important;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+.texto-blanco {
+    color: #ffffff;
+}
+
+/* EL CÍRCULO VERDE NEÓN */
+.punto-pulso {
+    width: 10px;          /* Tamaño del punto */
+    height: 10px;
+    background-color: #00ff00; 
+    border-radius: 50%;   /* Lo hace redondo */
+    display: inline-block;
+    margin-right: 10px;   /* Separa el punto del texto ESTADO */
+    box-shadow: 0 0 10px #00ff00; /* Brillo inicial */
+    animation: latido-verde 1.5s infinite ease-in-out;
+}
+
+/* LA ANIMACIÓN DE LATIDO */
+@keyframes latido-verde {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 5px #00ff00;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.5;
+        box-shadow: 0 0 15px #00ff00; /* Aumenta el brillo al crecer */
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 5px #00ff00;
+    }
+}
+
+/* ASEGURAR COLORES DE TEXTO */
+.texto-verde {
+    color: #00ff00 !important;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+.texto-blanco {
+    color: #ffffff;
+}
+/* --- ARREGLO FINAL MIDAS MÓVIL --- */
+@media (max-width: 768px) {
+    /* Forzamos a que el Header tenga espacio */
+    header {
+        height: auto !important;
+        min-height: 80px;
+    }
+
+    /* El menú que no ves: lo hacemos visible y vertical */
+    .menu {
+        display: none; /* Se activa con la clase .active */
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.98) !important;
+        z-index: 9999 !important;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .menu.active {
+        display: flex !important;
+    }
+
+    .menu li {
+        margin: 20px 0 !important;
+    }
+
+    .menu li a {
+        font-size: 1.5rem !important;
+        color: #d4af37 !important;
+        text-decoration: none;
+        letter-spacing: 3px;
+    }
+
+    /* Bajamos el logo y el texto para que no choquen con la barra de arriba */
+    .hero {
+        margin-top: 50px !important;
+        padding-top: 60px !important;
+    }
+
+    /* Ajuste de la barra de estado (Estado, Actualización, Mercado) */
+    .monitor-viva {
+        position: relative !important;
+        z-index: 10;
+        margin-top: 10px;
+    }
+
+    .contenedor-monitor {
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+}
+
+/* --- ARREGLO PARA MÓVIL (VISTA ASUS) --- */
+@media (max-width: 768px) {
+    /* 1. Evita que el logo tape la barra */
+    .hero {
+        margin-top: 100px !important; 
+        padding-top: 20px !important;
+    }
+
+    /* 2. Ocultar el menú horizontal y ponerlo vertical */
+    .menu {
+        display: none; /* Se oculta por defecto */
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 3. Clase que activa el menú (se añade con JS) */
+    .menu.active {
+        display: flex !important;
+    }
+
+    .menu li {
+        margin: 15px 0;
+    }
+
+    .menu li a {
+        font-size: 1.5rem;
+        color: #d4af37;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    /* 4. Estilo de las 3 rayas (Botón hamburguesa) */
+    .menu-hamburguesa {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        z-index: 10001;
+        gap: 5px;
+    }
+
+    .menu-hamburguesa span {
+        width: 30px;
+        height: 3px;
+        background: #d4af37;
+        border-radius: 2px;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-m {
+        width: 35px !important; /* Achicamos un poco el logo del header */
+        height: auto;
+    }
+    
+    .navbar {
+        padding: 10px 15px !important; /* Le damos aire a los lados */
+    }
+}
+.selector-longitud {
+    padding: 10px;
+    margin: 15px 0;
+    width: 100%; /* Para que ocupe todo el ancho del cuadro dorado */
+}
+
+/* 1. Centrar el Header (Logo y Menú) */
+header, .navbar {
+    display: flex;
+    justify-content: space-between; /* Logo a la izq, idioma a la der */
+    align-items: center; /* ESTO centra las 3 líneas verticalmente */
+    padding: 10px 5%;
+    width: 100%;
+}
+
+/* 2. Centrar específicamente el icono de las 3 líneas */
+#menu-toggle, .hamburguesa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Lo obliga a buscar el centro si el padre es ancho completo */
+}
+
+/* 3. Centrar los botones de Caballero/Dama */
+.contenedor-botones-perfil {
+    display: flex;
+    justify-content: center; /* CENTRADO HORIZONTAL */
+    gap: 15px; /* Espacio uniforme entre ellos */
+    width: 100%;
+    margin: 20px 0;
+}
+
+/* =========================================
+   PROBADOR MIDAS: AJUSTE PARA MÓVIL (CORRECCIÓN)
+   ========================================= */
+
+/* 1. Botones: Ahora serán idénticos, sin importar el largo del texto */
+.btn-control {
+    background: #111;
+    border: 1px solid #333;
+    color: #888;
+    padding: 12px 5px; /* Menos padding horizontal para que quepa bien el texto */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* MAGIA PARA MÓVIL: */
+    width: 50%;          /* Cada uno toma exactamente la mitad */
+    text-align: center;  /* Centra el texto (Caballero / Dama) */
+    display: block;      /* Asegura que tomen el ancho total */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-control.active {
+    background: #d4af37; /* Dorado MIDAS */
+    color: #000;
+    border-color: #fff;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* 2. El Selector de Medida: Necesita más aire */
+#selector-medida {
+    width: 100%;
+    margin-bottom: 25px; /* Más espacio con la imagen */
+    padding: 12px;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #333;
+}
+
+/* 3. El contenedor principal (Panel Tasación) necesita margen interno (Padding) */
+.panel-tasacion {
+    max-width: 550px; 
+    margin: 0 auto;
+    
+    /* AÑADE ESTO: Para que nada roce el borde dorado */
+    padding: 20px; 
+    box-sizing: border-box; /* Crucial para que el padding no rompa el ancho */
+}

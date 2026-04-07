@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDAS | comunidad</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#d4af37">
+    <link rel="icon" href="midas_m.png" type="image/png">
+    <title>👑 MIDAS | MERCADO GLOBAL</title>
+    <link rel="canonical" href="https://www.midasgoldking.com/mercado.html">
+    <meta property="og:title" content="MIDAS | Inteligencia de Mercado Global">
+<meta property="og:description" content="Cotización de oro 24k, onza troy y TRM en tiempo real. La bóveda digital de MIDAS GOLD.">
+<meta property="og:url" content="https://www.midasgoldking.com/mercado.html">
+<meta property="og:image" content="https://www.midasgoldking.com/img/banner-compartir.jpg">
+<meta property="og:type" content="website">
+</head>
+<body style="background: #000; color: #fff; font-family: sans-serif;">
+
+    <div id="preloader-midas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out;">
+    <img src="midas_m.png" alt="M" style="width: 80px; filter: drop-shadow(0 0 10px #d4af37); animation: latido 1.5s infinite ease-in-out;">
+    <p style="color: #d4af37; font-family: sans-serif; font-size: 0.8em; letter-spacing: 4px; margin-top: 20px; text-transform: uppercase;">Iniciando Bóveda...</p>
+</div>
+
+ <header>
+        <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="midas_m.png" alt="M" class="logo-m">
+            </a>
+        </div>
+
+        <div class="menu-hamburguesa" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="menu" id="menuPrincipal">
+            <li><a href="index.html">INICIO</a></li>
+            <li><a href="tasador.html">TASADOR</a></li>
+            <li><a href="tejidos.html">TEJIDOS</a></li>
+            <li><a href="probador.html">PROBADOR</a></li>
+            <li><a href="mercado.html">MERCADO</a></li>
+            <li><a href="comunidad.html">COMUNIDAD</a></li>
+        </ul>
+
+           <div class="idioma-selector-nuevo">
+            <button class="btn-idioma" onclick="toggleMenuIdioma()">
+                <span id="idioma-actual">🌐 ES</span>
+            </button>
+            <div id="menu-idiomas" class="dropdown-idiomas">
+                <div onclick="seleccionarIdioma('es')">🇪🇸 ESPAÑOL</div>
+                <div onclick="seleccionarIdioma('en')">🇺🇸 ENGLISH</div>
+                <div onclick="seleccionarIdioma('fr')">🇫🇷 FRANÇAIS</div>
+                <div onclick="seleccionarIdioma('it')">🇮🇹 ITALIANO</div>
+                <div onclick="seleccionarIdioma('pt')">🇵🇹 PORTUGUÊS</div>
+                <div onclick="seleccionarIdioma('de')">🇩🇪 DEUTSCH</div>
+                <div onclick="seleccionarIdioma('ru')">🇷🇺 РУССКИЙ</div>
+                <div onclick="seleccionarIdioma('jp')">🇯🇵 日本語</div>
+                <div onclick="seleccionarIdioma('cn')">🇨🇳 中文</div>
+                <div onclick="seleccionarIdioma('ar')">SA العربية</div>
+                <div onclick="seleccionarIdioma('hi')">🇮🇳 हिन्दी</div>
+                <div onclick="seleccionarIdioma('tr')">TR TÜRKÇE</div>
+                <div onclick="seleccionarIdioma('nl')">🇳🇱 NEDERLANDS</div>
+                <div onclick="seleccionarIdioma('kr')">🇰🇷 한국어</div>
+                <div onclick="seleccionarIdioma('pl')">🇵🇱 POLSKI</div>
+                <div onclick="seleccionarIdioma('gr')">🇬🇷 ΕΛΛΗΝΙΚΑ</div>
+                <div onclick="seleccionarIdioma('th')">🇹🇭 ไทย</div>
+                <div onclick="seleccionarIdioma('vn')">🇻🇳 TIẾNG VIỆT</div>
+                <div onclick="seleccionarIdioma('il')">🇮🇱 עברית</div>
+                <div onclick="seleccionarIdioma('se')">🇸🇪 SVENSKA</div>
+            </div>
+        </div> </nav>
+    </header>
+
+    <style>
+@keyframes pulso-verde {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+</style>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
+    
+    <section id="foro-consultas">
+        <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 15px; font-size: 1.2em; letter-spacing: 2px; text-transform: uppercase;">👑 Consultas al Experto</h2>
+        
+        <button onclick="abrirFormularioDuda()" style="width: 100%; margin-top: 20px; background: transparent; border: 1px solid #d4af37; color: #d4af37; padding: 15px; cursor: pointer; letter-spacing: 2px; font-weight: bold; transition: 0.3s;" onmouseover="this.style.background='#d4af37'; this.style.color='#000'" onmouseout="this.style.background='transparent'; this.style.color='#d4af37'">
+            NUEVA CONSULTA 
+        </button>
+
+        <div class="info-extra-midas" style="margin-top: 30px; padding: 20px; border-left: 2px solid #d4af37; background: rgba(212, 175, 55, 0.05);">
+    <h4 style="color: #d4af37; letter-spacing: 2px; font-size: 0.9em;">AVISO DE SEGURIDAD</h4>
+    <p style="color: #888; font-size: 0.8em; line-height: 1.5;">
+        Toda consulta enviada a través de este portal es cifrada y procesada directamente por nuestra oficina técnica en Colombia. Garantizamos discreción total en sus activos.
+    </p>
+</div>
+
+        <div id="modal-consulta" style="display:none; position:fixed; z-index:99999; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);">
+            <div style="background: #111; border: 1px solid #d4af37; margin: 10% auto; padding: 30px; width: 90%; max-width: 450px; text-align: center; border-radius: 8px;">
+                <h3 style="color: #d4af37; letter-spacing: 3px; margin-bottom: 10px;">NUEVA CONSULTA</h3>
+                <p style="color: #666; font-size: 0.8em; margin-bottom: 25px;">Tu duda será analizada por la inteligencia de MIDAS.</p>
+                
+                <form id="form-comunidad-midas" action="https://formspree.io/f/mzdjnzzn" method="POST">
+                    <input type="text" name="usuario" placeholder="Tu nombre o usuario" required style="width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 12px; margin-bottom: 15px; font-family: monospace;">
+                    <input type="email" name="email" placeholder="Tu correo electrónico" required style="width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 12px; margin-bottom: 15px; font-family: monospace;">
+                    <textarea name="consulta" placeholder="Escribe tu duda técnica aquí..." rows="4" required style="width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 12px; margin-bottom: 20px; font-family: sans-serif; resize: none;"></textarea>
+                    <button type="submit" id="btn-enviar-midas" style="background: #d4af37; color: #000; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; width: 100%; letter-spacing: 2px;">ENVIAR A LA BÓVEDA</button>
+                </form>
+                <p onclick="cerrarModales()" style="color: #555; cursor: pointer; margin-top: 20px; font-size: 0.7em; letter-spacing: 1px;">[ DESCARTAR ]</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiencias-inversion">
+        <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 15px; font-size: 1.2em; letter-spacing: 2px; text-transform: uppercase;">💎 Bitácora de Éxito</h2>
+        
+        <div id="contenedor-testimonios" style="margin-top: 20px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: #0a0a0a; border-left: 3px solid #d4af37; padding: 20px; border-radius: 0 5px 5px 0;">
+                <p style="color: #ccc; font-size: 0.9em; line-height: 1.6; font-style: italic;">"Gracias al tasador de MIDAS pude negociar mi cadena de 18k a un precio justo. La transparencia es total."</p>
+                <p style="color: #d4af37; font-size: 0.75em; margin-top: 10px; font-weight: bold; letter-spacing: 1px;">- INVERSIONISTA ANÓNIMO</p>
+            </div>
+            
+            <div style="background: rgba(20,20,20,0.5); border-left: 3px solid #d4af37; padding: 20px; border-radius: 0 5px 5px 0;">
+                <p style="color: #ccc; font-size: 0.9em; line-height: 1.6; font-style: italic;">"Pude vender una cadena antigua al precio justo de hoy. La transparencia de esta web no tiene competencia."</p>
+                <p style="color: #d4af37; font-size: 0.75em; margin-top: 10px; font-weight: bold; letter-spacing: 1px;">- CLIENTE VERIFICADO</p>
+            </div>
+        </div>
+
+        <button onclick="window.location.href='https://wa.me/573137918385?text=Hola%20MIDAS,%20quiero%20compartir%20mi%20experiencia%20con%20el%20oro%20o%20tejidos'" style="width: 100%; margin-top: 20px; background: #111; border: 1px solid #333; color: #888; padding: 15px; cursor: pointer; letter-spacing: 2px; font-size: 0.8em; transition: 0.3s;" onmouseover="this.style.borderColor='#d4af37'; this.style.color='#d4af37'">
+            COMPARTIR MI EXPERIENCIA
+        </button>
+    </section>
+
+</main>
+
+    <script src="script.js"></script>
+
+    <div style="background: rgba(20,20,20,0.5); border-left: 3px solid #d4af37; padding: 20px; margin-top: 15px;">
+    <p style="color: #ccc; font-size: 0.9em; line-height: 1.6; font-style: italic;">"Gracias al Tasador pude vender una cadena antigua al precio justo de hoy. La transparencia de esta web no tiene competencia."</p>
+    <p style="color: #d4af37; font-size: 0.75em; margin-top: 10px; font-weight: bold; letter-spacing: 1px;">- CLIENTE VERIFICADO</p>
+</div>
+    
+     <footer class="footer-midas">
+    <div class="footer-container">
+        <div class="footer-section">
+            <img src="midas_m.png" alt="Midas Logo" class="footer-logo">
+            <p class="footer-text">La Bóveda Digital: Transparencia y precisión en el mercado del oro global.</p>
+        </div>
+        
+        <div class="footer-section">
+            <h4>EXPLORAR</h4>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="tasador.html">Tasador</a></li>
+                <li><a href="tejidos.html">Tejidos</a></li>
+                <li><a href="mercado.html">Mercado</a></li>
+                <li><a href="comunidad.html">Comunidad</a></li> 
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>SOPORTE</h4>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('terminos')">Términos de Uso</a></li>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('privacidad')">Política de Privacidad</a></li>
+                <li><a href="javascript:void(0)" onclick="abrirLegal('faq')">Preguntas Frecuentes</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>CONTACTO</h4>
+            <div class="social-links">
+                <a href="https://wa.me/573137918385" target="_blank" class="wa-link">
+                    WHATSAPP: +57 313 791 8385
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2026 MIDAS GOLD KING | Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+    
+    <div id="modal-legal" style="display:none; position:fixed; z-index:40000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px);">
+    <div style="background: #111; border: 1px solid #d4af37; margin: 5% auto; padding: 30px; width: 85%; max-width: 500px; color: #fff; border-radius: 10px; position: relative; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); max-height: 80vh; overflow-y: auto;">
+        
+        <span onclick="cerrarLegal()" style="position: absolute; top: 10px; right: 20px; color: #d4af37; font-size: 30px; cursor: pointer;">&times;</span>
+        
+        <div id="contenido-legal"></div> 
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="cerrarLegal()" style="background:#d4af37; color:#000; border:none; padding:10px 20px; font-weight:bold; cursor:pointer; text-transform:uppercase;">Entendido</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-consulta" style="display:none; position:fixed; z-index:50000; left:0; top:0; width:100%; height:100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);">
+    <div style="background: #111; border: 1px solid #d4af37; margin: 10% auto; padding: 30px; width: 90%; max-width: 450px; text-align: center; border-radius: 8px;">
+        <h3 style="color: #d4af37; letter-spacing: 3px; margin-bottom: 10px;">NUEVA CONSULTA</h3>
+        <p style="color: #666; font-size: 0.8em; margin-bottom: 25px;">Tu duda será analizada por la inteligencia de MIDAS.</p>
+        
+        <form action="https://formspree.io/f/goldkingmidas245@gmail.com" method="POST">
+            <input type="text" name="usuario" placeholder="Tu nombre o usuario" required style="width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 12px; margin-bottom: 15px; font-family: monospace;">
+            <input type="email" name="email" placeholder="Tu correo electrónico" required style="width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 12px; margin-bottom: 15px; font-family: monospace;">
+            <textarea name="consulta" placeholder="Escribe tu duda técnica aquí..." rows="4" required style="width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 12px; margin-bottom: 20px; font-family: sans-serif;"></textarea>
+            
+            <input type="hidden" name="_subject" value="Nueva Consulta Técnica - MIDAS GOLD">
+            <input type="hidden" name="_next" value="https://www.midasgoldking.com/comunidad.html"> 
+            
+            <button type="submit" style="background: #d4af37; color: #000; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; width: 100%; letter-spacing: 2px;">ENVIAR A LA BÓVEDA</button>
+        </form>
+        
+        <p onclick="cerrarModales()" style="color: #555; cursor: pointer; margin-top: 20px; font-size: 0.7em; letter-spacing: 1px;">DESCARTAR</p>
+    </div>
+</div>
+
+<script>
+    // Asegúrate de que estas funciones existan si no están en tu script.js
+    function abrirFormularioDuda() { 
+        document.getElementById('modal-consulta').style.display = 'block'; 
+    }
+    function cerrarModales() { 
+        document.getElementById('modal-consulta').style.display = 'none'; 
+    }
+    // La función abrirLegal ya debería estar en tu script.js con la lógica de textosLegales
+</script>
+<div id="google_translate_element" style="display:none;"></div>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'es',
+            autoDisplay: false
+        }, 'google_translate_element');
+
+        // --- ELIMINADOR DE BARRA MIDAS ---
+        setInterval(function() {
+            // 1. Borra el iframe de la barra
+            const barra = document.querySelector('.goog-te-banner-frame');
+            if (barra) {
+                barra.style.display = 'none';
+                barra.remove(); 
+            }
+            // 2. Devuelve el cuerpo a su posición original (0px arriba)
+            document.body.style.top = "0px";
+            document.documentElement.style.marginTop = "0px";
+        }, 500); 
+    }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
