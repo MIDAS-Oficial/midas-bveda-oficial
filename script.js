@@ -89,41 +89,59 @@ window.addEventListener('load', () => {
 });
 
 
-function calcularTasacion() {
-    // 1. Tomamos el precio que mercado.js acaba de traer de Binance
-    const precio24k = window.precioOroReal24k; 
-    const trmActual = window.trmRealMidas; 
+async function calcularTasacion() {
+    const precioUSDGramo = window.precioOroUSD24k; // El precio base en USD (ej: 75.50)
     const display = document.getElementById('resultado-precio');
+    const monedaDestino = document.getElementById('select-pais').value; // Ej: 'GBP', 'BRL', 'PEN'
 
-    // Seguridad: Si la API aún no carga, avisamos
-    if (!precio24k) {
-        if(display) display.innerText = "SINCRONIZANDO...";
+    if (!precioUSDGramo) {
+        if(display) display.innerText = "SINCRONIZANDO CON LA BOLSA...";
         return;
     }
 
+    // 1. Obtener los datos del formulario
     const purezas = { "24k": 1, "22k": 0.916, "18k": 0.75, "14k": 0.585, "10k": 0.417 };
     const cantidad = parseFloat(document.getElementById('input-gramos').value);
     const unidad = document.getElementById('select-unidad').value; 
     const ley = document.getElementById('select-quilates').value;
-    const moneda = document.getElementById('select-pais').value;
 
     if (cantidad > 0) {
-        let gramosReales = (unidad === "kg") ? cantidad * 1000 : (unidad === "oz") ? cantidad * 28.35 : cantidad;
-        let precioBase = precio24k * purezas[ley];
+        display.innerText = "CALCULANDO DIVISA...";
 
-        let totalMin = gramosReales * (precioBase * 0.80); // Margen 70%
-        let totalMax = gramosReales * (precioBase * 0.90); // Margen 90%
+        try {
+            // 2. BUSCAR LA TASA DE CAMBIO REAL DEL PAÍS SELECCIONADO
+            const res = await fetch(`https://open.er-api.com/v6/latest/USD`);
+            const data = await res.json();
+            const tasaCambio = data.rates[monedaDestino]; // Trae la tasa de GBP, BRL, PEN, etc.
 
-        // Si la moneda no es COP, convertimos usando la TRM real
-        if (moneda !== "COP" && trmActual) { 
-            totalMin *= trmActual; 
-            totalMax *= trmActual; 
+            // 3. Cálculos de peso (Onza Troy 31.1035)
+            let gramosReales = (unidad === "kg") ? cantidad * 1000 : (unidad === "oz") ? cantidad * 31.1035 : cantidad;
+            
+            // 4. Convertir el precio del gramo de USD a la Moneda Destino
+            let precioGramoEnMonedaLocal = precioUSDGramo * tasaCambio;
+            let precioLeyLocal = precioGramoEnMonedaLocal * purezas[ley];
+
+            // 5. Aplicar márgenes MIDAS (82% - 90%)
+            let totalMin = gramosReales * (precioLeyLocal * 0.82); 
+            let totalMax = gramosReales * (precioLeyLocal * 0.90); 
+
+            // 6. Formato según el país (Puntos para COP, Comas para el resto)
+            const configFormato = (monedaDestino === 'COP') 
+                ? { loc: 'es-CO', dec: 0 } 
+                : { loc: 'en-US', dec: 2 };
+
+            const fmt = new Intl.NumberFormat(configFormato.loc, {
+                minimumFractionDigits: configFormato.dec,
+                maximumFractionDigits: configFormato.dec
+            });
+
+            display.innerText = `${fmt.format(totalMin)} - ${fmt.format(totalMax)} ${monedaDestino}`;
+            display.style.color = "#00ff88";
+
+        } catch (error) {
+            display.innerText = "ERROR DE CONEXIÓN";
+            console.error(error);
         }
-
-        display.innerText = `${totalMin.toLocaleString('es-CO', { maximumFractionDigits: 0 })} - ${totalMax.toLocaleString('es-CO', { maximumFractionDigits: 0 })} ${moneda}`;
-        
-        display.style.color = "#00ff88"; 
-        setTimeout(() => { display.style.color = "#d4af37"; }, 500);
     }
 }
 // Asegúrate de que este bloque esté UNA SOLA VEZ
