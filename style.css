@@ -1798,3 +1798,14 @@ header, .navbar {
         grid-template-columns: 1fr; /* Una sola tarjeta por fila */
     }
 }
+
+.contenedor-img {
+    aspect-ratio: 1 / 1; /* Mantiene el cuadro perfecto antes de que cargue la foto */
+    background: #1a1a1a; /* Un color oscuro de respaldo */
+    overflow: hidden;
+}
+
+.contenedor-img img {
+    content-visibility: auto; /* Optimización de renderizado de Chrome */
+    will-change: transform;
+}
