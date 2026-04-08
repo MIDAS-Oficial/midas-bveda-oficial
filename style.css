@@ -2008,3 +2008,50 @@ img {
     position: relative;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
+
+.modal-contenido-premium {
+    position: relative; /* Esto es la base para que la X se ubique bien */
+    background: #0a0a0a;
+    border: 2px solid #d4af37;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* LA BENDITA X */
+.cerrar-modal-btn {
+    position: absolute;
+    top: -15px; /* Sale un poquito del cuadro para que se vea pro */
+    right: -15px;
+    background: #d4af37; /* Fondo dorado para que resalte sí o sí */
+    color: #000; /* X negra sobre fondo dorado */
+    width: 35px;
+    height: 35px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999999; /* Por encima de la monda */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#img-container-modal {
+    width: 100%;
+    height: 280px;
+    background: #000;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#img-container-modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* LLENA TODO EL CUADRO SIN ESPACIOS NEGROS */
+}
