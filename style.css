@@ -2163,3 +2163,16 @@ img {
     /* --- NUEVO: SI EL CUADRO DORADO ES MUY GRANDE, PERMITE BAJAR DENTRO DEL MODAL --- */
     overflow-y: auto; 
 }
+
+/* Color dorado para los títulos de la ficha técnica */
+.ficha-tecnica p strong {
+    color: #d4af37; /* El dorado MIDAS */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Opcional: Si quieres que los dos puntos (:) también sean dorados */
+.ficha-tecnica p {
+    color: white; /* El contenido sigue en blanco para legibilidad */
+}
