@@ -2055,3 +2055,61 @@ img {
     height: 100%;
     object-fit: cover; /* LLENA TODO EL CUADRO SIN ESPACIOS NEGROS */
 }
+
+
+/* CUADRO DEL MODAL: Ajustado para que no sature la pantalla */
+.modal-contenido-premium {
+    position: relative;
+    background: #0a0a0a;
+    border: 2px solid #d4af37;
+    width: 88%; /* Un poco más delgado para que se vea más estilizado */
+    max-width: 380px;
+    padding: 15px; 
+    border-radius: 15px;
+    margin: auto;
+}
+
+/* EL CUADRO DE LA IMAGEN: Ahora es más corto para dejar espacio */
+#img-container-modal {
+    width: 100%;
+    height: 200px; /* <--- ESTE ES EL CAMBIO CLAVE: Antes era muy grande */
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px; /* Pegado arriba para ganar espacio */
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+#img-container-modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Sigue llenando el cuadro pero en un espacio menor */
+}
+
+/* LA X: Ahora se verá sí o sí porque el contenido subió */
+.cerrar-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #d4af37;
+    color: #000;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 100;
+}
+
+/* TEXTOS: Un poco más compactos para móvil */
+.info-tecnica-modal h2 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px 0;
+}
+
+.info-tecnica-modal p {
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
