@@ -631,3 +631,28 @@ window.onclick = function(event) {
     let modal = document.getElementById('modal-tejido');
     if (event.target == modal) cerrarDetalles();
 };
+
+document.addEventListener("DOMContentLoaded", function() {
+    const imagenes = document.querySelectorAll(".contenedor-img img");
+
+    const aparecerImagen = (entradas, observador) => {
+        entradas.forEach(entrada => {
+            if (entrada.isIntersecting) {
+                const img = entrada.target;
+                img.style.opacity = "1";
+                observador.unobserve(img);
+            }
+        });
+    };
+
+    const observador = new IntersectionObserver(aparecerImagen, {
+        root: null,
+        threshold: 0.1
+    });
+
+    imagenes.forEach(img => {
+        img.style.opacity = "0";
+        img.style.transition = "opacity 0.5s ease-in-out";
+        observador.observe(img);
+    });
+});
