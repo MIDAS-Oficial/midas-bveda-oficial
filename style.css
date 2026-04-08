@@ -1731,3 +1731,70 @@ header, .navbar {
     font-weight: 300;
     line-height: 1.4;
 }
+
+/* --- ADAPTACIÓN PARA CELULARES --- */
+@media (max-width: 768px) {
+    /* Ajustamos el grid para que salgan 2 columnas en lugar de 3 o 4 */
+    .grid-tejidos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Dos tarjetas por fila */
+        gap: 15px; /* Espacio más pequeño entre tarjetas */
+        padding: 10px;
+    }
+
+    /* Ajuste de los títulos de las tarjetas */
+    .info-tejido h3 {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .info-tejido p {
+        font-size: 0.75rem;
+        display: none; /* Escondemos la descripción corta en móvil para no saturar */
+    }
+
+    /* --- MODAL RESPONSIVO --- */
+    .modal-contenido-premium {
+        width: 95%;
+        padding: 20px;
+        max-height: 90vh;
+        overflow-y: auto; /* Permite scroll si la info es mucha */
+    }
+
+    .modal-body-layout {
+        flex-direction: column; /* Imagen arriba, texto abajo */
+        text-align: center;
+        gap: 20px;
+    }
+
+    #img-container-modal img {
+        width: 100%; /* La imagen toma el ancho total disponible */
+        max-width: 200px;
+        height: auto;
+    }
+
+    .info-tecnica-modal {
+        min-width: unset;
+    }
+
+    .info-tecnica-modal h2 {
+        font-size: 1.4rem;
+    }
+
+    .separador-oro {
+        margin: 10px auto;
+        width: 80%;
+    }
+
+    .ficha-tecnica {
+        text-align: left; /* Mantenemos los datos técnicos alineados a la izquierda */
+        font-size: 0.85rem;
+    }
+}
+
+/* Ajuste extra para celulares muy pequeños (iPhone SE, etc) */
+@media (max-width: 400px) {
+    .grid-tejidos {
+        grid-template-columns: 1fr; /* Una sola tarjeta por fila */
+    }
+}
