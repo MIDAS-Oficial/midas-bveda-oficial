@@ -606,7 +606,7 @@ const enciclopediaMidas = {
 };
 
 /* ============================================================
-   1. SISTEMA DE PRECARGA Y ANIMACIONES (DOMContentLoaded)
+   1. SISTEMA DE PRECARGA Y ANIMACIONES
    ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
     const joyasMidas = [
@@ -658,16 +658,20 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // CORRECCIÓN CLAVE: Manejo de espacios para URLs (Marine Plano)
-    let nombreArchivo = key.replace(/\s+/g, '%20');
-    
-    // Inserción de imagen con manejo de errores
+    // Determinamos la extensión inicial basada en lo que nos dijiste
+    let ext = "jpeg"; 
+    if (key === 'serpiente') ext = "jpg";
+    if (key === 'militar') ext = "JPG";
+    if (key === 'clip') ext = "png";
+
+    // Manejo de espacio para Marine Plano
+    let nombreParaUrl = key.replace(/\s+/g, '%20');
+
     imgContainer.innerHTML = `
-        <img id="img-dinamica" src="${nombreArchivo}.jpeg" 
+        <img id="img-dinamica" src="${nombreParaUrl}.${ext}" 
              onerror="intentarSiguiente(this, '${key}')">
     `;
     
-    // BLOQUEA EL SCROLL
     document.body.style.overflow = "hidden"; 
     modal.style.display = "flex";
 }
@@ -676,13 +680,12 @@ function cerrarDetalles() {
     const modal = document.getElementById('modal-tejido');
     if (modal) {
         modal.style.display = "none";
-        // DEVUELVE EL SCROLL
         document.body.style.overflow = "auto";
     }
 }
 
 /* ============================================================
-   3. LÓGICA DE CIERRE EXTERNO Y ERRORES DE IMAGEN
+   3. LÓGICA DE CIERRE Y ERRORES
    ============================================================ */
 
 window.onclick = function(event) {
@@ -692,33 +695,19 @@ window.onclick = function(event) {
     }
 };
 
-// Intentar cargar otras extensiones y variaciones de nombre
 function intentarSiguiente(imgElement, nombre) {
-    const extensiones = ['jpg', 'png', 'JPG', 'PNG', 'jpeg'];
-    
-    // Variaciones de nombre para asegurar que encuentre el archivo
-    const variaciones = [
-        nombre,
-        nombre.replace(/\s+/g, '%20'),
-        nombre.replace(/\s+/g, '_')
-    ];
-
-    // Buscamos qué extensión estamos probando actualmente
+    // Si falla la extensión inicial, probamos estas en orden
+    const extensiones = ['jpeg', 'jpg', 'png', 'JPG', 'PNG'];
     let srcActual = imgElement.src;
-    let extensionActual = srcActual.split('.').pop().split('?')[0];
 
-    // Intentar la siguiente combinación
     for (let ext of extensiones) {
-        for (let v of variaciones) {
-            let nuevaRuta = v + '.' + ext;
-            if (!srcActual.includes(nuevaRuta)) {
-                imgElement.src = nuevaRuta;
-                return; 
-            }
+        let rutaIntento = nombre.replace(/\s+/g, '%20') + "." + ext;
+        if (!srcActual.includes(rutaIntento)) {
+            imgElement.src = rutaIntento;
+            return;
         }
     }
-
-    // Si todo falla
-    imgElement.alt = "Imagen no disponible";
-    console.error("No se encontró la imagen para: " + nombre);
+    
+    imgElement.alt = "Imagen no encontrada";
+    console.error("Error definitivo en: " + nombre);
 }
