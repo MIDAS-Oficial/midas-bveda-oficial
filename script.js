@@ -609,7 +609,7 @@ function abrirDetalles(key) {
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
     
-    // Llenado de textos
+    // Llenar datos de texto
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -617,20 +617,24 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // Formatear el nombre para archivos con espacios (como Marine Plano)
-    let nombreArchivo = key.includes('_') ? key.replace('_', '%20') : key;
-
-    // Estructura con centrado absoluto y manejo de errores en cadena
-    imgContainer.innerHTML = `
-        <div class="loader-oro" id="loader-img"></div>
-        <img id="img-dinamica" src="${nombreArchivo}.jpeg" 
-             style="opacity: 0; max-width: 100%; height: auto; transition: opacity 0.3s ease; display: block;"
-             onload="this.style.opacity='1'; document.getElementById('loader-img').style.display='none';"
-             onerror="intentarSiguiente(this, '${nombreArchivo}')">
-    `;
+    // Limpiamos y ponemos la imagen (probando .jpeg primero)
+    imgContainer.innerHTML = `<img id="img-dinamica" src="${key}.jpeg" onerror="this.src='${key}.png'; this.onerror=function(){this.src='${key}.jpg';}">`;
     
     modal.style.display = "flex";
 }
+
+// Función para cerrar el modal
+function cerrarDetalles() {
+    document.getElementById('modal-tejido').style.display = "none";
+}
+
+// Cerrar si hacen clic fuera del cuadro negro
+window.onclick = function(event) {
+    const modal = document.getElementById('modal-tejido');
+    if (event.target == modal) {
+        cerrarDetalles();
+    }
+};
 
 // Función auxiliar para probar extensiones si falla la primera
 function intentarSiguiente(imgElement, nombre) {
