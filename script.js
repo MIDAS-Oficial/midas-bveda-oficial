@@ -609,7 +609,7 @@ function abrirDetalles(key) {
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
     
-    // 1. Llenado de texto instantáneo
+    // Llenar textos
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -617,12 +617,12 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // 2. Optimización de carga: Mostramos un loader mientras carga la pesada
+    // Limpiamos el contenedor y metemos el loader + la imagen oculta
     imgContainer.innerHTML = `
         <div class="loader-oro" id="loader-img"></div>
         <img id="img-dinamica" src="${key}.jpeg" 
-             style="opacity: 0; transition: opacity 0.3s ease;"
-             onload="this.style.opacity='1'; document.getElementById('loader-img').remove();"
+             style="opacity: 0; max-width: 100%; height: auto; transition: opacity 0.3s ease;"
+             onload="this.style.opacity='1'; document.getElementById('loader-img').style.display='none';"
              onerror="this.src='${key}.png'">
     `;
     
