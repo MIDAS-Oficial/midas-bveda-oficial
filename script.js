@@ -609,7 +609,7 @@ function abrirDetalles(key) {
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
     
-    // Llenar textos
+    // Llenado de textos
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -617,18 +617,36 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // Limpiamos el contenedor y metemos el loader + la imagen oculta
+    // Formatear el nombre para archivos con espacios (como Marine Plano)
+    let nombreArchivo = key.includes('_') ? key.replace('_', '%20') : key;
+
+    // Estructura con centrado absoluto y manejo de errores en cadena
     imgContainer.innerHTML = `
         <div class="loader-oro" id="loader-img"></div>
-        <img id="img-dinamica" src="${key}.jpeg" 
-             style="opacity: 0; max-width: 100%; height: auto; transition: opacity 0.3s ease;"
+        <img id="img-dinamica" src="${nombreArchivo}.jpeg" 
+             style="opacity: 0; max-width: 100%; height: auto; transition: opacity 0.3s ease; display: block;"
              onload="this.style.opacity='1'; document.getElementById('loader-img').style.display='none';"
-             onerror="this.src='${key}.png'">
+             onerror="intentarSiguiente(this, '${nombreArchivo}')">
     `;
     
     modal.style.display = "flex";
 }
 
+// Función auxiliar para probar extensiones si falla la primera
+function intentarSiguiente(imgElement, nombre) {
+    const extensiones = ['jpg', 'png', 'JPG', 'PNG'];
+    let actual = imgElement.src.split('.').pop().toLowerCase();
+    let sigIndice = extensiones.indexOf(actual === 'jpeg' ? 'jpg' : actual) + 1;
+
+    if (sigIndice < extensiones.length) {
+        imgElement.src = nombre + '.' + extensiones[sigIndice];
+    } else {
+        // Si nada funciona, ocultamos el loader y ponemos un icono de error
+        document.getElementById('loader-img').style.display = 'none';
+        imgElement.alt = "Imagen no disponible";
+        console.error("No se encontró la imagen para: " + nombre);
+    }
+}
 function cerrarDetalles() {
     document.getElementById('modal-tejido').style.display = "none";
 }
