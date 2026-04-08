@@ -616,17 +616,23 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // Usamos el mismo sistema de respaldo de extensiones que ya teníamos
     imgContainer.innerHTML = `
         <img id="img-dinamica" src="${key}.jpeg" 
              onerror="this.src='${key}.jpg'; this.onerror=function(){this.src='${key}.png';}">
     `;
     
+    // --- NUEVO: BLOQUEA EL SCROLL DEL FONDO ---
+    document.body.style.overflow = "hidden"; 
     modal.style.display = "flex";
 }
+
 // Función para cerrar el modal
 function cerrarDetalles() {
-    document.getElementById('modal-tejido').style.display = "none";
+    const modal = document.getElementById('modal-tejido');
+    modal.style.display = "none";
+    
+    // --- NUEVO: DEVUELVE EL SCROLL AL CERRAR ---
+    document.body.style.overflow = "auto"; 
 }
 
 // Cerrar si hacen clic fuera del cuadro negro
