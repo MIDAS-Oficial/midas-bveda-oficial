@@ -1719,3 +1719,15 @@ header, .navbar {
 .ficha-tecnica p { margin: 5px 0; color: #d4af37; }
 
 .cerrar-modal-btn { position: absolute; top: 10px; right: 20px; color: #d4af37; font-size: 40px; cursor: pointer; }
+
+.info-tejido h3 {
+    color: #d4af37; /* El dorado MIDAS para el nombre */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.info-tejido p {
+    color: rgba(255, 255, 255, 0.8); /* Blanco con 80% de opacidad para que sea elegante */
+    font-weight: 300;
+    line-height: 1.4;
+}
