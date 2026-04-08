@@ -1856,3 +1856,20 @@ img {
        que cargue instantáneo y parezca parte del diseño */
     background: radial-gradient(circle, #111 0%, #000 100%);
 }
+
+img {
+    /* Optimiza para que el navegador use la tarjeta de video del celular */
+    transform: translateZ(0); 
+    backface-visibility: hidden;
+    perspective: 1000;
+    
+    /* Evita el parpadeo al cargar */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.contenedor-img {
+    /* En lugar de un negro total, usa un degradado suave 
+       que cargue instantáneo y parezca parte del diseño */
+    background: radial-gradient(circle, #111 0%, #000 100%);
+}
