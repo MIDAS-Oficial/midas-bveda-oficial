@@ -515,3 +515,117 @@ function toggleMenu() {
         menu.classList.toggle("active");
     }
 }
+const enciclopediaMidas = {
+    "3x1": {
+        titulo: "3x1 (FÍGARO)",
+        historia: "Clásico italiano que alterna tres eslabones cortos con uno largo. Diseñado para ofrecer ligereza visual sin perder la elegancia del Oro 18k.",
+        fab: "Eslabones electrosoldados.", res: "Alta - Uso diario."
+    },
+    "balines": {
+        titulo: "BALINES (MILITARY BALL)",
+        historia: "Eslabones esféricos unidos por barras internas. Su diseño maximiza el brillo del oro al captar la luz desde 360 grados.",
+        fab: "Micro-fusión esférica.", res: "Media - Estético."
+    },
+    "chino": {
+        titulo: "TEJIDO CHINO",
+        historia: "Patrón de anillos entrelazados de forma compacta. Ofrece una flexibilidad superior, adaptándose perfectamente al contorno del cuello.",
+        fab: "Tejido manual circular.", res: "Muy Alta - Flexible."
+    },
+    "clip": {
+        titulo: "CLIP (PAPERCLIP)",
+        historia: "Tendencia moderna de eslabones rectangulares alargados. Representa el minimalismo industrial en la alta joyería contemporánea.",
+        fab: "Laminado macizo.", res: "Media - Tendencia."
+    },
+    "cubana": {
+        titulo: "CUBANA (CURB LINK)",
+        historia: "Eslabones planos y cerrados de alta densidad. Es el tejido preferido por su durabilidad extrema y su presencia imponente en el mercado.",
+        fab: "Torque y aplanado.", res: "Máxima - Indestructible."
+    },
+    "forzatina": {
+        titulo: "FORZATINA",
+        historia: "El diseño básico de la joyería. Eslabones entrelazados en ángulos de 90°. Es la cadena más confiable para portar dijes de alto valor.",
+        fab: "Eslabón perpendicular.", res: "Alta - Tradicional."
+    },
+    "franco": {
+        titulo: "FRANCO (V-LINK)",
+        historia: "Tejido denso con un patrón de cuatro lados. Su diseño evita que la cadena se enrede o pierda su forma con el uso intensivo.",
+        fab: "Entramado de 4 caras.", res: "Extrema - De carga."
+    },
+    "gucci": {
+        titulo: "GUCCI (MARINER)",
+        historia: "Inspirado en las cadenas de anclas náuticas. Posee una barra central que evita la deformación de los eslabones bajo tensión.",
+        fab: "Barra de refuerzo central.", res: "Muy Alta - Náutica."
+    },
+    "ice": {
+        titulo: "ICE LINK",
+        historia: "Estructura de eslabones anchos diseñada para maximizar la superficie visible de oro. Ideal para acabados con alto brillo o diamantes.",
+        fab: "Casting de eslabón ancho.", res: "Media/Alta - Lujo."
+    },
+    "lazo": {
+        titulo: "LAZO (ROPE CHAIN)",
+        historia: "Múltiples eslabones pequeños tejidos en espiral. Crea una textura similar a una cuerda de oro con un brillo helicoidal único.",
+        fab: "Tejido espiral complejo.", res: "Muy Alta - Robusta."
+    },
+    "marine_plano": {
+        titulo: "MARINE PLANO",
+        historia: "Versión suavizada del tejido náutico. Se desliza cómodamente bajo la ropa, manteniendo la estética de los eslabones de ancla.",
+        fab: "Prensado plano.", res: "Alta - Confort."
+    },
+    "marine": {
+        titulo: "MARINE TRADICIONAL",
+        historia: "Fiel al diseño original de los barcos de lujo. Es una pieza de peso considerable que destaca por su simetría y herencia.",
+        fab: "Eslabón de ancla macizo.", res: "Muy Alta - Pesada."
+    },
+    "militar": {
+        titulo: "MILITAR",
+        historia: "Diseño de bloque sólido. Pensado para durar generaciones bajo cualquier condición, con un cierre de seguridad reforzado.",
+        fab: "Soldadura de punto reforzada.", res: "Máxima - Seguridad."
+    },
+    "robusto": {
+        titulo: "ROBUSTO",
+        historia: "Tejido de gran volumen y peso. Diseñado para quienes buscan que su inversión en oro sea evidente al tacto y a la vista.",
+        fab: "Vaciado de alta densidad.", res: "Alta - Por peso."
+    },
+    "veneciana": {
+        titulo: "VENECIANA (BOX)",
+        historia: "Eslabones cuadrados que forman una cadena cúbica. Es extremadamente suave al tacto y tiene un brillo lineal ininterrumpido.",
+        fab: "Corte cúbico de precisión.", res: "Alta - Elegante."
+    },
+    "serpiente": {
+        titulo: "SERPIENTE ESPEJO (SNAKE)",
+        historia: "Placas de oro unidas de forma tan estrecha que parecen una superficie sólida de espejo. Es la máxima expresión de elegancia líquida.",
+        fab: "Ensamblaje de microplacas.", res: "Media - Delicada."
+    },
+    "plano": {
+        titulo: "PLANO (HERRINGBONE)",
+        historia: "Tejido de eslabones en 'V' alineados para formar una cinta plana de oro. Ofrece el mayor reflejo de luz posible sobre la piel.",
+        fab: "Tejido de cinta plana.", res: "Baja/Media - Estética."
+    }
+};
+
+function abrirDetalles(key) {
+    const info = enciclopediaMidas[key];
+    const modal = document.getElementById('modal-tejido');
+    document.getElementById('titulo-modal').innerText = info.titulo;
+    document.getElementById('historia-modal').innerText = info.historia;
+    document.getElementById('fab-modal').innerText = info.fab;
+    document.getElementById('res-modal').innerText = info.res;
+    
+    // Corregir nombres de archivo con espacios o extensiones raras
+    let imgName = key;
+    if(key === 'marine_plano') imgName = 'marine%20plano';
+    
+    const imgContainer = document.getElementById('img-container-modal');
+    imgContainer.innerHTML = `<img src="${imgName}.jpeg" onerror="this.src='${imgName}.jpg'; this.onerror=function(){this.src='${imgName}.png'; this.onerror=function(){this.src='${imgName}.JPG'}}">`;
+    
+    modal.style.display = "flex";
+}
+
+function cerrarDetalles() {
+    document.getElementById('modal-tejido').style.display = "none";
+}
+
+window.onclick = function(event) {
+    let modal = document.getElementById('modal-tejido');
+    if (event.target == modal) cerrarDetalles();
+};
