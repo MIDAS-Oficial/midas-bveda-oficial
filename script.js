@@ -620,7 +620,6 @@ document.addEventListener("DOMContentLoaded", () => {
         img.src = src; 
     });
 
-    // OBSERVADOR PARA APARECER IMÁGENES AL HACER SCROLL
     const imagenes = document.querySelectorAll(".contenedor-img img");
     const aparecerImagen = (entradas, observador) => {
         entradas.forEach(entrada => {
@@ -659,23 +658,25 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // Inserción de imagen con manejo de errores (No borrar el onerror)
+    // CORRECCIÓN CLAVE: Manejo de espacios para URLs (Marine Plano)
+    let nombreArchivo = key.replace(/\s+/g, '%20');
+    
+    // Inserción de imagen con manejo de errores
     imgContainer.innerHTML = `
-        <img id="img-dinamica" src="${key}.jpeg" 
+        <img id="img-dinamica" src="${nombreArchivo}.jpeg" 
              onerror="intentarSiguiente(this, '${key}')">
     `;
     
-    // BLOQUEA EL SCROLL (Para que no se mueva el fondo en el móvil)
+    // BLOQUEA EL SCROLL
     document.body.style.overflow = "hidden"; 
     modal.style.display = "flex";
 }
 
-// SOLO UNA FUNCIÓN DE CIERRE (Con el auto para que la PC no se congele)
 function cerrarDetalles() {
     const modal = document.getElementById('modal-tejido');
     if (modal) {
         modal.style.display = "none";
-        // DEVUELVE EL SCROLL (Esto arregla tu problema de la barra en PC)
+        // DEVUELVE EL SCROLL
         document.body.style.overflow = "auto";
     }
 }
@@ -684,7 +685,6 @@ function cerrarDetalles() {
    3. LÓGICA DE CIERRE EXTERNO Y ERRORES DE IMAGEN
    ============================================================ */
 
-// Cerrar si hacen clic fuera del cuadro
 window.onclick = function(event) {
     const modal = document.getElementById('modal-tejido');
     if (event.target == modal) {
@@ -692,19 +692,33 @@ window.onclick = function(event) {
     }
 };
 
-// Intentar cargar otras extensiones si la principal falla
+// Intentar cargar otras extensiones y variaciones de nombre
 function intentarSiguiente(imgElement, nombre) {
-    const extensiones = ['jpg', 'png', 'JPG', 'PNG'];
-    let srcActual = imgElement.src.toLowerCase();
+    const extensiones = ['jpg', 'png', 'JPG', 'PNG', 'jpeg'];
     
-    // Si ya probamos todo, paramos
-    let actual = srcActual.split('.').pop();
-    let sigIndice = extensiones.indexOf(actual === 'jpeg' ? 'jpg' : actual) + 1;
+    // Variaciones de nombre para asegurar que encuentre el archivo
+    const variaciones = [
+        nombre,
+        nombre.replace(/\s+/g, '%20'),
+        nombre.replace(/\s+/g, '_')
+    ];
 
-    if (sigIndice < extensiones.length) {
-        imgElement.src = nombre + '.' + extensiones[sigIndice];
-    } else {
-        imgElement.alt = "Imagen no disponible";
-        console.error("No se encontró la imagen para: " + nombre);
+    // Buscamos qué extensión estamos probando actualmente
+    let srcActual = imgElement.src;
+    let extensionActual = srcActual.split('.').pop().split('?')[0];
+
+    // Intentar la siguiente combinación
+    for (let ext of extensiones) {
+        for (let v of variaciones) {
+            let nuevaRuta = v + '.' + ext;
+            if (!srcActual.includes(nuevaRuta)) {
+                imgElement.src = nuevaRuta;
+                return; 
+            }
+        }
     }
+
+    // Si todo falla
+    imgElement.alt = "Imagen no disponible";
+    console.error("No se encontró la imagen para: " + nombre);
 }
