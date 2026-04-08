@@ -608,18 +608,16 @@ const enciclopediaMidas = {
 /* ============================================================
    1. SISTEMA DE PRECARGA Y ANIMACIONES (DOMContentLoaded)
    ============================================================ */
-document.addEventListener("DOMContentLoaded", function() {
-    // PRECARGA ESTRATÉGICA MIDAS
-    const imagenesParaPrecargar = [
+document.addEventListener("DOMContentLoaded", () => {
+    const joyasMidas = [
         '3x1.jpeg', 'balines.jpeg', 'chino.jpeg', 'clip.png', 
         'cubana.jpeg', 'forzatina.jpeg', 'franco.jpeg', 'gucci.jpeg',
         'ice.jpeg', 'lazo.jpeg', 'marine%20plano.jpeg', 'marine.jpeg',
         'militar.JPG', 'robusto.jpeg', 'veneciana.jpeg', 'serpiente.jpg', 'plano.jpeg'
     ];
-
-    imagenesParaPrecargar.forEach(src => {
+    joyasMidas.forEach(src => {
         const img = new Image();
-        img.src = src;
+        img.src = src; 
     });
 
     // OBSERVADOR PARA APARECER IMÁGENES AL HACER SCROLL
