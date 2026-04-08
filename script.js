@@ -608,17 +608,23 @@ const enciclopediaMidas = {
 function abrirDetalles(key) {
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
+    
+    // 1. Llenado de texto instantáneo
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
     document.getElementById('res-modal').innerText = info.res;
     
-    // Corregir nombres de archivo con espacios o extensiones raras
-    let imgName = key;
-    if(key === 'marine_plano') imgName = 'marine%20plano';
-    
     const imgContainer = document.getElementById('img-container-modal');
-    imgContainer.innerHTML = `<img src="${imgName}.jpeg" onerror="this.src='${imgName}.jpg'; this.onerror=function(){this.src='${imgName}.png'; this.onerror=function(){this.src='${imgName}.JPG'}}">`;
+    
+    // 2. Optimización de carga: Mostramos un loader mientras carga la pesada
+    imgContainer.innerHTML = `
+        <div class="loader-oro" id="loader-img"></div>
+        <img id="img-dinamica" src="${key}.jpeg" 
+             style="opacity: 0; transition: opacity 0.3s ease;"
+             onload="this.style.opacity='1'; document.getElementById('loader-img').remove();"
+             onerror="this.src='${key}.png'">
+    `;
     
     modal.style.display = "flex";
 }
