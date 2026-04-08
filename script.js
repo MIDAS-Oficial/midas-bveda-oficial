@@ -662,3 +662,19 @@ document.addEventListener("DOMContentLoaded", function() {
         observador.observe(img);
     });
 });
+
+// SISTEMA DE PRECARGA ESTRATÉGICA MIDAS
+document.addEventListener("DOMContentLoaded", () => {
+    const imagenesParaPrecargar = [
+        // Lista aquí las imágenes críticas del probador y tejidos
+        '3x1.jpeg', 'balines.jpeg', 'chino.jpeg', 'clip.png', 
+        'cubana.jpeg', 'forzatina.jpeg', 'franco.jpeg', 'gucci.jpeg',
+        'ice.jpeg', 'lazo.jpeg', 'marine%20plano.jpeg', 'marine.jpeg',
+        'militar.JPG', 'robusto.jpeg', 'veneciana.jpeg', 'serpiente.jpg', 'plano.jpeg'
+    ];
+
+    imagenesParaPrecargar.forEach(src => {
+        const img = new Image();
+        img.src = src; // El navegador la descarga y guarda en caché automáticamente
+    });
+});
