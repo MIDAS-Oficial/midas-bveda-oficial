@@ -1873,3 +1873,30 @@ img {
        que cargue instantáneo y parezca parte del diseño */
     background: radial-gradient(circle, #111 0%, #000 100%);
 }
+#img-container-modal {
+    width: 100%;
+    min-height: 250px; /* Mantén la altura que ya definimos */
+    display: flex;         /* Activa caja flexible */
+    justify-content: center; /* Centra horizontal */
+    align-items: center;     /* Centra vertical */
+    background: #000;      /* Fondo negro sólido o el que prefieras */
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Asegúrate de que el loader tenga un tamaño fijo para que no se mueva */
+.loader-oro {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(212, 175, 55, 0.2);
+    border-top: 3px solid #d4af37;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    position: absolute; /* Lo mantiene fijo en el centro mientras carga */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
