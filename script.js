@@ -605,71 +605,25 @@ const enciclopediaMidas = {
     }
 };
 
-function abrirDetalles(key) {
-    const info = enciclopediaMidas[key];
-    const modal = document.getElementById('modal-tejido');
-    
-    document.getElementById('titulo-modal').innerText = info.titulo;
-    document.getElementById('historia-modal').innerText = info.historia;
-    document.getElementById('fab-modal').innerText = info.fab;
-    document.getElementById('res-modal').innerText = info.res;
-    
-    const imgContainer = document.getElementById('img-container-modal');
-    
-    imgContainer.innerHTML = `
-        <img id="img-dinamica" src="${key}.jpeg" 
-             onerror="this.src='${key}.jpg'; this.onerror=function(){this.src='${key}.png';}">
-    `;
-    
-    // --- NUEVO: BLOQUEA EL SCROLL DEL FONDO ---
-    document.body.style.overflow = "hidden"; 
-    modal.style.display = "flex";
-}
-
-// Función para cerrar el modal
-function cerrarDetalles() {
-    const modal = document.getElementById('modal-tejido');
-    modal.style.display = "none";
-    
-    // --- NUEVO: DEVUELVE EL SCROLL AL CERRAR ---
-    document.body.style.overflow = "auto"; 
-}
-
-// Cerrar si hacen clic fuera del cuadro negro
-window.onclick = function(event) {
-    const modal = document.getElementById('modal-tejido');
-    if (event.target == modal) {
-        cerrarDetalles();
-    }
-};
-
-// Función auxiliar para probar extensiones si falla la primera
-function intentarSiguiente(imgElement, nombre) {
-    const extensiones = ['jpg', 'png', 'JPG', 'PNG'];
-    let actual = imgElement.src.split('.').pop().toLowerCase();
-    let sigIndice = extensiones.indexOf(actual === 'jpeg' ? 'jpg' : actual) + 1;
-
-    if (sigIndice < extensiones.length) {
-        imgElement.src = nombre + '.' + extensiones[sigIndice];
-    } else {
-        // Si nada funciona, ocultamos el loader y ponemos un icono de error
-        document.getElementById('loader-img').style.display = 'none';
-        imgElement.alt = "Imagen no disponible";
-        console.error("No se encontró la imagen para: " + nombre);
-    }
-}
-function cerrarDetalles() {
-    document.getElementById('modal-tejido').style.display = "none";
-}
-
-window.onclick = function(event) {
-    let modal = document.getElementById('modal-tejido');
-    if (event.target == modal) cerrarDetalles();
-};
-
+/* ============================================================
+   1. SISTEMA DE PRECARGA Y ANIMACIONES (DOMContentLoaded)
+   ============================================================ */
 document.addEventListener("DOMContentLoaded", function() {
-    const imagenes = document.querySelectorAll(".contenedor-img img");
+    // PRECARGA ESTRATÉGICA MIDAS
+    const imagenesParaPrecargar = [
+        '3x1.jpeg', 'balines.jpeg', 'chino.jpeg', 'clip.png', 
+        'cubana.jpeg', 'forzatina.jpeg', 'franco.jpeg', 'gucci.jpeg',
+        'ice.jpeg', 'lazo.jpeg', 'marine%20plano.jpeg', 'marine.jpeg',
+        'militar.JPG', 'robusto.jpeg', 'veneciana.jpeg', 'serpiente.jpg', 'plano.jpeg'
+    ];
 
+    imagenesParaPrecargar.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    // OBSERVADOR PARA APARECER IMÁGENES AL HACER SCROLL
+    const imagenes = document.querySelectorAll(".contenedor-img img");
     const aparecerImagen = (entradas, observador) => {
         entradas.forEach(entrada => {
             if (entrada.isIntersecting) {
@@ -692,18 +646,67 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// SISTEMA DE PRECARGA ESTRATÉGICA MIDAS
-document.addEventListener("DOMContentLoaded", () => {
-    const imagenesParaPrecargar = [
-        // Lista aquí las imágenes críticas del probador y tejidos
-        '3x1.jpeg', 'balines.jpeg', 'chino.jpeg', 'clip.png', 
-        'cubana.jpeg', 'forzatina.jpeg', 'franco.jpeg', 'gucci.jpeg',
-        'ice.jpeg', 'lazo.jpeg', 'marine%20plano.jpeg', 'marine.jpeg',
-        'militar.JPG', 'robusto.jpeg', 'veneciana.jpeg', 'serpiente.jpg', 'plano.jpeg'
-    ];
+/* ============================================================
+   2. FUNCIONES DEL MODAL (ABRIR Y CERRAR)
+   ============================================================ */
 
-    imagenesParaPrecargar.forEach(src => {
-        const img = new Image();
-        img.src = src; // El navegador la descarga y guarda en caché automáticamente
-    });
-});
+function abrirDetalles(key) {
+    const info = enciclopediaMidas[key];
+    const modal = document.getElementById('modal-tejido');
+    
+    document.getElementById('titulo-modal').innerText = info.titulo;
+    document.getElementById('historia-modal').innerText = info.historia;
+    document.getElementById('fab-modal').innerText = info.fab;
+    document.getElementById('res-modal').innerText = info.res;
+    
+    const imgContainer = document.getElementById('img-container-modal');
+    
+    // Inserción de imagen con manejo de errores (No borrar el onerror)
+    imgContainer.innerHTML = `
+        <img id="img-dinamica" src="${key}.jpeg" 
+             onerror="intentarSiguiente(this, '${key}')">
+    `;
+    
+    // BLOQUEA EL SCROLL (Para que no se mueva el fondo en el móvil)
+    document.body.style.overflow = "hidden"; 
+    modal.style.display = "flex";
+}
+
+// SOLO UNA FUNCIÓN DE CIERRE (Con el auto para que la PC no se congele)
+function cerrarDetalles() {
+    const modal = document.getElementById('modal-tejido');
+    if (modal) {
+        modal.style.display = "none";
+        // DEVUELVE EL SCROLL (Esto arregla tu problema de la barra en PC)
+        document.body.style.overflow = "auto";
+    }
+}
+
+/* ============================================================
+   3. LÓGICA DE CIERRE EXTERNO Y ERRORES DE IMAGEN
+   ============================================================ */
+
+// Cerrar si hacen clic fuera del cuadro
+window.onclick = function(event) {
+    const modal = document.getElementById('modal-tejido');
+    if (event.target == modal) {
+        cerrarDetalles();
+    }
+};
+
+// Intentar cargar otras extensiones si la principal falla
+function intentarSiguiente(imgElement, nombre) {
+    const extensiones = ['jpg', 'png', 'JPG', 'PNG'];
+    let srcActual = imgElement.src.toLowerCase();
+    
+    // Si ya probamos todo, paramos
+    let actual = srcActual.split('.').pop();
+    let sigIndice = extensiones.indexOf(actual === 'jpeg' ? 'jpg' : actual) + 1;
+
+    if (sigIndice < extensiones.length) {
+        imgElement.src = nombre + '.' + extensiones[sigIndice];
+    } else {
+        imgElement.alt = "Imagen no disponible";
+        console.error("No se encontró la imagen para: " + nombre);
+    }
+}
