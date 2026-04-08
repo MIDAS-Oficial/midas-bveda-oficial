@@ -521,10 +521,11 @@ const enciclopediaMidas = {
         historia: "Clásico italiano que alterna tres eslabones cortos con uno largo. Diseñado para ofrecer ligereza visual sin perder la elegancia del Oro 18k.",
         fab: "Eslabones electrosoldados.", res: "Alta - Uso diario."
     },
-    "balines": {
-        titulo: "BALINES (MILITARY BALL)",
-        historia: "Eslabones esféricos unidos por barras internas. Su diseño maximiza el brillo del oro al captar la luz desde 360 grados.",
-        fab: "Micro-fusión esférica.", res: "Media - Estético."
+   "balines": {
+        titulo: "BALINES DIAMANTADOS",
+        historia: "Una pieza de alta ingeniería joyera compuesta por esferas de oro sólido con cortes de precisión geométrica. Estos cortes, realizados con puntas de diamante, actúan como espejos microscópicos que multiplican el destello natural del metal ante cualquier fuente de luz.",
+        fab: "Esferas facetadas con punta de diamante.", 
+        res: "Media/Alta - Brillo estructural superior."
     },
     "chino": {
         titulo: "TEJIDO CHINO",
@@ -537,7 +538,7 @@ const enciclopediaMidas = {
         fab: "Laminado macizo.", res: "Media - Tendencia."
     },
     "cubana": {
-        titulo: "CUBANA (CURB LINK)",
+        titulo: "CUBANA",
         historia: "Eslabones planos y cerrados de alta densidad. Es el tejido preferido por su durabilidad extrema y su presencia imponente en el mercado.",
         fab: "Torque y aplanado.", res: "Máxima - Indestructible."
     },
@@ -547,17 +548,18 @@ const enciclopediaMidas = {
         fab: "Eslabón perpendicular.", res: "Alta - Tradicional."
     },
     "franco": {
-        titulo: "FRANCO (V-LINK)",
+        titulo: "FRANCO",
         historia: "Tejido denso con un patrón de cuatro lados. Su diseño evita que la cadena se enrede o pierda su forma con el uso intensivo.",
         fab: "Entramado de 4 caras.", res: "Extrema - De carga."
     },
-    "gucci": {
-        titulo: "GUCCI (MARINER)",
-        historia: "Inspirado en las cadenas de anclas náuticas. Posee una barra central que evita la deformación de los eslabones bajo tensión.",
-        fab: "Barra de refuerzo central.", res: "Muy Alta - Náutica."
+   "gucci": {
+        titulo: "GUCCI CLÁSICO",
+        historia: "El tejido Gucci es un pilar de la joyería de lujo italiana. Caracterizado por sus eslabones ovalados con una barra de unión central, este diseño combina una estética sofisticada con una estructura de gran estabilidad. Es la elección predilecta para quienes buscan un equilibrio entre la elegancia atemporal y la robustez del oro sólido.",
+        fab: "Eslabones de fundición con alma reforzada.", 
+        res: "Muy Alta - Estabilidad estructural."
     },
     "ice": {
-        titulo: "ICE LINK",
+        titulo: "ICE",
         historia: "Estructura de eslabones anchos diseñada para maximizar la superficie visible de oro. Ideal para acabados con alto brillo o diamantes.",
         fab: "Casting de eslabón ancho.", res: "Media/Alta - Lujo."
     },
@@ -587,17 +589,17 @@ const enciclopediaMidas = {
         fab: "Vaciado de alta densidad.", res: "Alta - Por peso."
     },
     "veneciana": {
-        titulo: "VENECIANA (BOX)",
+        titulo: "VENECIANA",
         historia: "Eslabones cuadrados que forman una cadena cúbica. Es extremadamente suave al tacto y tiene un brillo lineal ininterrumpido.",
         fab: "Corte cúbico de precisión.", res: "Alta - Elegante."
     },
     "serpiente": {
-        titulo: "SERPIENTE ESPEJO (SNAKE)",
+        titulo: "SERPIENTE ESPEJO",
         historia: "Placas de oro unidas de forma tan estrecha que parecen una superficie sólida de espejo. Es la máxima expresión de elegancia líquida.",
         fab: "Ensamblaje de microplacas.", res: "Media - Delicada."
     },
     "plano": {
-        titulo: "PLANO (HERRINGBONE)",
+        titulo: "PLANO",
         historia: "Tejido de eslabones en 'V' alineados para formar una cinta plana de oro. Ofrece el mayor reflejo de luz posible sobre la piel.",
         fab: "Tejido de cinta plana.", res: "Baja/Media - Estética."
     }
