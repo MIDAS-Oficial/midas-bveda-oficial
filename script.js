@@ -609,7 +609,6 @@ function abrirDetalles(key) {
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
     
-    // Llenar datos de texto
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -617,12 +616,14 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // Limpiamos y ponemos la imagen (probando .jpeg primero)
-    imgContainer.innerHTML = `<img id="img-dinamica" src="${key}.jpeg" onerror="this.src='${key}.png'; this.onerror=function(){this.src='${key}.jpg';}">`;
+    // Usamos el mismo sistema de respaldo de extensiones que ya teníamos
+    imgContainer.innerHTML = `
+        <img id="img-dinamica" src="${key}.jpeg" 
+             onerror="this.src='${key}.jpg'; this.onerror=function(){this.src='${key}.png';}">
+    `;
     
     modal.style.display = "flex";
 }
-
 // Función para cerrar el modal
 function cerrarDetalles() {
     document.getElementById('modal-tejido').style.display = "none";
