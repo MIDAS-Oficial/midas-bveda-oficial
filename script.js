@@ -644,22 +644,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ============================================================
-   FUNCIONES DEL MODAL (CON RASTREO DE ERRORES)
+   FUNCIONES DEL MODAL (CON ALERTAS DE ERROR)
    ============================================================ */
 
 function abrirDetalles(key) {
-    // 1. Verificamos si la llave existe en tu enciclopedia
-    console.log("Intentando abrir joya con llave:", key);
+    // Esto te dirá qué palabra está recibiendo el código cuando haces clic
+    console.log("Llave recibida:", key);
     
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
     
+    // Si 'info' es undefined, es porque la llave en el HTML y en el JS no coinciden
     if (!info) {
-        console.error("ERROR: La llave '" + key + "' no existe en enciclopediaMidas. Revisa tu archivo de datos.");
-        return; // Detiene el código para que no de error de 'undefined'
+        alert("ERROR DE MIDAS: La palabra '" + key + "' no existe en tu enciclopedia. Revisa que en el HTML y en el JS sea idéntica.");
+        return; 
     }
 
-    // 2. Llenar textos
+    // Llenar textos
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -667,15 +668,13 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // 3. Determinar extensión inicial
+    // Determinar extensión inicial (Ajustado a tus nombres actuales)
     let ext = "jpeg"; 
     if (key === 'serpiente') ext = "jpg";
     if (key === 'militar') ext = "JPG";
     if (key === 'clip') ext = "png";
+    if (key === 'merinep') ext = "jpeg"; // <--- Ajustado a tu cambio
 
-    console.log("Buscando imagen inicial:", key + "." + ext);
-
-    // 4. Carga de imagen
     imgContainer.innerHTML = `
         <div class="loader-oro" id="loader-img"></div>
         <img id="img-dinamica" src="${key}.${ext}" 
@@ -688,24 +687,13 @@ function abrirDetalles(key) {
     modal.style.display = "flex";
 }
 
-function cerrarDetalles() {
-    const modal = document.getElementById('modal-tejido');
-    if (modal) {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-}
-
 function intentarSiguiente(imgElement, nombre) {
     const extensiones = ['jpeg', 'jpg', 'png', 'JPG', 'PNG'];
     let srcActual = imgElement.src;
 
-    console.warn("Fallo la carga inicial de: " + nombre + ". Probando alternativas...");
-
     for (let ext of extensiones) {
         let rutaIntento = nombre + "." + ext;
         if (!srcActual.includes(rutaIntento)) {
-            console.log("Probando con: " + rutaIntento);
             imgElement.src = rutaIntento;
             return;
         }
@@ -713,5 +701,6 @@ function intentarSiguiente(imgElement, nombre) {
     
     document.getElementById('loader-img').style.display = 'none';
     imgElement.alt = "Imagen no encontrada";
-    console.error("No se encontró ninguna imagen para: " + nombre);
+    // Si llega aquí, es porque el archivo NO está en la carpeta de Vercel/Proyecto
+    console.error("No se encontró el archivo físico para: " + nombre);
 }
