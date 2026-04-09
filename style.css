@@ -2190,3 +2190,18 @@ img {
 .ficha-tecnica p {
     color: white; /* El contenido sigue en blanco para legibilidad */
 }
+
+
+
+
+
+.cerrar-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    color: #d4af37; /* Dorado MIDAS */
+    cursor: pointer;
+    z-index: 9999999 !important; /* <--- ESTO ES LO QUE HACE QUE EL CLIC SIRVA */
+    padding: 10px; /* Área de toque más grande para el cel */
+}
