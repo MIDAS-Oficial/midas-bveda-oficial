@@ -364,6 +364,9 @@ function cerrarLegal() {
         document.body.style.overflow = "auto"; // Devuelve scroll
     }
 }
+
+const formularioMidas = document.getElementById('form-comunidad-midas');
+
 if (formularioMidas) {
     formularioMidas.addEventListener('submit', async function(event) {
         event.preventDefault(); // Evita que se salga de tu web
