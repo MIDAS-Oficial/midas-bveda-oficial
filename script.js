@@ -357,22 +357,11 @@ function abrirLegal(tipo) {
     }
 }
 
-function cerrarDetalles() {
-    const modal = document.getElementById('modal-tejido');
-    
+function cerrarLegal() {
+    const modal = document.getElementById('modal-legal');
     if (modal) {
-        // 1. Forzamos el cierre inmediato (Elimina cualquier retraso)
         modal.style.display = "none";
-        
-        // 2. Limpiamos la imagen para que no se quede "cargada" la próxima vez
-        const imgDinamica = document.getElementById('img-dinamica');
-        if (imgDinamica) imgDinamica.src = ""; 
-
-        // 3. Devolvemos el scroll al cuerpo de la página
-        document.body.style.overflow = "auto";
-        document.body.style.height = "auto"; // Refuerzo para móviles
-        
-        console.log("MIDAS System: Modal cerrado correctamente.");
+        document.body.style.overflow = "auto"; // Devuelve scroll
     }
 }
 if (formularioMidas) {
