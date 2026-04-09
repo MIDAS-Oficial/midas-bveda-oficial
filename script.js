@@ -649,7 +649,6 @@ function abrirDetalles(key) {
     const modal = document.getElementById('modal-tejido');
     if (!info) return;
 
-    // Llenar datos
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -657,29 +656,47 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    let ext = "jpeg"; 
-    if (key === 'serpiente') ext = "jpg";
-    if (key === 'militar') ext = "JPG";
-    if (key === 'clip') ext = "png";
+    // Si es Marine Plano, asegúrate que la key sea 'merinep' o como llames al archivo
+    let ext = (key === 'serpiente') ? 'jpg' : (key === 'clip') ? 'png' : (key === 'militar') ? 'JPG' : 'jpeg';
 
-    // CARGA LIMPIA PARA MÓVIL
-    // El loader está ahí y la imagen empieza invisible (opacity 0)
     imgContainer.innerHTML = `
         <div class="loader-oro" id="loader-img"></div>
         <img id="img-dinamica" src="${key}.${ext}" 
-             style="opacity: 0; width: 100%; height: auto; transition: opacity 0.3s;" 
-             onload="quitarLoaderMidas(this)" 
+             style="opacity: 0; max-width: 100%; height: auto; transition: opacity 0.3s;" 
+             onload="finalizarCargaMidas(this, true)" 
              onerror="intentarSiguiente(this, '${key}')">
     `;
-    
-    // TRUCO PARA CELULAR: Si la imagen ya estaba en memoria, la fuerza a mostrarse
+
+    // Soporte para celulares (Caché)
     const img = document.getElementById('img-dinamica');
-    if (img.complete) {
-        quitarLoaderMidas(img);
-    }
+    if (img.complete) finalizarCargaMidas(img, true);
 
     document.body.style.overflow = "hidden"; 
     modal.style.display = "flex";
+}
+
+function finalizarCargaMidas(img, exito) {
+    const loader = document.getElementById('loader-img');
+    if (loader) loader.style.display = 'none'; // Se va el círculo pase lo que pase
+    if (exito) img.style.opacity = '1';
+}
+
+function intentarSiguiente(imgElement, nombre) {
+    const extensiones = ['jpeg', 'jpg', 'png', 'JPG', 'PNG'];
+    let srcActual = imgElement.src;
+
+    for (let ext of extensiones) {
+        let ruta = nombre + "." + ext;
+        if (!srcActual.includes(ruta)) {
+            imgElement.src = ruta;
+            return;
+        }
+    }
+    
+    // Si llegó aquí es porque no existe la foto. Quitamos el loader y mostramos error.
+    finalizarCargaMidas(imgElement, false);
+    imgElement.alt = "Imagen no disponible";
+    imgElement.style.opacity = "0.5";
 }
 
 function quitarLoaderMidas(img) {
