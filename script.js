@@ -705,3 +705,31 @@ function intentarSiguiente(imgElement, nombre) {
     // Si llega aquí, es porque el archivo NO está en la carpeta de Vercel/Proyecto
     console.error("No se encontró el archivo físico para: " + nombre);
 }
+
+function cerrarDetalles() {
+    console.log("Cerrando modal..."); // Esto es para que veas en la consola que el clic entró
+    
+    const modalTejido = document.getElementById('modal-tejido');
+    const modalLegal = document.getElementById('modal-legal');
+
+    // Cerramos ambos modales por si acaso
+    if (modalTejido) modalTejido.style.display = "none";
+    if (modalLegal) modalLegal.style.display = "none";
+
+    // Limpiamos la imagen para que no parpadee al abrir otra
+    const imgDinamica = document.getElementById('img-dinamica');
+    if (imgDinamica) imgDinamica.src = ""; 
+
+    // DEVOLVEMOS EL SCROLL (Vital para la PC)
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto"; 
+}
+
+/* Re-vinculamos el clic fuera del modal para que también cierre */
+window.onclick = function(event) {
+    const modalT = document.getElementById('modal-tejido');
+    const modalL = document.getElementById('modal-legal');
+    if (event.target == modalT || event.target == modalL) {
+        cerrarDetalles();
+    }
+};
