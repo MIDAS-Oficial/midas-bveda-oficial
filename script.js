@@ -644,13 +644,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ============================================================
-   2. FUNCIONES DEL MODAL (ABRIR Y CERRAR)
+   FUNCIONES DEL MODAL (CON RASTREO DE ERRORES)
    ============================================================ */
 
 function abrirDetalles(key) {
+    // 1. Verificamos si la llave existe en tu enciclopedia
+    console.log("Intentando abrir joya con llave:", key);
+    
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
     
+    if (!info) {
+        console.error("ERROR: La llave '" + key + "' no existe en enciclopediaMidas. Revisa tu archivo de datos.");
+        return; // Detiene el código para que no de error de 'undefined'
+    }
+
+    // 2. Llenar textos
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -658,17 +667,20 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // Determinamos la extensión inicial basada en lo que nos dijiste
+    // 3. Determinar extensión inicial
     let ext = "jpeg"; 
     if (key === 'serpiente') ext = "jpg";
     if (key === 'militar') ext = "JPG";
     if (key === 'clip') ext = "png";
 
-    // Manejo de espacio para Marine Plano
-    let nombreParaUrl = key.replace(/\s+/g, '%20');
+    console.log("Buscando imagen inicial:", key + "." + ext);
 
+    // 4. Carga de imagen
     imgContainer.innerHTML = `
-        <img id="img-dinamica" src="${nombreParaUrl}.${ext}" 
+        <div class="loader-oro" id="loader-img"></div>
+        <img id="img-dinamica" src="${key}.${ext}" 
+             style="opacity: 0; transition: opacity 0.3s;"
+             onload="this.style.opacity='1'; document.getElementById('loader-img').style.display='none';"
              onerror="intentarSiguiente(this, '${key}')">
     `;
     
@@ -684,30 +696,22 @@ function cerrarDetalles() {
     }
 }
 
-/* ============================================================
-   3. LÓGICA DE CIERRE Y ERRORES
-   ============================================================ */
-
-window.onclick = function(event) {
-    const modal = document.getElementById('modal-tejido');
-    if (event.target == modal) {
-        cerrarDetalles();
-    }
-};
-
 function intentarSiguiente(imgElement, nombre) {
-    // Si falla la extensión inicial, probamos estas en orden
     const extensiones = ['jpeg', 'jpg', 'png', 'JPG', 'PNG'];
     let srcActual = imgElement.src;
 
+    console.warn("Fallo la carga inicial de: " + nombre + ". Probando alternativas...");
+
     for (let ext of extensiones) {
-        let rutaIntento = nombre.replace(/\s+/g, '%20') + "." + ext;
+        let rutaIntento = nombre + "." + ext;
         if (!srcActual.includes(rutaIntento)) {
+            console.log("Probando con: " + rutaIntento);
             imgElement.src = rutaIntento;
             return;
         }
     }
     
+    document.getElementById('loader-img').style.display = 'none';
     imgElement.alt = "Imagen no encontrada";
-    console.error("Error definitivo en: " + nombre);
+    console.error("No se encontró ninguna imagen para: " + nombre);
 }
