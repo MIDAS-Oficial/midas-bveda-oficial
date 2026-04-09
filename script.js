@@ -644,24 +644,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/* ============================================================
-   FUNCIONES DEL MODAL (CON ALERTAS DE ERROR)
-   ============================================================ */
-
 function abrirDetalles(key) {
-    // Esto te dirá qué palabra está recibiendo el código cuando haces clic
-    console.log("Llave recibida:", key);
-    
     const info = enciclopediaMidas[key];
     const modal = document.getElementById('modal-tejido');
-    
-    // Si 'info' es undefined, es porque la llave en el HTML y en el JS no coinciden
-    if (!info) {
-        alert("ERROR DE MIDAS: La palabra '" + key + "' no existe en tu enciclopedia. Revisa que en el HTML y en el JS sea idéntica.");
-        return; 
-    }
+    if (!info) return;
 
-    // Llenar textos
+    // Llenar datos
     document.getElementById('titulo-modal').innerText = info.titulo;
     document.getElementById('historia-modal').innerText = info.historia;
     document.getElementById('fab-modal').innerText = info.fab;
@@ -669,23 +657,35 @@ function abrirDetalles(key) {
     
     const imgContainer = document.getElementById('img-container-modal');
     
-    // Determinar extensión inicial (Ajustado a tus nombres actuales)
     let ext = "jpeg"; 
     if (key === 'serpiente') ext = "jpg";
     if (key === 'militar') ext = "JPG";
     if (key === 'clip') ext = "png";
-    if (key === 'merinep') ext = "jpeg"; // <--- Ajustado a tu cambio
 
+    // CARGA LIMPIA PARA MÓVIL
+    // El loader está ahí y la imagen empieza invisible (opacity 0)
     imgContainer.innerHTML = `
         <div class="loader-oro" id="loader-img"></div>
         <img id="img-dinamica" src="${key}.${ext}" 
-             style="opacity: 0; transition: opacity 0.3s;"
-             onload="this.style.opacity='1'; document.getElementById('loader-img').style.display='none';"
+             style="opacity: 0; width: 100%; height: auto; transition: opacity 0.3s;" 
+             onload="quitarLoaderMidas(this)" 
              onerror="intentarSiguiente(this, '${key}')">
     `;
     
+    // TRUCO PARA CELULAR: Si la imagen ya estaba en memoria, la fuerza a mostrarse
+    const img = document.getElementById('img-dinamica');
+    if (img.complete) {
+        quitarLoaderMidas(img);
+    }
+
     document.body.style.overflow = "hidden"; 
     modal.style.display = "flex";
+}
+
+function quitarLoaderMidas(img) {
+    const loader = document.getElementById('loader-img');
+    if (loader) loader.style.display = 'none';
+    img.style.opacity = '1'; // Aparece suavemente
 }
 
 function intentarSiguiente(imgElement, nombre) {
