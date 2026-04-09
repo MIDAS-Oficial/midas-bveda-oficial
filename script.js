@@ -612,7 +612,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const joyasMidas = [
         '3x1.jpeg', 'balines.jpeg', 'chino.jpeg', 'clip.png', 
         'cubana.jpeg', 'forzatina.jpeg', 'franco.jpeg', 'gucci.jpeg',
-        'ice.jpeg', 'lazo.jpeg', 'merinep.jpeg', 'marine.jpeg',
+        'ice.jpeg', 'lazo.jpeg', 'marinep.jpeg', 'marine.jpeg',
         'militar.JPG', 'robusto.jpeg', 'veneciana.jpeg', 'serpiente.jpg', 'plano.jpeg'
     ];
     joyasMidas.forEach(src => {
