@@ -265,15 +265,15 @@
             autoDisplay: false
         }, 'google_translate_element');
 
-        // --- ELIMINADOR DE BARRA MIDAS ---
+        
         setInterval(function() {
-            // 1. Borra el iframe de la barra
+            
             const barra = document.querySelector('.goog-te-banner-frame');
             if (barra) {
                 barra.style.display = 'none';
                 barra.remove(); 
             }
-            // 2. Devuelve el cuerpo a su posición original (0px arriba)
+            
             document.body.style.top = "0px";
             document.documentElement.style.marginTop = "0px";
         }, 500); 
