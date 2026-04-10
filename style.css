@@ -1,7 +1,5 @@
 /* Limpieza básica */
 * {
-
-{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,20 +7,17 @@
 
 body {
     background-color: #000; /* Fondo negro total */
-    background-color: #000; 
     color: #fff;
     font-family: 'Segoe UI', sans-serif;
     overflow-x: hidden; /* Evita movimiento lateral */
-    overflow-x: hidden; 
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    
     /* CAMBIA ESTO: el 30px es el espacio arriba y abajo, el 7% es a los lados */
- 
     padding: 20px 7%; 
     background-color: #0a0a0a;
     border-bottom: 2px solid #d4af37;
@@ -34,7 +29,6 @@ body {
 .logo-m {
     height: 60px;
     margin-left: 50px; /* Esto la empuja un poco más a la derecha */
-    margin-left: 50px; 
     animation: brilloM 2s infinite ease-in-out;
 }
 .menu {
@@ -45,18 +39,15 @@ body {
     left: 50%;
     transform: translateX(-50%);
     perspective: 500px;
-
+  
 }
 .menu li a:hover {
     transform: translateZ(30px) scale(1.1); /* El texto avanza hacia el usuario */
     color: #fff; /* Cambia a blanco/oro brillante al activarse */
-    transform: translateZ(30px) scale(1.1);
-    color: #fff; 
     text-shadow: 0 0 15px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.4);
 }
 
 /* 4. El "Estallido" pequeño detrás de cada palabra */
-
 .menu li {
     position: relative;
     display: flex;
@@ -85,23 +76,19 @@ body {
 
 .menu a {
     color: #d4af37; /* Color Oro */
-    color: #d4af37; 
     text-decoration: none;
     font-weight: bold;
     font-size: 0.9rem;
     letter-spacing: 2px;
     display: inline-block;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Suavidad premium */
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); 
     position: relative;
     z-index: 2;
 }
 
 /* Sección Central (Hero) */
-
 .hero {
     height: 80vh; /* Ocupa casi toda la pantalla visible */
-    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -137,7 +124,6 @@ body {
     text-transform: uppercase;
 }
 /* Animación de brillo */
-
 @keyframes brilloM {
     0% { filter: drop-shadow(0 0 2px #d4af37); }
     50% { filter: drop-shadow(0 0 10px #d4af37) brightness(1.2); }
@@ -145,15 +131,12 @@ body {
 }
 
 /* Aplicar el brillo al logo */
-
 .logo-m {
     animation: brilloM 2s infinite ease-in-out;
 }
 .idioma-selector {
     margin-left: auto; /* Esto asegura que se mantenga a la derecha */
     margin-right: 40px; /* Aumenta este número para moverlo más hacia la izquierda */
-    margin-left: auto;
-    margin-right: 40px; 
 }
 .logo-container a {
     text-decoration: none;
@@ -161,7 +144,6 @@ body {
     outline: none;
 }
 /* Contenedor de herramientas */
-
 .grid-herramientas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -189,13 +171,11 @@ body {
 .tarjeta h3 { color: #d4af37; margin-bottom: 10px; }
 
 /* ESTILO PARA PUBLICIDAD */
-
 .banner-publicidad {
     width: 80%;
     height: 120px;
     background: #050505;
     border: 1px dashed #444; /* Línea punteada para indicar espacio de anuncio */
-    border: 1px dashed #444;
     margin: 20px auto;
     display: flex;
     justify-content: center;
@@ -207,11 +187,9 @@ body {
 }
 
 .top-banner { margin-top: -50px; } /* Ajuste para que quede cerca del Hero */
-.top-banner { margin-top: -50px; } 
 .grid-herramientas {
     display: grid;
     /* Esto hace que se ajusten solas: 4 columnas si hay espacio, 2 o 1 si es celular */
-    
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     gap: 20px;
     padding: 0 10% 40px 10%; /* 0 arriba para que suban */
@@ -221,7 +199,6 @@ body {
     width: 80%;
     height: 100px;
     background: linear-gradient(90deg, #050505, #111, #050505); /* Un degradado sutil */
-    background: linear-gradient(90deg, #050505, #111, #050505); 
     border: 1px solid #222; 
     margin: 40px auto;
     display: flex;
@@ -232,43 +209,35 @@ body {
 
 .banner-publicidad p {
     color: #555; /* Color gris oscuro elegante */
-    color: #555; 
     font-size: 0.75rem;
     font-weight: bold;
     letter-spacing: 5px; /* Espaciado entre letras tipo marca de lujo */
-    letter-spacing: 5px; 
     text-transform: uppercase;
 }
 /* Contenedor con perspectiva para efecto de profundidad (3D) */
-
 .contenedor-logo-expansion {
     position: relative;
     display: inline-block;
     perspective: 1500px; /* Perspectiva alta para mayor profundidad Z */
-    perspective: 1500px;
     cursor: pointer;
     margin-bottom: 20px; /* Espacio con el título */
-    margin-bottom: 20px; 
 }
 
 .logo-principal {
     width: 300px;
     position: relative;
     z-index: 2; /* El logo va al frente */
-    z-index: 2; 
     transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.5s;
     /* Sombras base para dar volumen inicial */
     filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
 }
 
 /* El brillo de fondo que "explota" */
-
 .estallido-luz {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 0; /* Empieza en cero */
-    width: 0; 
     height: 0;
     background: radial-gradient(circle, rgba(212, 175, 55, 1) 0%, rgba(212, 175, 55, 0.4) 40%, transparent 70%);
     transform: translate(-50%, -50%) translateZ(-10px); /* Ligeramente atrás en Z */
@@ -277,14 +246,11 @@ body {
     opacity: 0;
     transition: opacity 0.6s ease, width 0.6s ease, height 0.6s ease;
     z-index: 1; /* Detrás del logo */
-    z-index: 1; 
 }
 
 /* INTERACCIÓN AL PASAR EL MOUSE (HOVER) */
 .contenedor-logo-expansion:hover .logo-principal {
     /* translateZ lo agranda hacia adelante en 3D reales, scale(1.05) lo ajusta */
-
-.contenedor-logo-expansion:hover .logo-principal {  
     transform: translateZ(150px) scale(1.05); 
     /* Brillo frontal en el logo */
     filter: brightness(1.1) contrast(1.1) drop-shadow(0 15px 30px rgba(212, 175, 55, 0.7));
@@ -293,10 +259,8 @@ body {
 .contenedor-logo-expansion:hover .estallido-luz {
     opacity: 1;
     width: 500px; /* El brillo explota hacia los lados */
-    width: 500px;
     height: 500px;
     animation: pulsoLuzBoveda 2.5s infinite ease-in-out 0.6s; /* Empieza después de abrirse */
-    animation: pulsoLuzBoveda 2.5s infinite ease-in-out 0.6s; 
 }
 
 /* Animación de latido de la luz interior */
@@ -308,7 +272,6 @@ body {
 /* Pantalla completa del propósito */
 .modal-proposito {
     display: none; /* Oculto al inicio */
-    display: none; 
     position: fixed;
     z-index: 3000;
     left: 0;
@@ -317,8 +280,6 @@ body {
     height: 100%;
     background-color: rgba(0,0,0,0.95); /* Fondo casi negro */
     backdrop-filter: blur(15px); /* Efecto de desenfoque */
-    background-color: rgba(0,0,0,0.95); 
-    backdrop-filter: blur(15px);
     animation: fadeIn 0.5s;
 }
 
@@ -374,7 +335,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center; /* Esto centra el panel en el medio de la pantalla */
-    align-items: center;
     padding-bottom: 50px;; }
 .titulo-tasador { color: #d4af37; letter-spacing: 3px; margin-bottom: 20px; }
 .input-group { text-align: left; margin-bottom: 15px; }
@@ -386,7 +346,6 @@ body {
 .btn-tasar:hover { background: #fff; box-shadow: 0 0 15px #d4af37; }
 
 /* ESTILOS PARA LA SECCIÓN TEJIDOS */
-
 .seccion-limpia {
     padding: 60px 10%;
     text-align: center;
@@ -496,7 +455,6 @@ body {
     padding: 8px 15px;
     cursor: pointer;
     font-family: 'Cinzel', serif; /* O la que estés usando */
-    font-family: 'Cinzel', serif; 
     text-transform: uppercase;
     transition: 0.3s;
 }
@@ -539,7 +497,6 @@ body {
 /* Ajuste para que el rango se vea impecable */
 .precio-final {
     font-size: 1.3rem !important; /* Un poco más pequeño para que quepa el rango */
-    font-size: 1.3rem !important; 
     letter-spacing: 1px;
     padding: 10px 0;
 }
@@ -555,7 +512,6 @@ body {
     width: 100%;
     max-width: 900px;
     margin: 40px auto 60px auto; /* Espacio generoso antes del tasador */
-    margin: 40px auto 60px auto; 
     padding: 0 20px;
     animation: fadeIn 1s ease-in;
 }
@@ -616,12 +572,11 @@ body {
     background: rgba(255, 255, 255, 0.03);
     border-top: 1px solid #222;
     border-radius: 5px;
-
+    
 }
 
 .aviso-legal-tasacion p {
     color: #666; /* Gris oscuro para que no distraiga tanto como el resultado */
-    color: #666; 
     font-size: 0.75rem;
     line-height: 1.5;
     text-align: justify;
@@ -630,7 +585,6 @@ body {
 
 .aviso-legal-tasacion span {
     color: #d4af37; /* El encabezado del aviso en oro */
-    color: #d4af37; 
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
@@ -647,17 +601,13 @@ body {
     border-radius: 12px;
     width: 90%;
     max-width: 500px; /* Un poco más ancho para que respire */
-    max-width: 500px; 
     text-align: center;
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); /* Brillo sutil de bóveda */
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); 
 }
 
 .footer-midas {
     background-color: #000000; /* Negro total */
     border-top: 1px solid #d4af37; /* Línea dorada fina y elegante */
-    background-color: #000000;
-    border-top: 1px solid #d4af37; 
     padding: 60px 10% 20px 10%;
     margin-top: 80px;
     color: #fff;
@@ -736,7 +686,6 @@ body {
 
 .footer-bottom p {
     color: #444; /* Gris oscuro para el copyright */
-    color: #444; 
     font-size: 0.75rem;
     letter-spacing: 1px;
 }
@@ -748,9 +697,6 @@ body {
     background: rgba(10, 10, 10, 0.8); /* Fondo casi negro */
     border: 0.5px solid rgba(212, 175, 55, 0.3); /* Borde dorado muy sutil */
     border-radius: 2px; /* Esquinas rectas para verse más serio */
-    background: rgba(10, 10, 10, 0.8); 
-    border: 0.5px solid rgba(212, 175, 55, 0.3); 
-    border-radius: 2px; 
     text-align: center;
 }
 
@@ -776,7 +722,6 @@ body {
 
 .clausula-texto {
     color: #777; /* Gris suave, no distrae */
-    color: #777; 
     font-size: 0.75rem;
     line-height: 1.6;
     margin: 0;
@@ -848,10 +793,8 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ajusta la imagen sin deformarla */
-    object-fit: cover; 
     transition: transform 0.6s ease;
     filter: grayscale(20%); /* Un toque serio que se quita al tocar */
-    filter: grayscale(20%);
 }
 
 .tarjeta-oro:hover img {
@@ -883,35 +826,28 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Esto es clave: corta la imagen para que llene el cuadro sin deformarse */
-    object-fit: cover; 
     transition: transform 0.5s ease;
 }
 
 /* Efecto al tocar la tarjeta */
 .tarjeta-oro:active {
     transform: scale(0.95); /* Se hunde un poco al tocarla, como un botón real */
-    transform: scale(0.95); 
 }
 
 /* Para pantallas de celular */
 @media (max-width: 600px) {
     .grid-tejidos {
         grid-template-columns: repeat(2, 1fr); /* En celular muestra 2 por fila */
-        grid-template-columns: repeat(2, 1fr); 
         gap: 15px;
     }
     .titulo-seccion { font-size: 1.4rem; }
     .mensaje-especial { display: none; } /* Ocultamos el mensaje en celular para ahorrar espacio */
-    .mensaje-especial { display: none; } 
 }
 
 .descripcion-seccion {
     color: #aaa; /* Gris claro para que sea legible pero sutil */
     max-width: 700px; /* Para que no se estire mucho en pantallas anchas */
     margin: 0 auto 50px; /* Centrado y con espacio abajo antes de las fotos */
-    color: #aaa;
-    max-width: 700px;
-    margin: 0 auto 50px;
     font-size: 1rem;
     line-height: 1.6;
     font-weight: 300;
@@ -920,25 +856,20 @@ body {
 
 .descripcion-seccion strong {
     color: #d4af37; /* Resaltamos MIDAS en dorado */
-    color: #d4af37; 
     font-weight: bold;
 }
 .item-proposito p strong {
     color: #d4af37; /* El Dorado MIDAS */
-    color: #d4af37;
     font-weight: bold;
     text-transform: uppercase; /* Opcional: para que se vea más imponente */
-    text-transform: uppercase;
 }
 
 .monitor-precios {
     height: 450px; /* Altura fija para que no baile la página */
-    height: 450px; 
     display: flex;
     align-items: center;
     justify-content: center;
     background: #000; /* Fondo negro para que no se note el borde de la foto */
-    background: #000; 
     border: 1px solid #333;
     overflow: hidden;
 }
@@ -947,7 +878,6 @@ body {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain; /* ESTO evita que se estire o se corte */
-    object-fit: contain; 
     display: block;
     transition: all 0.3s ease;
 }
@@ -1046,12 +976,10 @@ body {
 
 .subtitulo-mercado {
     animation-delay: 0.3s; /* El párrafo cae un poco después */
-    animation-delay: 0.3s;
 }
 
 .linea-oro {
     animation-delay: 0.6s; /* La línea cae al final */
-    animation-delay: 0.6s;
 }
 
 @keyframes caidaMidas {
@@ -1097,7 +1025,6 @@ body {
 /* ESPACIOS PARA PUBLICIDAD */
 .ads-lateral {
     width: 160px; /* Tamaño estándar de banner vertical */
-    width: 160px; 
     height: 600px;
     background: #111;
     border: 1px dashed #444;
@@ -1143,8 +1070,6 @@ body {
 #contenedor-grafica-vertical {
     width: 450px;  /* Ancho controlado */
     height: 700px; /* Mucha más altura */
-    width: 450px;  
-    height: 700px; 
     border: 1px solid #d4af37;
     background: #000;
 }
@@ -1153,17 +1078,13 @@ body {
     height: 100% !important;
 }
 /* CONTENEDOR DE GRÁFICA VERTICAL COMPACTA */
-
 #contenedor-grafica-vertical {
     width: 100%;
     max-width: 450px;  /* Mantiene el ancho controlado */
     height: 450px;     /* ALTURA RECORTADA: Ahora no es tan largo */
-    max-width: 450px;  
-    height: 450px;    
     border: 1px solid #d4af37;
     background: #000;
     margin: 0 auto;    /* Centra el cuadro */
-    margin: 0 auto;   
 }
 
 #tradingview_midas {
@@ -1173,7 +1094,6 @@ body {
 .titulo-midas-global {
     color: #d4af37;
     font-family: 'Playfair Display', serif; /* La fuente con caídas */
-    font-family: 'Playfair Display', serif; 
     font-weight: bold;
     font-size: 1.5em;
     text-transform: uppercase;
@@ -1206,7 +1126,6 @@ body {
 /* Clase para la "caída" en los títulos de MIDAS GOLD KING */
 .fuente-caida {
     font-family: 'Playfair Display', serif; /* Si no carga la fuente, usa la Serif del sistema */
-    font-family: 'Playfair Display', serif; 
     font-weight: bold;
     text-transform: uppercase;
     color: #d4af37;
@@ -1220,22 +1139,18 @@ body {
     100% { transform: scale(1); opacity: 0.6; }
 }
 /* Agrégale esto al estilo del botón de cookies */
-
 #btn-aceptar-cookies {
     background: #d4af37;
     color: #000;
     padding: 12px 30px;
     font-weight: 900; /* Más negrita */
     border-radius: 2px; /* Bordes más rectos se ven más serios */
-    font-weight: 900; 
-    border-radius: 2px; 
     letter-spacing: 2px;
     transition: 0.3s;
 }
 
 #btn-aceptar-cookies:hover {
     background: #fff; /* Que brille al pasar el mouse */
-    background: #fff; 
     box-shadow: 0 0 15px #d4af37;
 }
 
@@ -1344,7 +1259,6 @@ body {
 
     .separador { 
         display: none !important; /* QUITA LOS PALITOS | */
-        display: none !important; 
     }
 
     .monitor-item {
@@ -1358,7 +1272,6 @@ body {
         height: 45px !important;
         margin: 0 !important;
         order: 2; /* Logo al centro */
-        order: 2; 
     }
 
     .menu-hamburguesa {
@@ -1369,14 +1282,11 @@ body {
     height: 20px;
     cursor: pointer;
     z-index: 1000;
-
+    
     /* --- EL AJUSTE DE CENTRADO --- */
     margin: 0 auto;       /* Esto lo centra horizontalmente en su contenedor */
     position: relative;   /* Asegura que no se mueva por otros flujos */
     left: 10px;           /* Empujón visual a la derecha para compensar el peso visual del logo */
-    margin: 0 auto;       
-    position: relative;   
-    left: 10px;          
 }
 
 /* Asegúrate de que las líneas internas sigan siendo doradas y elegantes */
@@ -1385,14 +1295,12 @@ body {
     width: 100%;
     height: 3px;
     background-color: #d4af37; /* Dorado Midas */
-    background-color: #d4af37; 
     border-radius: 2px;
     transition: all 0.3s ease;
 }
 
     .idioma-selector-nuevo {
         order: 3; /* Idioma a la derecha */
-        order: 3; 
         margin: 0 !important;
     }
 
@@ -1461,19 +1369,16 @@ body {
 @media (max-width: 768px) {
     .contenedor-monitor {
         flex-direction: column; /* LOS PONE UNO ABAJO DEL OTRO */
-        flex-direction: column; 
         gap: 8px;
         padding: 15px 0;
     }
 
     .ocultar-movil {
         display: none !important; /* QUITA LOS PALITOS | */
-        display: none !important; 
     }
 
     .monitor-item {
         font-size: 0.65rem; /* UN POCO MÁS CHICO PARA QUE QUEPA BIEN */
-        font-size: 0.65rem; 
         text-align: center;
         width: 100%;
         display: flex;
@@ -1487,7 +1392,6 @@ body {
 }
 .navbar {
     height: 80px !important; /* Le damos aire para que quepa el botón y el logo */
-    height: 80px !important; 
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -1500,14 +1404,12 @@ body {
     background-color: #00ff00; 
     border-radius: 50%;
     display: inline-block;
-
+    
     /* AJUSTES PARA ALINEACIÓN PERFECTA */
     vertical-align: middle;   /* Alinea el punto con la mitad de las letras */
     margin-bottom: 2px;      /* Pequeño ajuste fino para que no se vea caído */
-    vertical-align: middle;   
-    margin-bottom: 2px;     
     margin-right: 10px;      
-
+    
     box-shadow: 0 0 10px #00ff00; 
     animation: latido-verde 1.5s infinite ease-in-out;
 }
@@ -1523,7 +1425,6 @@ body {
         transform: scale(1.3);
         opacity: 0.5;
         box-shadow: 0 0 15px #00ff00; /* Aumenta el brillo al crecer */
-        box-shadow: 0 0 15px #00ff00; 
     }
     100% {
         transform: scale(1);
@@ -1546,16 +1447,12 @@ body {
 /* EL CÍRCULO VERDE NEÓN */
 .punto-pulso {
     width: 10px;          /* Tamaño del punto */
-    width: 10px;         
     height: 10px;
     background-color: #00ff00; 
     border-radius: 50%;   /* Lo hace redondo */
-    border-radius: 50%;  
     display: inline-block;
     margin-right: 10px;   /* Separa el punto del texto ESTADO */
     box-shadow: 0 0 10px #00ff00; /* Brillo inicial */
-    margin-right: 10px;  
-    box-shadow: 0 0 10px #00ff00; 
     animation: latido-verde 1.5s infinite ease-in-out;
 }
 
@@ -1570,7 +1467,6 @@ body {
         transform: scale(1.3);
         opacity: 0.5;
         box-shadow: 0 0 15px #00ff00; /* Aumenta el brillo al crecer */
-        box-shadow: 0 0 15px #00ff00; 
     }
     100% {
         transform: scale(1);
@@ -1600,7 +1496,6 @@ body {
     /* El menú que no ves: lo hacemos visible y vertical */
     .menu {
         display: none; /* Se activa con la clase .active */
-        display: none; 
         flex-direction: column !important;
         position: fixed !important;
         top: 0;
@@ -1657,10 +1552,8 @@ body {
     }
 
     /* 2. Ocultar el menú horizontal y ponerlo vertical */
-    
     .menu {
         display: none; /* Se oculta por defecto */
-        display: none;
         flex-direction: column;
         position: fixed;
         top: 0;
@@ -1709,20 +1602,17 @@ body {
 @media (max-width: 768px) {
     .logo-m {
         width: 35px !important; /* Achicamos un poco el logo del header */
-        width: 35px !important; 
         height: auto;
     }
-
+    
     .navbar {
         padding: 10px 15px !important; /* Le damos aire a los lados */
-        padding: 10px 15px !important; 
     }
 }
 .selector-longitud {
     padding: 10px;
     margin: 15px 0;
     width: 100%; /* Para que ocupe todo el ancho del cuadro dorado */
-    width: 100%;
 }
 
 /* 1. Centrar el Header (Logo y Menú) */
@@ -1730,8 +1620,6 @@ header, .navbar {
     display: flex;
     justify-content: space-between; /* Logo a la izq, idioma a la der */
     align-items: center; /* ESTO centra las 3 líneas verticalmente */
-    justify-content: space-between; 
-    align-items: center; 
     padding: 10px 5%;
     width: 100%;
 }
@@ -1742,7 +1630,6 @@ header, .navbar {
     justify-content: center;
     align-items: center;
     margin: 0 auto; /* Lo obliga a buscar el centro si el padre es ancho completo */
-    margin: 0 auto; 
 }
 
 /* 3. Centrar los botones de Caballero/Dama */
@@ -1750,8 +1637,6 @@ header, .navbar {
     display: flex;
     justify-content: center; /* CENTRADO HORIZONTAL */
     gap: 15px; /* Espacio uniforme entre ellos */
-    justify-content: center; 
-    gap: 15px;
     width: 100%;
     margin: 20px 0;
 }
@@ -1766,17 +1651,13 @@ header, .navbar {
     border: 1px solid #333;
     color: #888;
     padding: 12px 5px; /* Menos padding horizontal para que quepa bien el texto */
-    padding: 12px 5px; 
     cursor: pointer;
     transition: all 0.3s ease;
-
+    
     /* MAGIA PARA MÓVIL: */
     width: 50%;          /* Cada uno toma exactamente la mitad */
     text-align: center;  /* Centra el texto (Caballero / Dama) */
     display: block;      /* Asegura que tomen el ancho total */
-    width: 50%;         
-    text-align: center;  
-    display: block;    
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1793,7 +1674,6 @@ header, .navbar {
 #selector-medida {
     width: 100%;
     margin-bottom: 25px; /* Más espacio con la imagen */
-    margin-bottom: 25px; 
     padding: 12px;
     background-color: #000;
     color: #fff;
@@ -1808,7 +1688,6 @@ header, .navbar {
     /* AÑADE ESTO: Para que nada roce el borde dorado */
     padding: 20px; 
     box-sizing: border-box; /* Crucial para que el padding no rompa el ancho */
-    box-sizing: border-box; 
 }
 
 
@@ -1843,14 +1722,12 @@ header, .navbar {
 
 .info-tejido h3 {
     color: #d4af37; /* El dorado MIDAS para el nombre */
-    color: #d4af37; 
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
 .info-tejido p {
     color: rgba(255, 255, 255, 0.8); /* Blanco con 80% de opacidad para que sea elegante */
-    color: rgba(255, 255, 255, 0.8); 
     font-weight: 300;
     line-height: 1.4;
 }
@@ -1862,8 +1739,6 @@ header, .navbar {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* Dos tarjetas por fila */
         gap: 15px; /* Espacio más pequeño entre tarjetas */
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 15px;
         padding: 10px;
     }
 
@@ -1876,7 +1751,6 @@ header, .navbar {
     .info-tejido p {
         font-size: 0.75rem;
         display: none; /* Escondemos la descripción corta en móvil para no saturar */
-        display: none; 
     }
 
     /* --- MODAL RESPONSIVO --- */
@@ -1885,19 +1759,16 @@ header, .navbar {
         padding: 20px;
         max-height: 90vh;
         overflow-y: auto; /* Permite scroll si la info es mucha */
-        overflow-y: auto; 
     }
 
     .modal-body-layout {
         flex-direction: column; /* Imagen arriba, texto abajo */
-        flex-direction: column; 
         text-align: center;
         gap: 20px;
     }
 
     #img-container-modal img {
         width: 100%; /* La imagen toma el ancho total disponible */
-        width: 100%; 
         max-width: 200px;
         height: auto;
     }
@@ -1917,7 +1788,6 @@ header, .navbar {
 
     .ficha-tecnica {
         text-align: left; /* Mantenemos los datos técnicos alineados a la izquierda */
-        text-align: left;
         font-size: 0.85rem;
     }
 }
@@ -1926,21 +1796,17 @@ header, .navbar {
 @media (max-width: 400px) {
     .grid-tejidos {
         grid-template-columns: 1fr; /* Una sola tarjeta por fila */
-        grid-template-columns: 1fr; 
     }
 }
 
 .contenedor-img {
     aspect-ratio: 1 / 1; /* Mantiene el cuadro perfecto antes de que cargue la foto */
     background: #1a1a1a; /* Un color oscuro de respaldo */
-    aspect-ratio: 1 / 1; 
-    background: #1a1a1a; 
     overflow: hidden;
 }
 
 .contenedor-img img {
     content-visibility: auto; /* Optimización de renderizado de Chrome */
-    content-visibility: auto;
     will-change: transform;
 }
 
@@ -1956,7 +1822,6 @@ header, .navbar {
 
 #img-dinamica {
     will-change: opacity; /* Prepara al procesador del celular */
-    will-change: opacity; 
     image-rendering: -webkit-optimize-contrast;
 }
 
@@ -1977,13 +1842,11 @@ header, .navbar {
 
 img {
     /* Optimiza para que el navegador use la tarjeta de video del celular */
-  
     transform: translateZ(0); 
     backface-visibility: hidden;
     perspective: 1000;
     
     /* Evita el parpadeo al cargar */
-   
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
 }
@@ -1996,11 +1859,10 @@ img {
 
 img {
     /* Optimiza para que el navegador use la tarjeta de video del celular */
-    
     transform: translateZ(0); 
     backface-visibility: hidden;
     perspective: 1000;
-
+    
     /* Evita el parpadeo al cargar */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
@@ -2009,7 +1871,6 @@ img {
 .contenedor-img {
     /* En lugar de un negro total, usa un degradado suave 
        que cargue instantáneo y parezca parte del diseño */
-    
     background: radial-gradient(circle, #111 0%, #000 100%);
 }
 #img-container-modal {
@@ -2019,11 +1880,6 @@ img {
     justify-content: center; /* Centra horizontal */
     align-items: center;     /* Centra vertical */
     background: #000;      /* Fondo negro sólido o el que prefieras */
-    min-height: 250px; 
-    display: flex;         
-    justify-content: center; 
-    align-items: center;     
-    background: #000;      
     position: relative;
     border-radius: 8px;
     overflow: hidden;
@@ -2038,7 +1894,6 @@ img {
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     position: absolute; /* Lo mantiene fijo en el centro mientras carga */
-    position: absolute; 
 }
 
 @keyframes spin {
@@ -2049,7 +1904,6 @@ img {
 #img-container-modal {
     width: 100%;
     min-height: 280px; /* Altura mínima para que el loader respire */
-    min-height: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2060,7 +1914,6 @@ img {
 
 .loader-oro {
     position: absolute; /* Vital para que esté en el centro sin importar la imagen */
-    position: absolute; 
     width: 45px;
     height: 45px;
     border: 3px solid rgba(212, 175, 55, 0.1);
@@ -2079,7 +1932,6 @@ img {
 .modal-contenido-premium {
     background: #0a0a0a; border: 1px solid #d4af37; width: 90%; max-width: 500px;
     padding: 30px; border-radius: 15px; position: relative; /* Importante para la X */
-    padding: 30px; border-radius: 15px; position: relative; 
     text-align: center;
 }
 
@@ -2092,7 +1944,6 @@ img {
 /* EL CUADRO DE IMAGEN: Volvemos al formato corto original */
 #img-container-modal {
     width: 100%; height: 250px; /* Ajusta esta altura según tu gusto */
-    width: 100%; height: 250px;
     margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
     background: #000; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 10px;
     overflow: hidden;
@@ -2100,7 +1951,6 @@ img {
 
 #img-container-modal img {
     max-width: 100%; max-height: 100%; object-fit: contain; /* Para que no se corte la cadena */
-    max-width: 100%; max-height: 100%; object-fit: contain; 
 }
 
 /* TEXTOS */
@@ -2111,17 +1961,14 @@ img {
 #img-container-modal {
     width: 100%;
     height: 300px; /* Altura fija para impacto visual en móvil */
-    height: 300px; 
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #000;
     border: 1px solid #d4af37; /* Marco dorado sutil */
-    border: 1px solid #d4af37; 
     border-radius: 12px;
     overflow: hidden; /* Esto corta los sobrantes de la imagen */
-    overflow: hidden; 
     position: relative;
 }
 
@@ -2129,7 +1976,6 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* ESTO ELIMINA LOS ESPACIOS NEGROS: La imagen llena todo el cuadro */
-    object-fit: cover;
     object-position: center;
     display: block;
 }
@@ -2138,7 +1984,6 @@ img {
 .cerrar-modal-btn {
     position: absolute;
     top: -40px; /* La sacamos del cuadro para que no tape la imagen */
-    top: -40px; 
     right: 0;
     color: #d4af37;
     font-size: 35px;
@@ -2154,7 +1999,6 @@ img {
 /* --- AJUSTE DEL CONTENIDO PARA DAR ESPACIO A LA X --- */
 .modal-contenido-premium {
     margin-top: 50px; /* Espacio para que la X respire arriba */
-    margin-top: 50px; 
     background: #0a0a0a;
     border: 1px solid #d4af37;
     width: 90%;
@@ -2167,7 +2011,6 @@ img {
 
 .modal-contenido-premium {
     position: relative; /* Esto es la base para que la X se ubique bien */
-    position: relative; 
     background: #0a0a0a;
     border: 2px solid #d4af37;
     width: 90%;
@@ -2180,12 +2023,9 @@ img {
 .cerrar-modal-btn {
     position: absolute;
     top: -15px; /* Sale un poquito del cuadro para que se vea pro */
-    top: -15px;
     right: -15px;
     background: #d4af37; /* Fondo dorado para que resalte sí o sí */
     color: #000; /* X negra sobre fondo dorado */
-    background: #d4af37;
-    color: #000; 
     width: 35px;
     height: 35px;
     line-height: 32px;
@@ -2195,7 +2035,6 @@ img {
     font-weight: bold;
     cursor: pointer;
     z-index: 999999; /* Por encima de la monda */
-    z-index: 999999; 
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
@@ -2215,7 +2054,6 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* LLENA TODO EL CUADRO SIN ESPACIOS NEGROS */
-    object-fit: cover; 
 }
 
 
@@ -2225,7 +2063,6 @@ img {
     background: #0a0a0a;
     border: 2px solid #d4af37;
     width: 88%; /* Un poco más delgado para que se vea más estilizado */
-    width: 88%; 
     max-width: 380px;
     padding: 15px; 
     border-radius: 15px;
@@ -2236,12 +2073,10 @@ img {
 #img-container-modal {
     width: 100%;
     height: 200px; /* <--- ESTE ES EL CAMBIO CLAVE: Antes era muy grande */
-    height: 200px;
     background: #000;
     border-radius: 10px;
     overflow: hidden;
     margin-top: 5px; /* Pegado arriba para ganar espacio */
-    margin-top: 5px; 
     border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
@@ -2249,7 +2084,6 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Sigue llenando el cuadro pero en un espacio menor */
-    object-fit: cover; 
 }
 
 /* LA X: Ahora se verá sí o sí porque el contenido subió */
@@ -2287,19 +2121,15 @@ img {
     max-width: 400px;
     margin: auto;
     padding: 15px 20px 25px 20px; /* Más espacio abajo para que respire el texto */
-    padding: 15px 20px 25px 20px;
     border-radius: 15px;
     display: flex;
     flex-direction: column; /* Alinea todo verticalmente */
     gap: 5px; /* Espacio controlado entre elementos */
-    flex-direction: column; 
-    gap: 5px;
 }
 
 #img-container-modal {
     width: 100%;
     height: 220px; /* Altura ideal equilibrada */
-    height: 220px; 
     background: #000;
     border-radius: 10px;
     margin-top: 10px;
@@ -2321,13 +2151,11 @@ img {
 
 #modal-tejido {
     position: fixed; /* Obligatorio para que se quede pegado al frente */
-    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.98); /* Negro casi total para enfoque absoluto */
-    background: rgba(0, 0, 0, 0.98); 
     z-index: 999999; 
     display: none;
     align-items: center;
@@ -2337,10 +2165,8 @@ img {
 }
 
 /* Color dorado para los títulos de la ficha técnica */
-    
 .ficha-tecnica p strong {
     color: #d4af37; /* El dorado MIDAS */
-    color: #d4af37; 
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -2349,7 +2175,6 @@ img {
 /* Opcional: Si quieres que los dos puntos (:) también sean dorados */
 .ficha-tecnica p {
     color: white; /* El contenido sigue en blanco para legibilidad */
-    color: white; 
 }
 
 
@@ -2362,10 +2187,8 @@ img {
 }
 
 /* Opcional: Si quieres que los dos puntos (:) también sean dorados */
-    
 .ficha-tecnica p {
     color: white; /* El contenido sigue en blanco para legibilidad */
-    color: white; 
 }
 
 
@@ -2378,26 +2201,19 @@ img {
     right: 20px;
     font-size: 40px;
     color: #d4af37; /* Dorado MIDAS */
-    color: #d4af37; 
     cursor: pointer;
     z-index: 9999999 !important; /* <--- ESTO ES LO QUE HACE QUE EL CLIC SIRVA */
     padding: 10px; /* Área de toque más grande para el cel */
-    z-index: 9999999 !important; 
-    padding: 10px; 
 }
 
 
 #img-container-modal {
     width: 100%;
     min-height: 250px; /* Espacio para que el loader no se vea apretado */
-    min-height: 250px; 
     background-color: #000;
     display: flex;         /* ESTO centra el contenido */
     align-items: center;    /* Centra vertical */
     justify-content: center; /* Centra horizontal */
-    display: flex;         
-    align-items: center;    
-    justify-content: center; 
     position: relative;
     border-radius: 8px;
     margin-bottom: 15px;
@@ -2412,7 +2228,6 @@ img {
     border-radius: 50%;
     animation: spinMidas 0.8s linear infinite;
     position: absolute; /* Para que no mueva a la imagen */
-    position: absolute; 
 }
 
 @keyframes spinMidas {
