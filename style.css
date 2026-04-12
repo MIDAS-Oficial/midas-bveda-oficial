@@ -2242,43 +2242,49 @@ img {
 body { top: 0 !important; position: static !important; }
 
 /* =========================================
-   PROBADOR MIDAS - VISIBILIDAD TOTAL
+   PROBADOR MIDAS - AJUSTE DE PROPORCIÓN REAL
    ========================================= */
 
+/* 1. Ajustamos el contenedor para que sea más estrecho y alto */
+.monitor-precios {
+    max-width: 320px; /* Lo hacemos más angosto para que encaje con el modelo */
+    margin: 0 auto;   /* Lo centramos */
+    border: 2px solid #d4af37 !important;
+    background: #000 !important;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
 .monitor-precios div {
-    height: 500px !important;
+    height: 550px !important; /* Lo hacemos más largo hacia abajo */
     width: 100%;
+    display: flex;
+    align-items: flex-start; /* Alinea la foto al tope */
+    justify-content: center;
     overflow: hidden;
-    position: relative;
-    /* Fondo con degradado sutil para que los bordes no parezcan vacíos */
-    background: radial-gradient(circle, #1a1a1a 0%, #000 100%) !important;
-    border-radius: 2px;
+    background: #000 !important;
 }
 
 #imagen-modelo {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important; /* Que la altura se defina por la imagen */
     max-height: none !important;
-    /* CAMBIO CLAVE: 'contain' asegura que TODA la foto se vea siempre */
-    object-fit: contain !important; 
-    /* La pegamos al borde superior para que el cuello siempre esté arriba */
-    object-position: top !important; 
-    transition: transform 0.3s ease;
+    object-fit: contain;
+    /* Eliminamos cualquier margen que meta bordes extra */
+    margin: 0; 
+    padding: 0;
 }
 
-/* En celulares, bajamos el alto para que no se vea tan pequeño el modelo */
+/* 2. Ajuste para que en celulares no se vea gigante */
 @media (max-width: 768px) {
+    .monitor-precios {
+        max-width: 280px; /* Aún más estilizado en móvil */
+    }
     .monitor-precios div {
-        height: 450px !important;
+        height: 480px !important;
     }
 }
 
-/* Efecto MIDAS: Un ligero brillo dorado en el contenedor */
-.monitor-precios::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+/* 3. Quitamos el degradado radial que mencionaste para que el negro sea puro */
+.monitor-precios div {
+    background: #000 !important;
 }
