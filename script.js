@@ -78,12 +78,26 @@ function googleTranslateElementInit() {
     }, 'google_translate_element');
 }
 
-// 6. Carga inicial al abrir la web
+// 6. Carga inicial REFORZADA para persistencia
 window.addEventListener('DOMContentLoaded', () => {
     const langGuardado = localStorage.getItem('idiomaPreferido') || 'es';
+    
+    // Si el idioma no es español, forzamos la traducción tras un breve delay
     if (langGuardado !== 'es') {
-        setTimeout(() => seleccionarIdioma(langGuardado), 1000);
+        // Esperamos a que el motor de Google cargue en la nueva sección
+        const checkGoogle = setInterval(() => {
+            const combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                seleccionarIdioma(langGuardado);
+                clearInterval(checkGoogle);
+            }
+        }, 500);
+
+        // Seguridad: Si en 5 segundos no carga, dejamos de intentar
+        setTimeout(() => clearInterval(checkGoogle), 5000);
     }
+
+    // Mantener la barra de Google oculta permanentemente
     setInterval(limpiarBarraGoogle, 1000);
 });
 
