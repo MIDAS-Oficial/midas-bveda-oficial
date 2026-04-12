@@ -2242,43 +2242,43 @@ img {
 body { top: 0 !important; position: static !important; }
 
 /* =========================================
-   AJUSTE DE CUADRO COMPLETO - PROBADOR MIDAS
+   PROBADOR MIDAS - VISIBILIDAD TOTAL
    ========================================= */
 
-/* 1. Ajuste del contenedor principal */
 .monitor-precios div {
-    height: 500px !important; /* Aumentamos un poco el alto para mejor impacto */
+    height: 500px !important;
     width: 100%;
     overflow: hidden;
     position: relative;
-    background: #000 !important; /* Fondo negro puro para que no distraiga el degradado */
+    /* Fondo con degradado sutil para que los bordes no parezcan vacíos */
+    background: radial-gradient(circle, #1a1a1a 0%, #000 100%) !important;
+    border-radius: 2px;
 }
 
-/* 2. Ajuste de la imagen del modelo (LA MAGIA) */
 #imagen-modelo {
     width: 100% !important;
     height: 100% !important;
-    max-height: none !important; /* Quitamos la restricción anterior */
-    object-fit: cover !important; /* Llena el cuadro sin estirarse (hace zoom inteligente) */
-    object-position: top center !important; /* Enfoca la parte de arriba (donde van las cadenas) */
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease;
+    max-height: none !important;
+    /* CAMBIO CLAVE: 'contain' asegura que TODA la foto se vea siempre */
+    object-fit: contain !important; 
+    /* La pegamos al borde superior para que el cuello siempre esté arriba */
+    object-position: top !important; 
+    transition: transform 0.3s ease;
 }
 
-/* 3. Ajuste específico para Celulares (Pantallas pequeñas) */
+/* En celulares, bajamos el alto para que no se vea tan pequeño el modelo */
 @media (max-width: 768px) {
     .monitor-precios div {
-        height: 400px !important; /* Un poco más bajo en móvil para que quepa el selector abajo */
-    }
-    
-    #imagen-modelo {
-        object-fit: cover !important;
-        /* En móvil a veces es mejor 'contain' si no quieres que se corte nada, 
-           pero 'cover' es el que quita los bordes negros. Probemos 'cover' primero. */
+        height: 450px !important;
     }
 }
 
-/* 4. Efecto de carga suave al cambiar de medida */
-#imagen-modelo.cambiando {
-    opacity: 0;
-    transform: scale(1.02);
+/* Efecto MIDAS: Un ligero brillo dorado en el contenedor */
+.monitor-precios::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
