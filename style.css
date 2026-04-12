@@ -2240,3 +2240,45 @@ img {
 .goog-te-banner-frame { display: none !important; }
 .skiptranslate { display: none !important; }
 body { top: 0 !important; position: static !important; }
+
+/* =========================================
+   AJUSTE DE CUADRO COMPLETO - PROBADOR MIDAS
+   ========================================= */
+
+/* 1. Ajuste del contenedor principal */
+.monitor-precios div {
+    height: 500px !important; /* Aumentamos un poco el alto para mejor impacto */
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: #000 !important; /* Fondo negro puro para que no distraiga el degradado */
+}
+
+/* 2. Ajuste de la imagen del modelo (LA MAGIA) */
+#imagen-modelo {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important; /* Quitamos la restricción anterior */
+    object-fit: cover !important; /* Llena el cuadro sin estirarse (hace zoom inteligente) */
+    object-position: top center !important; /* Enfoca la parte de arriba (donde van las cadenas) */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease;
+}
+
+/* 3. Ajuste específico para Celulares (Pantallas pequeñas) */
+@media (max-width: 768px) {
+    .monitor-precios div {
+        height: 400px !important; /* Un poco más bajo en móvil para que quepa el selector abajo */
+    }
+    
+    #imagen-modelo {
+        object-fit: cover !important;
+        /* En móvil a veces es mejor 'contain' si no quieres que se corte nada, 
+           pero 'cover' es el que quita los bordes negros. Probemos 'cover' primero. */
+    }
+}
+
+/* 4. Efecto de carga suave al cambiar de medida */
+#imagen-modelo.cambiando {
+    opacity: 0;
+    transform: scale(1.02);
+}
