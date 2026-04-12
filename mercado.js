@@ -60,6 +60,15 @@ async function actualizarMidas() {
         if(document.getElementById('oro-g')) document.getElementById('oro-g').innerText = fmt.format(gramoLocal);
         if(document.getElementById('oro-kg')) document.getElementById('oro-kg').innerText = fmt.format(kiloLocal);
 
+if (localStorage.getItem('idiomaPreferido') && localStorage.getItem('idiomaPreferido') !== 'es') {
+    const lang = localStorage.getItem('idiomaPreferido');
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+        combo.value = lang;
+        combo.dispatchEvent(new Event('change'));
+    }
+}
+
         window.tiempoRestante = 60; 
     } catch (e) { 
         console.error("Error en sincronización:", e); 
