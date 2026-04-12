@@ -1,91 +1,90 @@
+/* =========================================
+   SISTEMA DE IDIOMAS MIDAS (11 IDIOMAS)
+   ========================================= */
+
+// 1. Diccionario de Textos Principales
+const textos = {
+    "es": { "nav0": "Inicio", "nav1": "Tasador", "nav2": "Tejidos", "nav3": "Probador", "nav4": "Mercado", "nav5": "Comunidad", "titulo": "LA BÓVEDA DE MIDAS", "sub": "Alta Joyería y Tasación Real", "btn": "TASAR AHORA" },
+    "en": { "nav0": "Home", "nav1": "Appraiser", "nav2": "Weaves", "nav3": "Try-on", "nav4": "Market", "nav5": "Community", "titulo": "THE MIDAS VAULT", "sub": "High Jewelry & Real Appraisal", "btn": "APPRAISE NOW" },
+    "it": { "nav0": "Inizio", "nav1": "Perito", "nav2": "Tessuti", "nav3": "Prova", "nav4": "Mercato", "nav5": "Comunità", "titulo": "IL CAVEAU DI MIDAS", "sub": "Alta Gioielleria e Valutazione Reale", "btn": "VALUTA ORA" },
+    "fr": { "nav0": "Accueil", "nav1": "Expert", "nav2": "Tissus", "nav3": "Essayer", "nav4": "Marché", "nav5": "Communauté", "titulo": "LE COFFRE DE MIDAS", "sub": "Haute Joaillerie", "btn": "ÉVALUER" },
+    "pt": { "nav0": "Início", "nav1": "Avaliador", "nav2": "Tecidos", "nav3": "Provador", "nav4": "Mercado", "nav5": "Comunidade", "titulo": "O COFRE DE MIDAS", "sub": "Alta Joalheria", "btn": "AVALIAR AGORA" },
+    "de": { "nav0": "Start", "nav1": "Gutachter", "nav2": "Gewebe", "nav3": "Anprobe", "nav4": "Markt", "nav5": "Gemeinschaft", "titulo": "DIE MIDAS-TRESOR", "sub": "Echtschmuck-Bewertung", "btn": "JETZT BEWERTEN" },
+    "ru": { "nav0": "Главная", "nav1": "Оценщик", "nav2": "Ткани", "nav3": "Примерка", "nav4": "Рынок", "nav5": "Сообщество", "titulo": "ХРАНИЛИЩЕ МИДАСА", "sub": "Ювелирные изделия", "btn": "ОЦЕНИТЬ" },
+    "cn": { "nav0": "首页", "nav1": "评估师", "nav2": "编织", "nav3": "试穿", "nav4": "市场", "nav5": "社区", "titulo": "米达斯金库", "sub": "高级珠宝评估", "btn": "立即评估" },
+    "jp": { "nav0": "ホーム", "nav1": "鑑定士", "nav2": "織り", "nav3": "試着", "nav4": "市場", "nav5": "コミュニティ", "titulo": "マイダスの金庫", "sub": "高級ジュエリー鑑定", "btn": "今すぐ査定" },
+    "ar": { "nav0": "الرئيسية", "nav1": "المثمن", "nav2": "الأنسجة", "nav3": "التجربة", "nav4": "السوق", "nav5": "المجتمع", "titulo": "خزنة ميداس", "sub": "مجوهرات راقية", "btn": "قيم الآن" },
+    "hi": { "nav0": "होम", "nav1": "मूल्यांकनकर्ता", "nav2": "बुनाई", "nav3": "ट्रायल", "nav4": "बाजार", "nav5": "समुदाय", "titulo": "मिडास वॉल्ट", "sub": "उच्च आभूषण मूल्यांकन", "btn": "अभी मूल्यांकन करें" }
+};
+
+// 2. Función para abrir/cerrar el menú
 function toggleMenuIdioma() {
-    document.getElementById("menu-idiomas").classList.toggle("show");
+    const menu = document.getElementById("menu-idiomas");
+    if (menu) menu.classList.toggle("show");
 }
 
-function seleccionarIdioma(lang) {
-    // 1. Actualizar el texto del botón principal inmediatamente
-    const btnTexto = document.getElementById('idioma-actual');
-    if (btnTexto) btnTexto.innerText = "🌐 " + lang.toUpperCase();
-
-    // 2. Ejecutar tu traducción manual (Navbar y Títulos)
-    if (typeof textos !== 'undefined' && textos[lang]) {
-        cambiarIdiomaManual(lang);
-    }
-
-    // 3. FORZAR TRADUCCIÓN GLOBAL DE GOOGLE
-    const intentarTraducir = setInterval(() => {
-        const combo = document.querySelector('.goog-te-combo');
-        if (combo) {
-            combo.value = lang;
-            combo.dispatchEvent(new Event('change'));
-            clearInterval(intentarTraducir); // Detener cuando funcione
-        }
-    }, 100); // Intenta cada 100ms hasta que el motor de Google responda
-
-    // 4. Tiempo límite para dejar de intentar (5 segundos)
-    setTimeout(() => clearInterval(intentarTraducir), 5000);
-
-    toggleMenuIdioma();
-}
-
-function cambiarIdiomaManual(lang) {
-    const t = textos[lang];
-    if (!t) return;
-    
-    localStorage.setItem('idiomaPreferido', lang);
-
-    // Navbar
-    const navIds = ['nav-inicio', 'nav-tasador', 'nav-tejidos', 'nav-probador', 'nav-mercado', 'nav-comunidad'];
-    navIds.forEach((id, i) => {
-        const el = document.getElementById(id);
-        if (el) el.innerText = t[`nav${i}`] || el.innerText;
-    });
-
-    // Títulos Hero
-    const tit = document.getElementById('bienvenida-titulo');
-    const sub = document.getElementById('bienvenida-sub');
-    if (tit) tit.innerText = t.titulo;
-    if (sub) sub.innerText = t.sub;
-
-    const btn = document.querySelector('.btn-tasar');
-    if (btn) btn.innerText = t.btn;
-}
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'es',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE, // Cambiado a SIMPLE
-        autoDisplay: false, // Evita que salte el banner automáticamente
-        multilanguagePage: true
-    }, 'google_translate_element');
-}
-// Función para forzar que la página no se mueva
+// 3. Limpieza de la interfaz de Google (Oculta la barra azul)
 function limpiarBarraGoogle() {
     const banner = document.querySelector(".goog-te-banner-frame");
-    if (banner) {
-        banner.style.display = 'none';
-    }
+    const skiptranslate = document.querySelector(".skiptranslate");
+    if (banner) banner.remove();
+    if (skiptranslate) skiptranslate.style.display = 'none';
     document.body.style.top = "0px";
 }
 
-// Ejecutar la limpieza cada vez que se cambie el idioma
+// 4. Función Maestra de Selección
 function seleccionarIdioma(lang) {
+    // Cambiar texto en el botón principal
     const btnTexto = document.getElementById('idioma-actual');
     if (btnTexto) btnTexto.innerText = "🌐 " + lang.toUpperCase();
 
+    // Guardar en memoria
+    localStorage.setItem('idiomaPreferido', lang);
+
+    // Cambiar textos manuales (Navbar y Hero)
+    const t = textos[lang];
+    if (t) {
+        const navIds = ['nav-inicio', 'nav-tasador', 'nav-tejidos', 'nav-probador', 'nav-mercado', 'nav-comunidad'];
+        navIds.forEach((id, i) => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = t[`nav${i}`];
+        });
+        const tit = document.getElementById('bienvenida-titulo');
+        const sub = document.getElementById('bienvenida-sub');
+        const btn = document.querySelector('.btn-tasar');
+        if (tit) tit.innerText = t.titulo;
+        if (sub) sub.innerText = t.sub;
+        if (btn) btn.innerText = t.btn;
+    }
+
+    // Disparar Google Translate en silencio
     const combo = document.querySelector('.goog-te-combo');
     if (combo) {
         combo.value = lang;
         combo.dispatchEvent(new Event('change'));
-        
-        // Esperar un momento a que Google intente poner la barra y borrarla
         setTimeout(limpiarBarraGoogle, 500);
     }
+    
     toggleMenuIdioma();
 }
 
-// También limpiar al cargar la página
-window.addEventListener('load', () => {
-    setInterval(limpiarBarraGoogle, 1000); // Revisa cada segundo por si Google intenta volver
+// 5. Inicialización de Google Translate
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'es',
+        includedLanguages: 'en,it,fr,pt,de,ru,zh-CN,ja,ar,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+
+// 6. Carga inicial al abrir la web
+window.addEventListener('DOMContentLoaded', () => {
+    const langGuardado = localStorage.getItem('idiomaPreferido') || 'es';
+    if (langGuardado !== 'es') {
+        setTimeout(() => seleccionarIdioma(langGuardado), 1000);
+    }
+    setInterval(limpiarBarraGoogle, 1000);
 });
 
 
