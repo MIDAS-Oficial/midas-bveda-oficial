@@ -2234,3 +2234,9 @@ img {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Bloqueo total de la barra de Google */
+#google_translate_element { display: none !important; }
+.goog-te-banner-frame { display: none !important; }
+.skiptranslate { display: none !important; }
+body { top: 0 !important; position: static !important; }
