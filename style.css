@@ -2288,3 +2288,35 @@ body { top: 0 !important; position: static !important; }
 .monitor-precios div {
     background: #000 !important;
 }
+
+/* =========================================
+   ESTILO REFINADO PROBADOR MIDAS GOLD
+   ========================================= */
+
+/* Color Dorado Claro para textos de interfaz */
+.monitor-precios span {
+    color: #ffebad !important; /* Un dorado crema más brillante y lujoso */
+    text-shadow: 0 0 5px rgba(255, 235, 173, 0.3);
+}
+
+/* Asegurar que el cuadro sea vertical y centrado */
+@media (max-width: 768px) {
+    .monitor-precios {
+        max-width: 290px !important; /* Se ajusta mejor al ancho de la pantalla del cel */
+    }
+    
+    .monitor-precios div[style*="height: 550px"] {
+        height: 480px !important; /* Un poco más corto en móvil para que no ocupe toda la pantalla */
+    }
+}
+
+/* Animación sutil para el texto de Midas Gold */
+@keyframes brilloMidas {
+    0% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.6; }
+}
+
+.monitor-precios span[style*="bottom: 15px"] {
+    animation: brilloMidas 3s infinite ease-in-out;
+}
