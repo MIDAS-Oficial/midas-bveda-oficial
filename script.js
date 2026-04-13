@@ -101,68 +101,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setInterval(limpiarBarraGoogle, 1000);
 });
 
-/* =========================================
-   LÓGICA DEL TASADOR GLOBAL MIDAS (CORREGIDA)
-   ========================================= */
-
-async function calcularTasacion() {
-    const display = document.getElementById('resultado-precio');
-    const precioUSDGramo = window.precioOroUSD24k; 
-
-    // VALIDACIÓN DE SEGURIDAD: Si la bolsa no ha cargado, intentamos cargarla rápido
-    if (!precioUSDGramo || precioUSDGramo === 0) {
-        if(display) display.innerText = "RECONECTANDO CON LA BOLSA...";
-        await actualizarMidas(); 
-        // Si después de reintentar sigue en 0, detenemos
-        if (!window.precioOroUSD24k) return;
-    }
-
-    const monedaDestino = document.getElementById('select-pais').value;
-    const purezas = { "24k": 1, "22k": 0.916, "18k": 0.75, "14k": 0.585, "10k": 0.417 };
-    const cantidad = parseFloat(document.getElementById('input-gramos').value);
-    const unidad = document.getElementById('select-unidad').value; 
-    const ley = document.getElementById('select-quilates').value;
-
-    if (isNaN(cantidad) || cantidad <= 0) {
-        alert("Por favor ingresa un peso válido.");
-        return;
-    }
-
-    display.innerText = "CALCULANDO DIVISA...";
-
-    try {
-        // 1. Obtener tasa de cambio para la moneda elegida
-        const res = await fetch(`https://open.er-api.com/v6/latest/USD`);
-        const data = await res.json();
-        const tasaCambio = data.rates[monedaDestino];
-
-        // 2. Ajustar peso según unidad
-        let gramosReales = (unidad === "kg") ? cantidad * 1000 : (unidad === "oz") ? cantidad * 31.1035 : cantidad;
-        
-        // 3. Cálculo financiero MIDAS
-        let precioGramoEnMonedaLocal = precioUSDGramo * tasaCambio;
-        let precioLeyLocal = precioGramoEnMonedaLocal * purezas[ley];
-
-        // Márgenes de compra MIDAS (82% a 90% del spot)
-        let totalMin = gramosReales * (precioLeyLocal * 0.82); 
-        let totalMax = gramosReales * (precioLeyLocal * 0.90); 
-
-        // 4. Formatear resultado
-        const configFormato = (monedaDestino === 'COP') ? { loc: 'es-CO', dec: 0 } : { loc: 'en-US', dec: 2 };
-        const fmt = new Intl.NumberFormat(configFormato.loc, {
-            style: 'currency',
-            currency: monedaDestino,
-            minimumFractionDigits: configFormato.dec
-        });
-
-        display.innerText = `${fmt.format(totalMin)} - ${fmt.format(totalMax)}`;
-        display.style.color = "#00ff88";
-
-    } catch (error) {
-        display.innerText = "ERROR DE CONEXIÓN";
-        console.error(error);
-    }
-}
 // Asegúrate de que este bloque esté UNA SOLA VEZ
 const catalogo = {
     caballero: [
