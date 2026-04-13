@@ -218,8 +218,6 @@ function cambiarGenero(gen) {
     }
 }
 
-});
-
 function actualizarImagen() {
     const img = document.getElementById('imagen-modelo');
     const sel = document.getElementById('selector-medida');
