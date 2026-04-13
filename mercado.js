@@ -1,3 +1,7 @@
+/* =========================================
+   LÓGICA DE MERCADO MIDAS GOLD KING
+   ========================================= */
+
 // 1. VARIABLES GLOBALES DE LA BÓVEDA
 window.tiempoRestante = 60; 
 
@@ -44,7 +48,7 @@ async function actualizarMidas() {
         const gramoLocal = onzaLocal / 31.1035;
         const kiloLocal = gramoLocal * 1000;
 
-        window.precioOroUSD24k = precioUSD / 31.1035; // Guardamos el gramo en USD puro
+        window.precioOroUSD24k = precioUSD / 31.1035; 
         window.trmRealMidas = trmActual;
 
         // Formato de moneda
@@ -60,14 +64,18 @@ async function actualizarMidas() {
         if(document.getElementById('oro-g')) document.getElementById('oro-g').innerText = fmt.format(gramoLocal);
         if(document.getElementById('oro-kg')) document.getElementById('oro-kg').innerText = fmt.format(kiloLocal);
 
-if (localStorage.getItem('idiomaPreferido') && localStorage.getItem('idiomaPreferido') !== 'es') {
-    const lang = localStorage.getItem('idiomaPreferido');
-    const combo = document.querySelector('.goog-te-combo');
-    if (combo) {
-        combo.value = lang;
-        combo.dispatchEvent(new Event('change'));
-    }
-}
+        // --- REFUERZO DE IDIOMA MIDAS ---
+        const lang = localStorage.getItem('idiomaPreferido');
+        if (lang && lang !== 'es') {
+            const combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                combo.value = lang;
+                combo.dispatchEvent(new Event('change'));
+                // Limpiamos la barra de Google por si intenta aparecer tras actualizar
+                setTimeout(limpiarBarraGoogle, 500);
+            }
+        }
+        // --------------------------------
 
         window.tiempoRestante = 60; 
     } catch (e) { 
@@ -92,12 +100,17 @@ function iniciarCronometro() {
 document.addEventListener('DOMContentLoaded', () => {
     actualizarMidas();
     iniciarCronometro();
-    // Esperamos un microsegundo para que el contenedor de la gráfica exista
     setTimeout(cargarGraficaMidas, 500); 
 });
 
-// Bloqueo de inspección
+// 6. PROTECCIÓN Y LIMPIEZA CONSTANTE
 setInterval(() => {
+    // Limpieza de interfaz de Google
+    const banner = document.querySelector(".goog-te-banner-frame");
+    if (banner) banner.remove();
+    document.body.style.top = "0px";
+
+    // Bloqueo de inspección
     if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
         console.clear();
         console.log("%cACCESO RESTRINGIDO - BÓVEDA MIDAS", "color: #d4af37; font-size: 30px; font-weight: bold;");
