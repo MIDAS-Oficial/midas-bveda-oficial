@@ -2289,4 +2289,33 @@ body { top: 0 !important; position: static !important; }
     background: #000 !important;
 }
 
+/* OPTIMIZACIÓN DE IMÁGENES MIDAS */
+img {
+    /* Evita que la imagen se vea borrosa al escalar */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    
+    /* Mantiene la proporción perfecta siempre */
+    height: auto;
+    max-width: 100%;
+    
+    /* Suavizado para pantallas de alta densidad */
+    shape-rendering: geometricPrecision;
+}
 
+/* Clase específica para tus Renders de Joyería */
+.render-joya {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Filtro sutil para resaltar el brillo del oro en pantallas OLED */
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+}
+
+/* Optimización para el logo en el header */
+.logo-m {
+    width: 50px; /* O el tamaño que prefieras */
+    height: auto;
+    /* Evita que el logo se pixele al ser pequeño */
+    image-rendering: auto;
+}
