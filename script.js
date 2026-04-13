@@ -327,7 +327,7 @@ const textosLegales = {
     terminos: `
         <div style="font-family: 'Courier New', monospace; text-align: left; line-height: 1.5; color: #ccc; font-size: 0.8em; padding: 10px;">
             <h2 style="color: #d4af37; border-bottom: 2px solid #d4af37; padding-bottom: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center;">Términos y Condiciones de Uso</h2>
-            <p style="text-align: center; color: #666; font-size: 0.9em;">Última actualización: Abril 2026</p>
+            <p style="text-align: center; color: #666; font-size: 0.9em;">Última actualización: 2026</p>
             
             <p><strong style="color: #d4af37;">1. MARCO OPERATIVO:</strong> El ecosistema digital MIDAS GOLD KING constituye una interfaz de consulta técnica y financiera. Al acceder a la Bóveda, el usuario acepta que los datos proporcionados son de carácter informativo y basados en fluctuaciones de mercados bursátiles internacionales (LBMA/COMEX).</p>
             
