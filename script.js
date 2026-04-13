@@ -50,13 +50,13 @@ function seleccionarIdioma(lang) {
             if (el) el.innerText = t[`nav${i}`];
         });
         const tit = document.getElementById('bienvenida-titulo');
-        const sub = document.getElementById('bienvenida-sub');
-        const btn = document.querySelector('.btn-tasar');
-        if (tit) tit.innerText = t.titulo;
-        if (sub) sub.innerText = t.sub;
-        if (btn) btn.innerText = t.btn;
-    }
+    const sub = document.getElementById('bienvenida-sub');
+    const btnTasar = document.querySelector('.btn-tasar'); // Cambié el nombre para no confundir con la variable 'btn' de idiomas
 
+    if (tit) tit.innerText = t.titulo;
+    if (sub) sub.innerText = t.sub;
+    if (btnTasar) btnTasar.innerText = t.btn;
+}
     // Disparar Google Translate en silencio
     const combo = document.querySelector('.goog-te-combo');
     if (combo) {
@@ -100,51 +100,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // Mantener la barra de Google oculta permanentemente
     setInterval(limpiarBarraGoogle, 1000);
 });
-
-
-/* =========================================
-   SISTEMA DE ACTUALIZACIÓN DE BOLSA (MERCADO)
-   ========================================= */
-
-// Aseguramos que las variables existan desde el inicio
-window.precioOroUSD24k = 0; 
-window.trmRealMidas = 0;
-let tiempoRestante = 60; 
-
-async function actualizarMidas() {
-    try {
-        // 1. Obtener datos de APIs
-        const [resTRM, resOro] = await Promise.all([
-            fetch('https://open.er-api.com/v6/latest/USD'),
-            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
-        ]);
-
-        const dataTRM = await resTRM.json();
-        const dataOro = await resOro.json();
-
-        // 2. Guardar valores globales para que el TASADOR pueda verlos
-        const precioOnzaUSD = parseFloat(dataOro.price);
-        window.precioOroUSD24k = precioOnzaUSD / 31.1035; // Precio por gramo
-        window.trmRealMidas = dataTRM.rates['COP']; // TRM base
-
-        // 3. Si estás en la página de Mercado, actualizar etiquetas
-        const displayTRM = document.getElementById('trm-valor');
-        if (displayTRM) {
-            const fmt = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
-            displayTRM.innerText = fmt.format(window.trmRealMidas);
-            // Actualizar el resto de etiquetas de mercado si existen...
-            if(document.getElementById('oro-g')) document.getElementById('oro-g').innerText = fmt.format(window.precioOroUSD24k * window.trmRealMidas);
-        }
-
-        console.log("✓ Bóveda Sincronizada: Gramo USD $" + window.precioOroUSD24k.toFixed(2));
-        
-        // Resetear reloj después de actualizar
-        tiempoRestante = 60; 
-
-    } catch (e) {
-        console.error("Error de conexión con la bolsa:", e);
-    }
-}
 
 /* =========================================
    LÓGICA DEL TASADOR GLOBAL MIDAS (CORREGIDA)
