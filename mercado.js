@@ -78,7 +78,6 @@ async function actualizarMidas() {
         console.error("Error en sincronización:", e); 
     }
 }
-
 // 5. CRONÓMETRO DE ACTUALIZACIÓN
 function iniciarCronometro() {
     if (window.relojMidas) clearInterval(window.relojMidas);
