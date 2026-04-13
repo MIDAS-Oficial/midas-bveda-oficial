@@ -289,7 +289,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const langGuardado = localStorage.getItem('idiomaPreferido') || 'es';
     const btnTexto = document.getElementById('idioma-actual');
     if (btnTexto) btnTexto.innerText = "🌐 " + langGuardado.toUpperCase();
-    cambiarIdioma(langGuardado);
+    seleccionarIdioma(langGuardado);
 
     // Iniciar probador
     if (document.getElementById('selector-medida')) cambiarGenero('caballero');
