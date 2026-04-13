@@ -320,34 +320,56 @@ window.onclick = function(event) {
 }
 
 /* =========================================
-   SISTEMA LEGAL PROFESIONAL MIDAS
+   SISTEMA LEGAL PROFESIONAL MIDAS v2.0
    ========================================= */
 
 const textosLegales = {
     terminos: `
-        <div style="font-family: monospace; text-align: left; line-height: 1.6; color: #bbb; font-size: 0.85em;">
-            <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px; letter-spacing: 3px; text-transform: uppercase;">Términos de Servicio - MIDAS GOLD KING</h2>
-            <p><strong style="color: #d4af37;">1. NATURALEZA DEL SERVICIO:</strong> MIDAS opera como una plataforma de inteligencia de mercado y tasación digital. Los valores de metales preciosos se sincronizan mediante APIs internacionales en tiempo real.</p>
-            <p><strong style="color: #d4af37;">2. PRECISIÓN DE DATOS:</strong> El algoritmo de la Bóveda calcula el valor basado en el peso neto y la pureza declarada por el usuario. MIDAS no se hace responsable por errores en el pesaje físico.</p>
-            <p><strong style="color: #d4af37;">3. PROPIEDAD INTELECTUAL:</strong> El diseño, logotipos (MIDAS M) y herramientas como el Tasador Global son propiedad exclusiva de MIDAS GOLD KING.</p>
+        <div style="font-family: 'Courier New', monospace; text-align: left; line-height: 1.5; color: #ccc; font-size: 0.8em; padding: 10px;">
+            <h2 style="color: #d4af37; border-bottom: 2px solid #d4af37; padding-bottom: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center;">Términos y Condiciones de Uso</h2>
+            <p style="text-align: center; color: #666; font-size: 0.9em;">Última actualización: Abril 2026</p>
+            
+            <p><strong style="color: #d4af37;">1. MARCO OPERATIVO:</strong> El ecosistema digital MIDAS GOLD KING constituye una interfaz de consulta técnica y financiera. Al acceder a la Bóveda, el usuario acepta que los datos proporcionados son de carácter informativo y basados en fluctuaciones de mercados bursátiles internacionales (LBMA/COMEX).</p>
+            
+            <p><strong style="color: #d4af37;">2. EXENCIÓN DE RESPONSABILIDAD FINANCIERA:</strong> MIDAS no ejerce como entidad de asesoría de inversión. Las tasaciones generadas por el "Tasador Global" son proyecciones matemáticas calculadas sobre el precio spot del oro. MIDAS no garantiza beneficios económicos derivados del uso de su algoritmo en transacciones físicas externas.</p>
+            
+            <p><strong style="color: #d4af37;">3. PRECISIÓN MECÁNICA:</strong> La exactitud de la tasación depende estrictamente de la veracidad de los datos de entrada (Pureza de ley y Masa en gramos). Cualquier discrepancia resultante de instrumentos de pesaje no calibrados o declaraciones de quilataje erróneas es responsabilidad exclusiva del operador/usuario.</p>
+            
+            <p><strong style="color: #d4af37;">4. PROPIEDAD INDUSTRIAL:</strong> Queda prohibida la reproducción total o parcial del código fuente, algoritmos de cálculo, renders de joyería y la identidad visual "MIDAS M". El uso no autorizado de estos activos será procesado bajo la legislación de propiedad intelectual vigente en Colombia y tratados internacionales.</p>
+            
+            <p style="border-top: 1px solid #333; padding-top: 10px; color: #888;">Al utilizar esta plataforma, usted confirma que comprende la volatilidad del mercado de metales preciosos.</p>
         </div>`,
     
     privacidad: `
-        <div style="font-family: monospace; text-align: left; line-height: 1.6; color: #bbb; font-size: 0.85em;">
-            <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px; letter-spacing: 3px; text-transform: uppercase;">Protocolo de Privacidad - Bóveda Digital</h2>
-            <p><strong style="color: #d4af37;">1. RECOLECCIÓN DE DATOS:</strong> El sistema captura únicamente el identificador de usuario y el mensaje técnico para su procesamiento en la Bóveda.</p>
-            <p><strong style="color: #d4af37;">2. USO DE LA INFORMACIÓN:</strong> La información se utiliza exclusivamente para resolución de dudas técnicas y mejora del algoritmo MIDAS.</p>
-            <p><strong style="color: #d4af37;">3. SEGURIDAD:</strong> MIDAS implementa filtros de cifrado para garantizar que su identidad permanezca resguardada.</p>
+        <div style="font-family: 'Courier New', monospace; text-align: left; line-height: 1.5; color: #ccc; font-size: 0.8em; padding: 10px;">
+            <h2 style="color: #d4af37; border-bottom: 2px solid #d4af37; padding-bottom: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center;">Protocolo de Seguridad y Privacidad</h2>
+            
+            <p><strong style="color: #d4af37;">1. CRIPTOGRAFÍA DE DATOS:</strong> Toda interacción dentro de la Bóveda de MIDAS está protegida por protocolos de cifrado simétrico. No almacenamos registros de tasaciones individuales en servidores públicos, garantizando el anonimato de sus activos financieros.</p>
+            
+            <p><strong style="color: #d4af37;">2. TRATAMIENTO DE METADATOS:</strong> MIDAS captura exclusivamente telemetría técnica (moneda seleccionada, tipo de tejido consultado) con el fin único de optimizar el rendimiento de la interfaz y la precisión del convertidor de divisas en tiempo real.</p>
+            
+            <p><strong style="color: #d4af37;">3. POLÍTICA DE COOKIES DE MERCADO:</strong> Utilizamos identificadores temporales de sesión para mantener la sincronización con la API de Binance (PAXG) y la TRM local, asegurando que los precios no sufran desajustes durante su navegación activa.</p>
+            
+            <p><strong style="color: #d4af37;">4. DERECHOS ARCO:</strong> El usuario mantiene pleno control sobre su información técnica, la cual puede ser purgada mediante la limpieza de caché o el cierre de la sesión de navegador, eliminando cualquier rastro de consulta en el dispositivo local.</p>
         </div>`,
         
     faq: `
-        <div style="font-family: monospace; text-align: left; line-height: 1.6; color: #bbb; font-size: 0.85em;">
-            <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px; letter-spacing: 3px; text-transform: uppercase;">Preguntas Frecuentes (FAQ)</h2>
-            <p><strong style="color: #d4af37;">¿POR QUÉ VARÍA EL PRECIO DEL ORO?</strong><br>El mercado cotiza en la bolsa de Londres (LBMA). MIDAS actualiza estos valores cada 60 segundos.</p>
-            <p><strong style="color: #d4af37;">¿QUÉ ES EL TASADOR GLOBAL?</strong><br>Es una herramienta matemática avanzada que calcula el valor real de fundición de su pieza según el spot actual.</p>
+        <div style="font-family: 'Courier New', monospace; text-align: left; line-height: 1.5; color: #ccc; font-size: 0.8em; padding: 10px;">
+            <h2 style="color: #d4af37; border-bottom: 2px solid #d4af37; padding-bottom: 10px; letter-spacing: 4px; text-transform: uppercase; text-align: center;">Centro de Inteligencia (FAQ)</h2>
+            
+            <p><strong style="color: #d4af37;">¿QUÉ TAN FIABLE ES EL PRECIO MOSTRADO?</strong><br>
+            Nuestra infraestructura se conecta directamente con el par PAXG/USDT y APIs de divisas globales. El margen de error es inferior al 0.01% respecto al precio spot de Londres.</p>
+            
+            <p><strong style="color: #d4af37;">¿EL TASADOR INCLUYE MANO DE OBRA?</strong><br>
+            No. El Tasador Global MIDAS calcula exclusivamente el valor del metal puro o ley según el mercado actual. No incluye costos de diseño, fabricación o valor agregado comercial.</p>
+            
+            <p><strong style="color: #d4af37;">¿QUÉ SIGNIFICA "LEY 750" EN EL SISTEMA?</strong><br>
+            Es el estándar internacional para el oro de 18 kilates, indicando que la pieza contiene un 75% de oro puro. El sistema ajusta automáticamente la tasación según este parámetro de pureza.</p>
+            
+            <p><strong style="color: #d4af37;">¿POR QUÉ EL CRONÓMETRO DE 60 SEGUNDOS?</strong><br>
+            Para garantizar que usted nunca opere con precios obsoletos. El mercado del oro es altamente volátil y una actualización de un minuto protege la precisión de su valoración.</p>
         </div>`
 };
-
 function abrirLegal(tipo) {
     const modal = document.getElementById('modal-legal');
     const contenido = document.getElementById('contenido-legal');
