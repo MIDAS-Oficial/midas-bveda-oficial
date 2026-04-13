@@ -778,28 +778,32 @@ console.log("%c¡ALTO! Propiedad de MIDAS GOLD KING", "color: #ffebad; font-size
 console.log("El contenido de esta boveda está protegido legalmente.");
 
 /* =========================================
-   SISTEMA DE COOKIES PERSISTENTE MIDAS
+   SISTEMA DE COOKIES POR SESIÓN MIDAS
    ========================================= */
 
 function gestionarAvisoCookies() {
     const aviso = document.getElementById('aviso-cookies');
-    // Revisamos si ya existe la "llave" en la memoria del navegador
-    const cookiesAceptadas = localStorage.getItem('midasCookiesAceptadas');
+    
+    // Al usar sessionStorage, el aviso volverá a salir cada vez que
+    // el usuario cierre la pestaña y regrese a MIDAS GOLD KING.
+    const cookiesAceptadas = sessionStorage.getItem('midasCookiesSesion');
 
     if (!cookiesAceptadas) {
-        // Si NO ha aceptado, mostramos el aviso después de 1 segundo
         setTimeout(() => {
-            if (aviso) aviso.style.display = 'block';
+            if (aviso) {
+                aviso.style.display = 'block';
+                aviso.style.opacity = '1';
+            }
         }, 1000);
     }
 }
 
 function aceptarCookies() {
     const aviso = document.getElementById('aviso-cookies');
-    // Guardamos la "llave" para que no vuelva a aparecer
-    localStorage.setItem('midasCookiesAceptadas', 'true');
     
-    // Cerramos el aviso con una transición suave
+    // Guardamos la aceptación solo para la sesión actual
+    sessionStorage.setItem('midasCookiesSesion', 'true');
+    
     if (aviso) {
         aviso.style.opacity = '0';
         setTimeout(() => {
@@ -808,5 +812,5 @@ function aceptarCookies() {
     }
 }
 
-// Ejecutar la revisión apenas cargue cualquier página
+// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', gestionarAvisoCookies);
