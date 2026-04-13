@@ -38,13 +38,11 @@ function limpiarInterfazGoogle() {
     document.documentElement.style.marginTop = "0px";
 }
 
-// 4. FUNCIÓN PARA ACTUALIZAR PRECIOS EN VIVO
 async function actualizarMidas() {
     try {
         const selector = document.getElementById('selector-moneda');
         const monedaSeleccionada = selector ? selector.value : 'COP';
 
-        // Obtener datos reales
         const [resTRM, resOro] = await Promise.all([
             fetch('https://open.er-api.com/v6/latest/USD'),
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
@@ -56,38 +54,28 @@ async function actualizarMidas() {
         const trmActual = dataTRM.rates[monedaSeleccionada];
         const precioUSD = parseFloat(dataOro.price);
 
-        // Cálculos de la Bóveda
+        // --- ESTA LÍNEA ES LA QUE FALTA PARA QUE EL TASADOR FUNCIONE ---
+        window.precioOroUSD24k = precioUSD / 31.1035; 
+        // --------------------------------------------------------------
+
         const onzaLocal = precioUSD * trmActual;
         const gramoLocal = onzaLocal / 31.1035;
         const kiloLocal = gramoLocal * 1000;
 
-        // Formato de moneda según la región seleccionada
         const fmt = new Intl.NumberFormat('es-CO', { 
             style: 'currency', 
             currency: monedaSeleccionada, 
             minimumFractionDigits: 0 
         });
 
-        // Inyección de datos en el HTML
         if(document.getElementById('trm-valor')) document.getElementById('trm-valor').innerText = fmt.format(trmActual);
         if(document.getElementById('oro-oz')) document.getElementById('oro-oz').innerText = fmt.format(onzaLocal);
         if(document.getElementById('oro-g')) document.getElementById('oro-g').innerText = fmt.format(gramoLocal);
         if(document.getElementById('oro-kg')) document.getElementById('oro-kg').innerText = fmt.format(kiloLocal);
 
-        // --- REFUERZO DE IDIOMA PARA CONTENIDO DINÁMICO ---
-        const lang = localStorage.getItem('idiomaPreferido');
-        if (lang && lang !== 'es') {
-            const combo = document.querySelector('.goog-te-combo');
-            if (combo) {
-                combo.value = lang;
-                combo.dispatchEvent(new Event('change'));
-                setTimeout(limpiarInterfazGoogle, 400);
-            }
-        }
-
         window.tiempoRestante = 60; 
     } catch (e) { 
-        console.error("Error en sincronización de Bóveda:", e); 
+        console.error("Error en sincronización:", e); 
     }
 }
 
