@@ -78,29 +78,35 @@ function googleTranslateElementInit() {
     }, 'google_translate_element');
 }
 
-// 6. Carga inicial REFORZADA para persistencia
+/* =========================================
+   CEREBRO DE ARRANQUE UNIFICADO MIDAS
+   ========================================= */
 window.addEventListener('DOMContentLoaded', () => {
+    // 1. Manejo de Idioma (Selecciona el guardado o Español por defecto)
     const langGuardado = localStorage.getItem('idiomaPreferido') || 'es';
-    
-    // Si el idioma no es español, forzamos la traducción tras un breve delay
-    if (langGuardado !== 'es') {
-        // Esperamos a que el motor de Google cargue en la nueva sección
-        const checkGoogle = setInterval(() => {
-            const combo = document.querySelector('.goog-te-combo');
-            if (combo) {
-                seleccionarIdioma(langGuardado);
-                clearInterval(checkGoogle);
-            }
-        }, 500);
-
-        // Seguridad: Si en 5 segundos no carga, dejamos de intentar
-        setTimeout(() => clearInterval(checkGoogle), 5000);
+    if (typeof seleccionarIdioma === "function") {
+        seleccionarIdioma(langGuardado);
     }
 
-    // Mantener la barra de Google oculta permanentemente
-    setInterval(limpiarBarraGoogle, 1000);
-});
+    // 2. Si el usuario está en la página del PROBADOR, iniciarlo
+    if (document.getElementById('selector-medida')) {
+        cambiarGenero('caballero');
+    }
 
+    // 3. Si el usuario está en la página de MERCADO o TASADOR, iniciar precios
+    if (typeof actualizarMidas === "function") {
+        actualizarMidas(); 
+        iniciarCronometro();
+    }
+    
+    // 4. Cargar la gráfica de TradingView con un pequeño delay para que no pese
+    if (typeof cargarGraficaMidas === "function") {
+        setTimeout(cargarGraficaMidas, 800);
+    }
+
+    // 5. Mantener la basura de Google Translate oculta
+    setInterval(limpiarInterfazGoogle, 1000);
+});
 
 async function calcularTasacion() {
     const precioUSDGramo = window.precioOroUSD24k; // El precio base en USD (ej: 75.50)
@@ -212,12 +218,6 @@ function cambiarGenero(gen) {
     }
 }
 
-// Reemplaza tu window.onload por este disparador más seguro
-window.addEventListener('DOMContentLoaded', () => {
-    // Si estamos en la página del probador, inicializamos
-    if (document.getElementById('selector-medida')) {
-        cambiarGenero('caballero');
-    }
 });
 
 function actualizarImagen() {
@@ -288,7 +288,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const langGuardado = localStorage.getItem('idiomaPreferido') || 'es';
     const btnTexto = document.getElementById('idioma-actual');
     if (btnTexto) btnTexto.innerText = "🌐 " + langGuardado.toUpperCase();
-    cambiarIdioma(langGuardado);
+    seleccionarIdioma(langGuardado);
 
     // Iniciar probador
     if (document.getElementById('selector-medida')) cambiarGenero('caballero');
