@@ -302,10 +302,7 @@ window.addEventListener('load', function() {
             setTimeout(() => { preloader.style.display = 'none'; }, 500);
         }, 1500);
     }
-    if (!localStorage.getItem('cookiesAceptadas')) {
-        const cookies = document.getElementById('aviso-cookies');
-        if(cookies) setTimeout(() => { cookies.style.display = 'block'; }, 2000);
-    }
+    
 });
 
 window.onclick = function(event) {
@@ -320,12 +317,6 @@ window.onclick = function(event) {
             if (dropdowns[i].classList.contains('show')) dropdowns[i].classList.remove('show');
         }
     }
-}
-
-function aceptarCookies() {
-    localStorage.setItem('cookiesAceptadas', 'true');
-    const cookies = document.getElementById('aviso-cookies');
-    if(cookies) cookies.style.display = 'none';
 }
 
 /* =========================================
@@ -786,4 +777,36 @@ document.addEventListener('dragstart', function(e) {
 console.log("%c¡ALTO! Propiedad de MIDAS GOLD KING", "color: #ffebad; font-size: 20px; font-weight: bold; background: #000; padding: 10px;");
 console.log("El contenido de esta boveda está protegido legalmente.");
 
+/* =========================================
+   SISTEMA DE COOKIES PERSISTENTE MIDAS
+   ========================================= */
 
+function gestionarAvisoCookies() {
+    const aviso = document.getElementById('aviso-cookies');
+    // Revisamos si ya existe la "llave" en la memoria del navegador
+    const cookiesAceptadas = localStorage.getItem('midasCookiesAceptadas');
+
+    if (!cookiesAceptadas) {
+        // Si NO ha aceptado, mostramos el aviso después de 1 segundo
+        setTimeout(() => {
+            if (aviso) aviso.style.display = 'block';
+        }, 1000);
+    }
+}
+
+function aceptarCookies() {
+    const aviso = document.getElementById('aviso-cookies');
+    // Guardamos la "llave" para que no vuelva a aparecer
+    localStorage.setItem('midasCookiesAceptadas', 'true');
+    
+    // Cerramos el aviso con una transición suave
+    if (aviso) {
+        aviso.style.opacity = '0';
+        setTimeout(() => {
+            aviso.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Ejecutar la revisión apenas cargue cualquier página
+document.addEventListener('DOMContentLoaded', gestionarAvisoCookies);
