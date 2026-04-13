@@ -763,3 +763,27 @@ window.onclick = function(event) {
         cerrarDetalles();
     }
 };
+
+/* =========================================
+   PROTECCIÓN DE PROPIEDAD INTELECTUAL MIDAS
+   ========================================= */
+
+// 1. Bloquear el clic derecho en las imágenes del probador y catálogo
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.nodeName === 'IMG') {
+        e.preventDefault();
+    }
+}, false);
+
+// 2. Bloquear el arrastre de imágenes (para que no las arrastren al escritorio)
+document.addEventListener('dragstart', function(e) {
+    if (e.target.nodeName === 'IMG') {
+        e.preventDefault();
+    }
+}, false);
+
+// 3. Aviso en consola (ya tenías uno, vamos a reforzarlo)
+console.log("%c¡ALTO! Propiedad de MIDAS GOLD KING", "color: #ffebad; font-size: 20px; font-weight: bold; background: #000; padding: 10px;");
+console.log("El contenido de esta boveda está protegido legalmente.");
+
+
