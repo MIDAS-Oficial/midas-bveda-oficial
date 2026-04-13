@@ -102,59 +102,110 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
-async function calcularTasacion() {
-    const precioUSDGramo = window.precioOroUSD24k; // El precio base en USD (ej: 75.50)
-    const display = document.getElementById('resultado-precio');
-    const monedaDestino = document.getElementById('select-pais').value; // Ej: 'GBP', 'BRL', 'PEN'
+/* =========================================
+   SISTEMA DE ACTUALIZACIÓN DE BOLSA (MERCADO)
+   ========================================= */
 
-    if (!precioUSDGramo) {
-        if(display) display.innerText = "SINCRONIZANDO CON LA BOLSA...";
-        return;
+// Aseguramos que las variables existan desde el inicio
+window.precioOroUSD24k = 0; 
+window.trmRealMidas = 0;
+let tiempoRestante = 60; 
+
+async function actualizarMidas() {
+    try {
+        // 1. Obtener datos de APIs
+        const [resTRM, resOro] = await Promise.all([
+            fetch('https://open.er-api.com/v6/latest/USD'),
+            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
+        ]);
+
+        const dataTRM = await resTRM.json();
+        const dataOro = await resOro.json();
+
+        // 2. Guardar valores globales para que el TASADOR pueda verlos
+        const precioOnzaUSD = parseFloat(dataOro.price);
+        window.precioOroUSD24k = precioOnzaUSD / 31.1035; // Precio por gramo
+        window.trmRealMidas = dataTRM.rates['COP']; // TRM base
+
+        // 3. Si estás en la página de Mercado, actualizar etiquetas
+        const displayTRM = document.getElementById('trm-valor');
+        if (displayTRM) {
+            const fmt = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
+            displayTRM.innerText = fmt.format(window.trmRealMidas);
+            // Actualizar el resto de etiquetas de mercado si existen...
+            if(document.getElementById('oro-g')) document.getElementById('oro-g').innerText = fmt.format(window.precioOroUSD24k * window.trmRealMidas);
+        }
+
+        console.log("✓ Bóveda Sincronizada: Gramo USD $" + window.precioOroUSD24k.toFixed(2));
+        
+        // Resetear reloj después de actualizar
+        tiempoRestante = 60; 
+
+    } catch (e) {
+        console.error("Error de conexión con la bolsa:", e);
+    }
+}
+
+/* =========================================
+   LÓGICA DEL TASADOR GLOBAL MIDAS (CORREGIDA)
+   ========================================= */
+
+async function calcularTasacion() {
+    const display = document.getElementById('resultado-precio');
+    const precioUSDGramo = window.precioOroUSD24k; 
+
+    // VALIDACIÓN DE SEGURIDAD: Si la bolsa no ha cargado, intentamos cargarla rápido
+    if (!precioUSDGramo || precioUSDGramo === 0) {
+        if(display) display.innerText = "RECONECTANDO CON LA BOLSA...";
+        await actualizarMidas(); 
+        // Si después de reintentar sigue en 0, detenemos
+        if (!window.precioOroUSD24k) return;
     }
 
-    // 1. Obtener los datos del formulario
+    const monedaDestino = document.getElementById('select-pais').value;
     const purezas = { "24k": 1, "22k": 0.916, "18k": 0.75, "14k": 0.585, "10k": 0.417 };
     const cantidad = parseFloat(document.getElementById('input-gramos').value);
     const unidad = document.getElementById('select-unidad').value; 
     const ley = document.getElementById('select-quilates').value;
 
-    if (cantidad > 0) {
-        display.innerText = "CALCULANDO DIVISA...";
+    if (isNaN(cantidad) || cantidad <= 0) {
+        alert("Por favor ingresa un peso válido.");
+        return;
+    }
 
-        try {
-            // 2. BUSCAR LA TASA DE CAMBIO REAL DEL PAÍS SELECCIONADO
-            const res = await fetch(`https://open.er-api.com/v6/latest/USD`);
-            const data = await res.json();
-            const tasaCambio = data.rates[monedaDestino]; // Trae la tasa de GBP, BRL, PEN, etc.
+    display.innerText = "CALCULANDO DIVISA...";
 
-            // 3. Cálculos de peso (Onza Troy 31.1035)
-            let gramosReales = (unidad === "kg") ? cantidad * 1000 : (unidad === "oz") ? cantidad * 31.1035 : cantidad;
-            
-            // 4. Convertir el precio del gramo de USD a la Moneda Destino
-            let precioGramoEnMonedaLocal = precioUSDGramo * tasaCambio;
-            let precioLeyLocal = precioGramoEnMonedaLocal * purezas[ley];
+    try {
+        // 1. Obtener tasa de cambio para la moneda elegida
+        const res = await fetch(`https://open.er-api.com/v6/latest/USD`);
+        const data = await res.json();
+        const tasaCambio = data.rates[monedaDestino];
 
-            // 5. Aplicar márgenes MIDAS (82% - 90%)
-            let totalMin = gramosReales * (precioLeyLocal * 0.82); 
-            let totalMax = gramosReales * (precioLeyLocal * 0.90); 
+        // 2. Ajustar peso según unidad
+        let gramosReales = (unidad === "kg") ? cantidad * 1000 : (unidad === "oz") ? cantidad * 31.1035 : cantidad;
+        
+        // 3. Cálculo financiero MIDAS
+        let precioGramoEnMonedaLocal = precioUSDGramo * tasaCambio;
+        let precioLeyLocal = precioGramoEnMonedaLocal * purezas[ley];
 
-            // 6. Formato según el país (Puntos para COP, Comas para el resto)
-            const configFormato = (monedaDestino === 'COP') 
-                ? { loc: 'es-CO', dec: 0 } 
-                : { loc: 'en-US', dec: 2 };
+        // Márgenes de compra MIDAS (82% a 90% del spot)
+        let totalMin = gramosReales * (precioLeyLocal * 0.82); 
+        let totalMax = gramosReales * (precioLeyLocal * 0.90); 
 
-            const fmt = new Intl.NumberFormat(configFormato.loc, {
-                minimumFractionDigits: configFormato.dec,
-                maximumFractionDigits: configFormato.dec
-            });
+        // 4. Formatear resultado
+        const configFormato = (monedaDestino === 'COP') ? { loc: 'es-CO', dec: 0 } : { loc: 'en-US', dec: 2 };
+        const fmt = new Intl.NumberFormat(configFormato.loc, {
+            style: 'currency',
+            currency: monedaDestino,
+            minimumFractionDigits: configFormato.dec
+        });
 
-            display.innerText = `${fmt.format(totalMin)} - ${fmt.format(totalMax)} ${monedaDestino}`;
-            display.style.color = "#00ff88";
+        display.innerText = `${fmt.format(totalMin)} - ${fmt.format(totalMax)}`;
+        display.style.color = "#00ff88";
 
-        } catch (error) {
-            display.innerText = "ERROR DE CONEXIÓN";
-            console.error(error);
-        }
+    } catch (error) {
+        display.innerText = "ERROR DE CONEXIÓN";
+        console.error(error);
     }
 }
 // Asegúrate de que este bloque esté UNA SOLA VEZ
