@@ -2319,3 +2319,13 @@ img {
     /* Evita que el logo se pixele al ser pequeño */
     image-rendering: auto;
 }
+
+/* Evita el zoom automático en móviles */
+@media screen and (max-width: 768px) {
+    #input-gramos, 
+    #select-unidad, 
+    #select-quilates, 
+    #select-pais {
+        font-size: 16px !important;
+    }
+}
